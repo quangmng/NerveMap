@@ -12,19 +12,14 @@ import RealityKitContent
 
 struct HomeView: View {
     @Environment(\.openWindow) public var openWindow
+    
+    
     var body: some View {
         NavigationStack{
-            VStack {
-               
-                Button("Female Model"){
-                    openWindow(id: "ModelDF")
-                }
-                
-                Text("Hello, world!")
-                
-            }
-            
-            //Title
+                    HStack{
+             
+                    }
+                    
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("NrvMap3D")

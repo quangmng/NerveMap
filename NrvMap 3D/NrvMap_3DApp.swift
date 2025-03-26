@@ -19,7 +19,14 @@ struct NrvMap_3DApp: App {
         }
         
         WindowGroup(id: "ModelDF"){
-            ModelView()
+            FemaleModelView()
+                .volumeBaseplateVisibility(.visible)
+        }.windowStyle(.volumetric)
+            .defaultSize(width: 600, height: 1600)
+        
+        
+        WindowGroup(id: "ModelDM"){
+            MaleModelView()
                 .volumeBaseplateVisibility(.visible)
         }.windowStyle(.volumetric)
             .defaultSize(width: 600, height: 1600)
