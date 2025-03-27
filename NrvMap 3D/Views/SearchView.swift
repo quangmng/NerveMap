@@ -24,8 +24,8 @@ public struct SearchView: View {
                         .fontDesign(.rounded)
                 }
             }
+            .searchable(text: $searchText)
         }
-        .searchable(text: $searchText)
     }
     
 }
