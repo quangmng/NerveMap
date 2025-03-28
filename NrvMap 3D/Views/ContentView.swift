@@ -25,16 +25,6 @@ struct ContentView: View {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
-            
-            SettingView()
-                .tabItem{
-                    Image(systemName: "questionmark.circle.dashed")
-                    Text("Setting")
-                    
-                }
-            
-            
-            
         }
         .padding()
     }

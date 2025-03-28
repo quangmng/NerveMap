@@ -20,7 +20,7 @@ struct HomeView: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: 1232, height: 220)
+                            .frame(width: 1220, height: 220)
                             .background(Color.gray.opacity(0.7))
                             .cornerRadius(25)
                         
@@ -48,7 +48,7 @@ struct HomeView: View {
                     
                 }
                 
-                CustomNavLink(title: "❓Help", destination: ChooseModelView())
+                CustomNavLink(title: "❓Help", destination: HelpView())
                     .frame(width: 250, height: 100)
                     .leading()
                 
@@ -61,20 +61,6 @@ struct HomeView: View {
                     Text("NrvMap3D")
                         .font(.extraLargeTitle)
                         .fontDesign(.rounded)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingView()){
-                        
-                        Image(systemName: "gear")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 50)
-                            
-                            
-                            
-                        
-                    }
                 }
             }
         }

@@ -14,7 +14,7 @@ struct MaleModelView: View {
     @State private var selectedEntity: Entity? // Stores tapped entity
     @State private var modelEntity: Entity? // Stores full model
     @State private var originalTransform: Transform? // Stores original position
-    
+    @State private var currentScale: Float = 1.0
     
     var body: some View {
         HStack{
@@ -73,7 +73,7 @@ struct MaleModelView: View {
                     VStack{
                         
                         Button(){
-                            
+                            //recenter the main screen
                             
                         }label:{
                             Image(systemName: "house")
@@ -83,7 +83,7 @@ struct MaleModelView: View {
                         
                         
                         Button(){
-                            
+                            // resize the model
                             
                         }label:{
                             Image(systemName: "square.resize")
@@ -92,7 +92,7 @@ struct MaleModelView: View {
                         .padding()
                         
                         Button(){
-                            
+                           // move the model
                             
                         }label:{
                             Image(systemName: "move.3d")
@@ -101,7 +101,7 @@ struct MaleModelView: View {
                         .padding()
                         
                         Button(){
-                            
+                            //annotation
                             
                         }label:{
                             Image(systemName: "heart.text.clipboard")

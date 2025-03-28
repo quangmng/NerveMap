@@ -7,44 +7,36 @@
 
 import SwiftUI
 import RealityKit
-import RealityKitContent
 
 struct FemaleModelView: View {
-
-    @State private var selectedEntity: Entity? // Stores tapped entity
-    @State private var modelEntity: Entity? // Stores full model
-    @State private var originalTransform: Transform? // Stores original position
+    @State private var modelEntity: Entity? // Store reference to 3D model
+    @State private var selectedEntity: Entity?
+    @State private var originalTransform: Transform?
     
+    @State private var currentScale: Float = 1.0  // Track zoom scale
+    @State private var rotationAngle: Float = 0.0 // Track rotation angle
+    @State private var lastDragValue: CGFloat = 0 // Store last drag position
+
     var body: some View {
-        HStack{
-            ZStack{
-                
+        HStack {
+            ZStack {
                 RealityView { content in
-                    
                     do {
                         let entity = try await Entity.load(named: "FemaleDModel")
-                        
-                        entity.scale = SIMD3<Float>(0.5, 0.5, 0.5) // Try a smaller scale
-                        
-                        
+                        entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.generateCollisionShapes(recursive: true) // Enable tap & drag
-                        
                         entity.position = SIMD3<Float>(0, -0.5, 0)
                         
                         enableInteraction(for: entity)
                         content.add(entity)
                         
-                        modelEntity = entity // Store the model
-                        
+                        modelEntity = entity
                         originalTransform = entity.transform // Save original position
-                        
-                        
-                    }
-                    catch {
+                    } catch {
                         print("Failed to load model: \(error)")
                     }
                 }
-                
+                // **Add Drag & Tap Gestures for Interaction**
                 .gesture(
                     DragGesture()
                         .targetedToAnyEntity()
@@ -64,59 +56,89 @@ struct FemaleModelView: View {
                             highlightEntity(event.entity)
                         }
                 )
-                
-                
-                HStack{
-                    Spacer()
-                        .frame(width: 600)
-                    VStack{
-                        
-                        Button(){
-                            
-                            
-                        }label:{
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            zoomModel(to: Float(value))
+                        }
+                )
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            rotateModel(by: Float(value.translation.width - lastDragValue) * 0.2)
+                            lastDragValue = value.translation.width
+                        }
+                        .onEnded { _ in lastDragValue = 0 }
+                )
+
+                // **Right-aligned Button Bar**
+                HStack {
+                    Spacer().frame(width: 600)
+                    VStack {
+                        Button {
+                            resetModelPosition()
+                        } label: {
                             Image(systemName: "house")
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        
-                        
-                        Button(){
-                            
-                            
-                        }label:{
+
+                        Button {
+                            // Zoom functionality
+                            zoomModel(to: 1.5)
+                        } label: {
                             Image(systemName: "square.resize")
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        
-                        Button(){
-                            
-                            
-                        }label:{
+
+                        Button {
+                            // Rotate model
+                            rotateModel(by: 45.0)
+                        } label: {
                             Image(systemName: "move.3d")
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        
-                        Button(){
-                            
-                            
-                        }label:{
+
+                        Button {
+                            print("Favorite tapped")
+                        } label: {
                             Image(systemName: "heart.text.clipboard")
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        
                     }
                 }
-                
             }
         }
         .background(.clear)
     }
-}
 
+    // **Zoom Function**
+    private func zoomModel(to scale: Float) {
+        if scale > 0.5 && scale < 3.0 { // Limit zoom range
+            currentScale = scale
+            modelEntity?.scale = SIMD3(repeating: currentScale)
+        }
+    }
+
+    // **Rotate Function**
+    private func rotateModel(by degrees: Float) {
+        if let entity = modelEntity {
+            rotationAngle += degrees
+            let radians = (rotationAngle * .pi) / 180 // Convert degrees to radians
+            entity.transform.rotation = simd_quatf(angle: radians, axis: [0, 1, 0]) // Rotate on Y-axis
+        }
+    }
+
+    // **Reset Model Position**
+    private func resetModelPosition() {
+        if let entity = modelEntity, let originalTransform {
+            entity.transform = originalTransform
+        }
+    }
+}
 func enableInteraction(for entity: Entity) {
     entity.components.set(InputTargetComponent()) // Enable interaction
     entity.generateCollisionShapes(recursive: true) // Ensure all children have collision
@@ -124,7 +146,6 @@ func enableInteraction(for entity: Entity) {
         enableInteraction(for: child)
     }
 }
-
 
 // Highlight tapped entity
 func highlightEntity(_ entity: Entity) {
