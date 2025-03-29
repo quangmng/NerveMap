@@ -15,63 +15,74 @@ struct ChooseModelView: View {
     
     
     var body: some View {
-        NavigationStack{
-                    HStack{
-                        VStack{
-                            Text("Male")
-                                .font(.extraLargeTitle)
-                            
-                            Button(){
-                                openWindow(id: "ModelDM")
-                            }label: {
-                                Model3D(named: "FemaleDModel") {
-                                    model in model
-                                        .scaleEffect(0.09)
-                                        .background(.clear)
-                                }placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                            .background(.clear)
-                            .frame(width: 250, height: 250)
-                            .padding(.top, 50)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                        }
-                        .padding(20)
+        TimelineView(.animation){ context in
+            NavigationStack{
+                HStack{
+                    VStack{
+                        Text("Male")
+                            .font(.extraLargeTitle)
                         
-                        
-                        VStack{
-                            Text("Female")
-                                .font(.extraLargeTitle)
-                            
-                            Button(){
-                                openWindow(id: "ModelDF")
-                            }label: {
-                                Model3D(named: "FemaleDModel") {
-                                    model in model
-                                        .scaleEffect(0.09)
-                                        .background(.clear)
-                                }placeholder: {
-                                    ProgressView()
-                                }
+                        Button(){
+                            openWindow(id: "ModelDM")
+                        }label: {
+                            Model3D(named: "FemaleDModel") {
+                                model in model
+                                    .scaleEffect(0.09)
+                                    .background(.clear)
+                                    .rotation3DEffect(
+                                        Rotation3D(
+                                            angle: Angle2D(degrees: 100 * context.date.timeIntervalSinceReferenceDate), axis: .y
+                                            )
+                                    )
+                            }placeholder: {
+                                ProgressView()
                             }
-                            .background(.clear)
-                            .frame(width: 250, height: 250)
-                            .padding(.top, 50)
-                            .frame(maxHeight: .infinity, alignment: .top)
                         }
-                        .padding(20)
+                        .background(.clear)
+                        .frame(width: 250, height: 250)
+                        .padding(.top, 50)
+                        .frame(maxHeight: .infinity, alignment: .top)
                     }
+                    .padding(20)
                     
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("NrvMap3D")
-                        .font(.extraLargeTitle)
-                        .fontDesign(.rounded)
+                    
+                    VStack{
+                        Text("Female")
+                            .font(.extraLargeTitle)
+                        
+                        Button(){
+                            openWindow(id: "ModelDF")
+                        }label: {
+                            Model3D(named: "FemaleDModel") {
+                                model in model
+                                    .scaleEffect(0.09)
+                                    .background(.clear)
+                                    .rotation3DEffect(
+                                        Rotation3D(
+                                            angle: Angle2D(degrees: 100 * context.date.timeIntervalSinceReferenceDate), axis: .y
+                                            )
+                                    )
+                            }placeholder: {
+                                ProgressView()
+                            }
+                        }
+                        .background(.clear)
+                        .frame(width: 250, height: 250)
+                        .padding(.top, 50)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                    }
+                    .padding(20)
                 }
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("NrvMap3D")
+                            .font(.extraLargeTitle)
+                            .fontDesign(.rounded)
+                    }
+                }
+                
             }
-            
-            
         }
         .padding()
     }
