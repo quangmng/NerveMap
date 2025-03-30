@@ -52,21 +52,18 @@ struct HelpView: View {
                 VStack{
                     Text("Immersive experience on learning")
                     .font(.extraLargeTitle)
-                    .frame(width:.infinity)
                     .bold()
                     .padding()
                     .leading()
                     
                     Text("Learn in a app")
                     .font(.extraLargeTitle)
-                    .frame(width:.infinity)
                     .bold()
                     .padding()
                     .leading()
                     
                     Text("Make your notes")
                     .font(.extraLargeTitle)
-                    .frame(width:.infinity)
                     .bold()
                     .padding()
                     .leading()

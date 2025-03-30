@@ -59,6 +59,7 @@
 				C5477C9B2D7F092A00C09342 /* .gitignore */,
 				C5477C802D7F080100C09342 /* NrvMap 3D */,
 				C5477C812D7F080100C09342 /* Packages */,
+				D55F3AE62D98FE74004DA0E2 /* Frameworks */,
 				C5477C7F2D7F080100C09342 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +78,13 @@
 				C5477C822D7F080100C09342 /* RealityKitContent */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		D55F3AE62D98FE74004DA0E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
