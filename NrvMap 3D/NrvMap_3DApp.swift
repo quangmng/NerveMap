@@ -30,6 +30,10 @@ struct NrvMap_3DApp: App {
                 .volumeBaseplateVisibility(.visible)
         }.windowStyle(.volumetric)
             .defaultSize(width: 600, height: 1600)
+        
+        ImmersiveSpace(id: "test"){
+            MaleModelView()
+        }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

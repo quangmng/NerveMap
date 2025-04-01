@@ -38,7 +38,7 @@ struct HomeView: View {
                 
                 HStack{
                     
-                    CustomNavLink(title: "🏃Simulation", destination: ChooseModelView())
+                    CustomNavLink(title: "🏃Simulation", destination: SpaceControl())
                     
                     
                     CustomNavLink(title: "📝Saved Note", destination: ChooseModelView())

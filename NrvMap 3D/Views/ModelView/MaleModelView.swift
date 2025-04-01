@@ -11,11 +11,28 @@ import RealityKitContent
 
 struct MaleModelView: View {
     
+    @State private var angle = Angle(degrees: 0.0)
+    @GestureState private var magnifyBy = 1.0
     @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
+    @State private var isOr = true
+    
+    var magnification: some Gesture {
+            MagnifyGesture()
+                .updating($magnifyBy) { value, gestureState, transaction in
+                    gestureState = value.magnification
+                }
+        }
+    
+    var rotation: some Gesture {
+           RotateGesture()
+               .onChanged { value in
+                   angle = value.rotation
+               }
+       }
     
     var body: some View {
         
@@ -35,18 +52,32 @@ struct MaleModelView: View {
                         modelEntity = entity
                         originalTransform = entity.transform
                         
+                        if isOr == true{
+                            print("ok")
+                        }else{
+                            entity.position = SIMD3<Float>(0, -0.5, 0)
+                        }
+                        
                     } catch {
                         print("Failed to load model: \(error)")
                     }
                     
                 }
-                .gesture(
+                .rotationEffect(angle)
+                .gesture(rotation)
+                .scaleEffect(magnifyBy)
+                .simultaneousGesture(magnification)
+                .simultaneousGesture(
                     DragGesture()
                         .targetedToAnyEntity()
                         .onChanged { event in
-                            if let entity = selectedEntity {
-                                let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
-                                entity.transform.translation += delta
+                            if isAnnotationMode {
+                                print("gesture blocked")
+                            }else{
+                                if let entity = selectedEntity {
+                                    let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
+                                    entity.transform.translation += delta
+                                }
                             }
                         }
                         .onEnded { _ in print("Drag ended") }
@@ -59,11 +90,14 @@ struct MaleModelView: View {
                             fvm.highlightEntity(event.entity)
                         }
                 )
+                .scaleEffect(magnifyBy)
+                .gesture(magnification)
                 HStack {
                     Spacer().frame(width: 600)
                     VStack {
                         Button {
-                            
+                            isOr.toggle()
+                            print(isOr)
                         } label: {
                             Image(systemName: "house")
                         }
@@ -101,6 +135,9 @@ struct MaleModelView: View {
         }.background{
             if isAnnotationMode == true {
                 Color.black.opacity(0.5)
+            }
+            if isOr == true{
+                Color.gray
             }
             else {
                 Color.clear
