@@ -26,41 +26,41 @@ struct Model3DViewTest: View {
     
     var body: some View {
         
-      
-            VStack {
-                
-                Model3D(named: "FemaleDModel") {
-                    model in model
-                        .scaleEffect(magnifyBy)
-                        .background(.clear)
-                        .simultaneousGesture(
-                            TapGesture()
-                                .targetedToAnyEntity()
-                                .onEnded { event in
-                                    selectedEntity = event.entity
-                                    fvm.highlightEntity(event.entity)
+        
+        VStack {
+            
+            Model3D(named: "FemaleDModel") {
+                model in model
+                    .scaleEffect(magnifyBy)
+                    .background(.clear)
+                    .simultaneousGesture(
+                        TapGesture()
+                            .targetedToAnyEntity()
+                            .onEnded { event in
+                                selectedEntity = event.entity
+                                fvm.highlightEntity(event.entity)
+                            }
+                    )
+                    .gesture(
+                        DragGesture()
+                            .targetedToAnyEntity()
+                            .onChanged { event in
+                                
+                                if let entity = selectedEntity {
+                                    let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
+                                    entity.transform.translation += delta
                                 }
-                        )
-                        .gesture(
-                            DragGesture()
-                                .targetedToAnyEntity()
-                                .onChanged { event in
-                                    
-                                    if let entity = selectedEntity {
-                                        let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
-                                        entity.transform.translation += delta
-                                    }
-                                }
-                                .onEnded { _ in print("Drag ended") }
-                            )
-                        .scaleEffect(magnifyBy)
-                        .gesture(magnification)
-                }placeholder: {
-                    ProgressView()
-                }
-                
+                            }
+                            .onEnded { _ in print("Drag ended") }
+                    )
+                    .scaleEffect(magnifyBy)
+                    .gesture(magnification)
+            }placeholder: {
+                ProgressView()
             }
+            
         }
+    }
     
 }
 

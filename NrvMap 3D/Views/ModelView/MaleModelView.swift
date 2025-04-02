@@ -42,8 +42,8 @@ struct MaleModelView: View {
                 RealityView{ content in
                     
                     do {
-                        let entity = try await Entity.load(named: "FemaleDModel")
-                        
+//                        let entity = try await Entity.load(named: "FemaleDModel")
+                        let entity = try await ModelEntity(named: "FemaleDModel")
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.generateCollisionShapes(recursive: true)
                         entity.position = SIMD3<Float>(0, -0.5, 0)

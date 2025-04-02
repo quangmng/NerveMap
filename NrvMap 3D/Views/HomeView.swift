@@ -13,58 +13,47 @@ import RealityKitContent
 struct HomeView: View {
   
     var body: some View {
-        NavigationStack{
-            VStack{
-                
-                NavigationLink(destination: ChooseModelView()) {
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 1220, height: 220)
-                            .background(Color.gray.opacity(0.7))
-                            .cornerRadius(25)
-                        
-                        Text("Choose Model")
-                            .font(.extraLargeTitle)
-                            .foregroundColor(.white)
-                            .leading()
-                            .padding()
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack {
+                    NavigationLink(destination: ChooseModelView()) {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.2)
+                                .background(Color.gray.opacity(0.7))
+                                .cornerRadius(25)
                             
+                            Text("Choose Model")
+                                .font(.extraLargeTitle)
+                                .foregroundColor(.white)
+                                .leading()
+                                .padding()
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .padding()
+                    
+                    HStack {
+                        CustomNavLink(title: "🏃Simulation", destination: SpaceControl())
+                        CustomNavLink(title: "📝Saved Note", destination: ChooseModelView())
+                        CustomNavLink(title: "🔍Search", destination: SearchView())
+                    }
+                    
+                    CustomNavLink(title: "❓Help", destination: HelpView())
+                        .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.1)
+                        .leading()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("NrvMap3D")
+                            .font(.extraLargeTitle)
+                            .fontDesign(.rounded)
                     }
                 }
-                .buttonStyle(.plain)
-                .padding()
-                
-                
-                HStack{
-                    
-                    CustomNavLink(title: "🏃Simulation", destination: SpaceControl())
-                    
-                    
-                    CustomNavLink(title: "📝Saved Note", destination: ChooseModelView())
-                    
-                    CustomNavLink(title: "🔍Search", destination: SearchView())
-                    
-                    
-                }
-                
-                CustomNavLink(title: "❓Help", destination: HelpView())
-                    .frame(width: 250, height: 100)
-                    .leading()
-                
-                
-                
             }
-                    
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("NrvMap3D")
-                        .font(.extraLargeTitle)
-                        .fontDesign(.rounded)
-                }
-            }
+            .padding()
         }
-        .padding()
     }
 }
 
