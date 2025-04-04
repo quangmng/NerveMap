@@ -12,104 +12,123 @@ import RealityKitContent
 
 struct Model3DViewTest: View {
     
-    @State var initialPosition: SIMD3<Float>? = nil
+    @State private var angle = Angle(degrees: 1.0)
+    @State private var modelEntity: Entity?
+    @State private var selectedEntity: Entity?
+    @State private var originalTransform: Transform?
+    @State private var isAnnotationMode = false
+    @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
     
-    var translationGesture: some Gesture {
-        /// The gesture to move an entity.
-        DragGesture()
+    var tap: some Gesture {
+        TapGesture()
             .targetedToAnyEntity()
-            .onChanged({ value in
-                /// The entity that the drag gesture targets.
-                let rootEntity = value.entity
-
-                // Set `initialPosition` to the position of the entity if it is `nil`.
-                if initialPosition == nil {
-                    initialPosition = rootEntity.position
-                }
-
-                /// The movement that converts a global world space to the scene world space of the entity.
-                let movement = value.convert(value.translation3D, from: .global, to: .scene)
-
-                // Apply the entity position to match the drag gesture,
-                // and set the movement to stay at the ground level.
-                rootEntity.position = (initialPosition ?? .zero) + movement.grounded
-            })
-            .onEnded({ _ in
-                // Reset the `initialPosition` back to `nil` when the gesture ends.
-                initialPosition = nil
-            })
+            .onEnded { event in
+                selectedEntity = event.entity
+                fvm.highlightEntity(event.entity)
+            }
     }
     
-    /// The gesture checks whether there is a root component and adjusts the scale of the entity.
+    var drag: some Gesture {
+        DragGesture()
+            .targetedToAnyEntity()
+            .onChanged { event in
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    if let entity = selectedEntity {
+                        let delta = SIMD3<Float>(Float(event.translation.width) * -0.0001, 0, Float(event.translation.height) * -0.0001)
+                        entity.transform.translation += delta
+                    }
+                }
+            }
+            .onEnded { _ in print("Drag ended") }
+    }
+    
     var scaleGesture: some Gesture {
-        /// The gesture to scale the entity with two hands.
         MagnifyGesture()
             .targetedToAnyEntity()
             .onChanged { value in
-                /// The entity that the magnify gesture targets.
                 let rootEntity = value.entity
-
-                // Set the `initialScale` to the scale of the entity if it is `nil`.
                 if initialScale == nil {
                     initialScale = rootEntity.scale
                 }
-
-                /// The rate that the model will scale by.
                 let scaleRate: Float = 1.0
-
-                // Scale the entity up smoothly by the relative magnification on the gesture.
                 rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
             }
             .onEnded { _ in
-                // Reset the `initialScale` back to `nil` when the gesture ends.
                 initialScale = nil
             }
     }
     
+    var rotation: some Gesture {
+           RotateGesture()
+               .onChanged { value in
+                   angle = value.rotation
+               }
+       }
+    
     var body: some View {
         
-        RealityView { content in
-            let fileName: String = "FemaleDModel"
-            guard let femaleModel = try? await ModelEntity(named: fileName) else {
-                assertionFailure("Failed to load model: \(fileName)")
+        RealityView{content in
+            
+            guard let skyboxEntity = createSkybox() else {
+                print("Error loading entity")
                 return
             }
-            let bounds = femaleModel.visualBounds(relativeTo: nil)
-            let carWidth: Float = (femaleModel.model?.mesh.bounds.max.x)!
-            let carHeight: Float = (femaleModel.model?.mesh.bounds.max.y)!
-            let carDepth: Float = (femaleModel.model?.mesh.bounds.max.z)!
-            let boxShape = ShapeResource.generateBox(
-                width: carWidth,
-                height: carHeight,
-                depth: carDepth)
-
-            // Add a box shape as a collision component.
-            femaleModel.components.set(CollisionComponent(shapes: [boxShape]))
             
-            // Enable inputs from the hand gestures.
-            femaleModel.components.set(InputTargetComponent())
+            let model = await create3DModel()
             
-            // Set the spawn position of the entity on the ground.
-            femaleModel.position.y -= bounds.min.y
+            content.add(skyboxEntity)
+            content.add(model)
             
-            // Set the spawn position along the z-axis, with the edge of the visual bound.
-            femaleModel.position.z += bounds.min.z
-
-            // Set the spawn position along the x-axis, with the edge of the visual bound.
-            femaleModel.position.x += bounds.min.x
-
-            femaleModel.scale /= 1.5
-
-            // Add the car model to the `RealityView`.
-            content.add(femaleModel)
         }
-        // Enable the `translationGesture` to the `RealityView`.
-        .gesture(translationGesture)
-        // Enable the `scaleGesture` to the `RealityView`.
-        .gesture(scaleGesture)
+        .simultaneousGesture(rotation)
+        .simultaneousGesture(scaleGesture)
+        .simultaneousGesture(drag)
+        .simultaneousGesture(tap)
     }
+    
+    private func create3DModel() async -> Entity{
+        
+       guard let modelEntity = try? await Entity(named: "Scene", in: realityKitContentBundle) else {
+           
+           fatalError("Fail to load entity")
+           
+        }
+        fvm.enableInteraction(for: modelEntity)
+        
+        
+        return modelEntity
+        
+    }
+
+    private func createSkybox() -> Entity?{
+        
+        let largeSphere = MeshResource.generateSphere(radius: 1000.0)
+        
+        var skyboxMaterial = UnlitMaterial()
+        
+        do{
+            let texture = try TextureResource.load(named: "Hospital")
+            skyboxMaterial.color = .init(texture: .init(texture))
+        }catch{
+            print("Error: \(error)")
+        }
+        
+        let skyBoxEntity = Entity()
+        skyBoxEntity.components.set(ModelComponent(mesh: largeSphere, materials: [skyboxMaterial]))
+        
+        skyBoxEntity.scale *= .init(x: -1, y: 1, z: 1)
+        
+        return skyBoxEntity
+        
+    }
+
+    
 }
+
+
 #Preview{
     Model3DViewTest()
 }

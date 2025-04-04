@@ -34,7 +34,7 @@ struct NrvMap_3DApp: App {
             .defaultSize(width: 600, height: 1600)
         
         ImmersiveSpace(id: "test"){
-            MaleModelView()
+            Model3DViewTest()
         }.immersionStyle(selection: $currentStyle, in: .full)
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
