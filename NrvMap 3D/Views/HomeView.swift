@@ -11,7 +11,7 @@ import RealityKit
 import RealityKitContent
 
 struct HomeView: View {
-    
+    @StateObject var noteVM = NoteViewModel()
     var body: some View {
         NavigationStack{
             GeometryReader { geometry in
@@ -42,7 +42,7 @@ struct HomeView: View {
                         
                         // Save Note Button
                         NavigationLink{
-                            ChooseModelView()
+                            NoteListView(noteVM: noteVM)
                         } label: {
                             Text("📝\nSaved Note")
                                 .font(.extraLargeTitle)

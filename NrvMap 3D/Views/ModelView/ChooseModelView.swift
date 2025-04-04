@@ -12,7 +12,9 @@ import RealityKitContent
 
 struct ChooseModelView: View {
     
+//    let notee: Note
     @Environment(\.openWindow) public var openWindow
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var noteVM = NoteViewModel()
     @State private var noteText: String = ""
     @State private var lastUpdate: Date = Date()
@@ -30,22 +32,40 @@ struct ChooseModelView: View {
                 HStack {
                     Button {
                         if !noteText.isEmpty {
-                            let formatter = DateFormatter()
-                            formatter.dateFormat = "yy-MM-dd HH:mm"
-                            let dateString = formatter.string(from: lastUpdate)
-                            noteVM.addNote(text: noteText)
-                            noteText = ""
+                            // Create a new Core Data note entity
+                            let newNote = NoteEntity(context: viewContext)
+                            newNote.text = noteText
+                            newNote.dateCreated = Date()
+                            
+                            // Save the context
+                            do {
+                                try viewContext.save()
+                                noteText = ""
+                            } catch {
+                                print("Error saving note: \(error)")
+                            }
                         }
                     } label: {
                         Text("Save note")
                             .font(.title)
                     }
                     
-                    NavigationLink {
-                        NoteListView(noteVM: noteVM)
+                    Button {
+                        openWindow(id: "NotesWindow")
                     } label: {
                         Text("See the notes")
+                            .font(.title2)
+                            .padding()
+                            .background(.blue.opacity(0.1))
+                            .cornerRadius(8)
                     }
+
+                    
+//                    NavigationLink {
+//                        NoteListView(noteVM: noteVM)
+//                    } label: {
+//                        Text("See the notes")
+//                    }
 
 
                 }

@@ -6,14 +6,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NoteListView: View {
-    @StateObject var noteVM = NoteViewModel()
+    @FetchRequest(
+        entity: NoteEntity.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \NoteEntity.dateCreated, ascending: false)]
+    ) var notes: FetchedResults<NoteEntity>
+
     var body: some View {
-        List {
-            ForEach(noteVM.notes) { note in
-                NoteRowView(note: note)
+        NavigationStack {
+            List {
+                ForEach(notes) { note in
+                    VStack(alignment: .leading) {
+                        Text(note.text ?? "No text")
+                            .font(.headline)
+                        Text(note.dateCreated!, style: .date)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                }
             }
+            .navigationTitle("Saved Notes")
         }
     }
 }

@@ -9,13 +9,20 @@ import SwiftUI
 
 @main
 struct NrvMap_3DApp: App {
-
+    
     @State private var appModel = AppModel()
-
+    @StateObject private var noteVM = NoteViewModel()
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ChooseModelView()
+                .environmentObject(noteVM)
                 .environment(appModel)
+        }
+        
+        WindowGroup(id: "NotesWindow") {
+            NoteListView()
         }
         
         WindowGroup(id: "ModelDF"){
@@ -23,7 +30,6 @@ struct NrvMap_3DApp: App {
                 .volumeBaseplateVisibility(.visible)
         }.windowStyle(.volumetric)
             .defaultSize(width: 600, height: 1600)
-        
         
         WindowGroup(id: "ModelDM"){
             MaleModelView()
@@ -34,7 +40,7 @@ struct NrvMap_3DApp: App {
         ImmersiveSpace(id: "test"){
             MaleModelView()
         }
-
+        
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()
                 .environment(appModel)
