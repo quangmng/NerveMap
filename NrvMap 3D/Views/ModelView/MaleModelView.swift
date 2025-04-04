@@ -11,21 +11,54 @@ import RealityKitContent
 
 struct MaleModelView: View {
     
-    @State private var angle = Angle(degrees: 0.0)
-    @GestureState private var magnifyBy = 1.0
+    @State private var angle = Angle(degrees: 1.0)
     @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
-    @State private var isOr = true
+    @State var initialScale: SIMD3<Float>? = nil
     
-    var magnification: some Gesture {
-            MagnifyGesture()
-                .updating($magnifyBy) { value, gestureState, transaction in
-                    gestureState = value.magnification
+    var tap: some Gesture {
+        TapGesture()
+            .targetedToAnyEntity()
+            .onEnded { event in
+                selectedEntity = event.entity
+                fvm.highlightEntity(event.entity)
+            }
+    }
+    
+    var drag: some Gesture {
+        DragGesture()
+            .targetedToAnyEntity()
+            .onChanged { event in
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    if let entity = selectedEntity {
+                        let delta = SIMD3<Float>(Float(event.translation.width) * -0.0001, 0, Float(event.translation.height) * -0.0001)
+                        entity.transform.translation += delta
+                    }
                 }
-        }
+            }
+            .onEnded { _ in print("Drag ended") }
+    }
+    
+    var scaleGesture: some Gesture {
+        MagnifyGesture()
+            .targetedToAnyEntity()
+            .onChanged { value in
+                let rootEntity = value.entity
+                if initialScale == nil {
+                    initialScale = rootEntity.scale
+                }
+                let scaleRate: Float = 1.0
+                rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
+            }
+            .onEnded { _ in
+                initialScale = nil
+            }
+    }
     
     var rotation: some Gesture {
            RotateGesture()
@@ -38,66 +71,43 @@ struct MaleModelView: View {
         
         HStack {
             ZStack {
-                
-                RealityView{ content in
+               
+//3D model generation
+                RealityView{ content, attachments in
                     
                     do {
-//                        let entity = try await Entity.load(named: "FemaleDModel")
                         let entity = try await ModelEntity(named: "FemaleDModel")
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                        entity.generateCollisionShapes(recursive: true)
                         entity.position = SIMD3<Float>(0, -0.5, 0)
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
                         modelEntity = entity
                         originalTransform = entity.transform
                         
-                        if isOr == true{
-                            print("ok")
-                        }else{
-                            entity.position = SIMD3<Float>(0, -0.5, 0)
-                        }
-                        
                     } catch {
                         print("Failed to load model: \(error)")
                     }
                     
+                }update:{content, attachments in
+                
+                   
+                    
                 }
-                .rotationEffect(angle)
-                .gesture(rotation)
-                .scaleEffect(magnifyBy)
-                .simultaneousGesture(magnification)
-                .simultaneousGesture(
-                    DragGesture()
-                        .targetedToAnyEntity()
-                        .onChanged { event in
-                            if isAnnotationMode {
-                                print("gesture blocked")
-                            }else{
-                                if let entity = selectedEntity {
-                                    let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
-                                    entity.transform.translation += delta
-                                }
-                            }
-                        }
-                        .onEnded { _ in print("Drag ended") }
-                )
-                .gesture(
-                    TapGesture()
-                        .targetedToAnyEntity()
-                        .onEnded { event in
-                            selectedEntity = event.entity
-                            fvm.highlightEntity(event.entity)
-                        }
-                )
-                .scaleEffect(magnifyBy)
-                .gesture(magnification)
+                attachments: {
+                    
+                }
+               
+//Gesture
+                .simultaneousGesture(rotation)
+                .simultaneousGesture(scaleGesture)
+                .simultaneousGesture(drag)
+                .simultaneousGesture(tap)
+                
                 HStack {
                     Spacer().frame(width: 600)
                     VStack {
                         Button {
-                            isOr.toggle()
-                            print(isOr)
+                           
                         } label: {
                             Image(systemName: "house")
                         }
@@ -135,12 +145,6 @@ struct MaleModelView: View {
         }.background{
             if isAnnotationMode == true {
                 Color.black.opacity(0.5)
-            }
-            if isOr == true{
-                Color.gray
-            }
-            else {
-                Color.clear
             }
         }
     }
