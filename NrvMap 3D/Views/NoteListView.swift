@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct NoteListView: View {
-    @ObservedObject var noteVM: NoteViewModel
+    @StateObject var noteVM = NoteViewModel()
     var body: some View {
         List {
             ForEach(noteVM.notes) { note in
-                Text(note.text)
+                NoteRowView(note: note)
             }
         }
     }

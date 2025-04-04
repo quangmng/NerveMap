@@ -15,6 +15,7 @@ struct ChooseModelView: View {
     @Environment(\.openWindow) public var openWindow
     @StateObject var noteVM = NoteViewModel()
     @State private var noteText: String = ""
+    @State private var lastUpdate: Date = Date()
     
     var body: some View {
         TimelineView(.animation){ context in
@@ -28,8 +29,13 @@ struct ChooseModelView: View {
                 
                 HStack {
                     Button {
-                        noteVM.addNote(text: noteText)
-                        noteText = ""
+                        if !noteText.isEmpty {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yy-MM-dd HH:mm"
+                            let dateString = formatter.string(from: lastUpdate)
+                            noteVM.addNote(text: noteText)
+                            noteText = ""
+                        }
                     } label: {
                         Text("Save note")
                             .font(.title)
