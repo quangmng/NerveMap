@@ -20,15 +20,16 @@ struct HomeView: View {
                         Text("Choose Model")
                             .font(.extraLargeTitle)
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, minHeight: 300, alignment: .center)
+                            .frame(maxWidth: .infinity, minHeight: 200, alignment: .center)
                             
                     }
                     .buttonBorderShape(.roundedRectangle(radius: 25))
-                    .padding(.horizontal)
+                    .padding(.horizontal, 30)
 //                    .frame(maxWidth: .infinity)
                     
-                    
                     HStack(alignment: .center, spacing: 10) {
+                        
+                        // Simulation Button
                         NavigationLink{
                             SpaceControl()
                         } label: {
@@ -39,8 +40,7 @@ struct HomeView: View {
                                 .padding(.horizontal, 30)
                         }
                         
-                        
-                        
+                        // Save Note Button
                         NavigationLink{
                             ChooseModelView()
                         } label: {
@@ -51,6 +51,7 @@ struct HomeView: View {
                                 .padding(.horizontal, 30)
                         }
                         
+                        // Search Button
                         NavigationLink{
                             SearchView()
                         } label: {
@@ -65,7 +66,7 @@ struct HomeView: View {
                     .padding(.horizontal)
                     
                     Spacer().frame(height: 20)
-                    
+                    // Help button
                     NavigationLink {
                         HelpView()
                     } label: {
@@ -78,9 +79,7 @@ struct HomeView: View {
                     .buttonBorderShape(.roundedRectangle(radius: 25))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading, .bottom])
-
-//                    CustomNavLink(title: "❓Help", destination: HelpView())
-//                        .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.1)
+                    
                 }
                 .fontDesign(.rounded)
                 .frame(maxWidth: .infinity, minHeight: 150, alignment: .center)

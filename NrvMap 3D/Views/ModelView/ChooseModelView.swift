@@ -11,16 +11,44 @@ import RealityKit
 import RealityKitContent
 
 struct ChooseModelView: View {
-    @Environment(\.openWindow) public var openWindow
     
+    @Environment(\.openWindow) public var openWindow
+    @StateObject var noteVM = NoteViewModel()
+    @State private var noteText: String = ""
     
     var body: some View {
         TimelineView(.animation){ context in
             NavigationStack{
+                
+                TextField("Enter your note...", text: $noteText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .fontDesign(.rounded)
+                
+                HStack {
+                    Button {
+                        noteVM.addNote(text: noteText)
+                        noteText = ""
+                    } label: {
+                        Text("Save note")
+                            .font(.title)
+                    }
+                    
+                    NavigationLink {
+                        NoteListView(noteVM: noteVM)
+                    } label: {
+                        Text("See the notes")
+                    }
+
+
+                }
+                
                 HStack{
                     VStack{
                         Text("Male")
                             .font(.extraLargeTitle)
+                            .fontDesign(.rounded)
                         
                         Button(){
                             openWindow(id: "ModelDM")
@@ -32,7 +60,7 @@ struct ChooseModelView: View {
                                     .rotation3DEffect(
                                         Rotation3D(
                                             angle: Angle2D(degrees: 100 * context.date.timeIntervalSinceReferenceDate), axis: .y
-                                            )
+                                        )
                                     )
                             }placeholder: {
                                 ProgressView()
@@ -43,16 +71,15 @@ struct ChooseModelView: View {
                         .padding(.top, 50)
                         .frame(maxHeight: .infinity, alignment: .top)
                     }
-                    .padding(20)
-                    
                     
                     VStack{
                         Text("Female")
                             .font(.extraLargeTitle)
+                            .fontDesign(.rounded)
                         
                         Button(){
                             openWindow(id: "ModelDF")
-                        }label: {
+                        } label: {
                             Model3D(named: "FemaleDModel") {
                                 model in model
                                     .scaleEffect(0.09)
@@ -60,7 +87,7 @@ struct ChooseModelView: View {
                                     .rotation3DEffect(
                                         Rotation3D(
                                             angle: Angle2D(degrees: 100 * context.date.timeIntervalSinceReferenceDate), axis: .y
-                                            )
+                                        )
                                     )
                             }placeholder: {
                                 ProgressView()
@@ -71,9 +98,9 @@ struct ChooseModelView: View {
                         .padding(.top, 50)
                         .frame(maxHeight: .infinity, alignment: .top)
                     }
-                    .padding(20)
+                    
                 }
-                
+                .padding(20)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("NrvMap3D")
@@ -81,7 +108,6 @@ struct ChooseModelView: View {
                             .fontDesign(.rounded)
                     }
                 }
-                
             }
         }
         .padding()
