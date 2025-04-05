@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Annotation: Identifiable {
+struct AnnotationModel: Identifiable {
     let id = UUID()
     var title: String
     var description: String

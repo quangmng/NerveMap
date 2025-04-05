@@ -18,6 +18,7 @@ struct MaleModelView: View {
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
+    @State var annotationList: [AnnotationModel] = [AnnotationModel(title: "Hello", description: "Try to test", position: SIMD3<Float>(-1, -1, -1))]
     
     var tap: some Gesture {
         TapGesture()
@@ -74,27 +75,33 @@ struct MaleModelView: View {
                
 //3D model generation
                 RealityView{ content, attachments in
-                    
-                    do {
-                        let entity = try await ModelEntity(named: "FemaleDModel")
+    
+                        let entity = await fvm.create3DModel()
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.position = SIMD3<Float>(0, -0.5, 0)
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
                         modelEntity = entity
                         originalTransform = entity.transform
-                        
-                    } catch {
-                        print("Failed to load model: \(error)")
-                    }
                     
                 }update:{content, attachments in
                 
-                   
+                   for list in annotationList {
+                        if let listEntity = attachments.entity(for: list.id){
+                            content.add(listEntity)
+                           
+                       }
+                    }
                     
                 }
                 attachments: {
-                    
+                    ForEach(annotationList) { list in
+                        Attachment(id: list.id) {
+                            Text(list.title)
+                                .font(.extraLargeTitle)
+                                .bold()
+                        }
+                    }
                 }
                
 //Gesture

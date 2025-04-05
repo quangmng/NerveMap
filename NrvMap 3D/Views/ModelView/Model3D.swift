@@ -72,12 +72,12 @@ struct Model3DViewTest: View {
         
         RealityView{content in
             
-            guard let skyboxEntity = createSkybox() else {
+            guard let skyboxEntity = fvm.createSkybox() else {
                 print("Error loading entity")
                 return
             }
             
-            let model = await create3DModel()
+            let model = await fvm.create3DModel()
             
             content.add(skyboxEntity)
             content.add(model)
@@ -88,43 +88,6 @@ struct Model3DViewTest: View {
         .simultaneousGesture(drag)
         .simultaneousGesture(tap)
     }
-    
-    private func create3DModel() async -> Entity{
-        
-       guard let modelEntity = try? await Entity(named: "Scene", in: realityKitContentBundle) else {
-           
-           fatalError("Fail to load entity")
-           
-        }
-        fvm.enableInteraction(for: modelEntity)
-        
-        
-        return modelEntity
-        
-    }
-
-    private func createSkybox() -> Entity?{
-        
-        let largeSphere = MeshResource.generateSphere(radius: 1000.0)
-        
-        var skyboxMaterial = UnlitMaterial()
-        
-        do{
-            let texture = try TextureResource.load(named: "Hospital")
-            skyboxMaterial.color = .init(texture: .init(texture))
-        }catch{
-            print("Error: \(error)")
-        }
-        
-        let skyBoxEntity = Entity()
-        skyBoxEntity.components.set(ModelComponent(mesh: largeSphere, materials: [skyboxMaterial]))
-        
-        skyBoxEntity.scale *= .init(x: -1, y: 1, z: 1)
-        
-        return skyBoxEntity
-        
-    }
-
     
 }
 
