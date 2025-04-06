@@ -11,6 +11,7 @@ import RealityKitContent
 
 struct MaleModelView: View {
     
+    @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
     @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
@@ -18,7 +19,7 @@ struct MaleModelView: View {
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
-    @State var annotationList: [AnnotationModel] = [AnnotationModel(title: "Hello", description: "Try to test", position: SIMD3<Float>(-1, -1, -1))]
+    @State var annotationList: [AnnotationModel] = [AnnotationModel(title: "Hello1", description: "Try to test", position: SIMD3<Float>(-1, -1, -1)),AnnotationModel(title: "Hello2", description: "Try to test", position: SIMD3<Float>(-3, -3, -3))]
     
     var tap: some Gesture {
         TapGesture()
@@ -97,9 +98,9 @@ struct MaleModelView: View {
                 attachments: {
                     ForEach(annotationList) { list in
                         Attachment(id: list.id) {
-                            Text(list.title)
-                                .font(.extraLargeTitle)
-                                .bold()
+                            Button("\(list.title)"){
+                                openWindow(id: "ModelDM")
+                            }
                         }
                     }
                 }
