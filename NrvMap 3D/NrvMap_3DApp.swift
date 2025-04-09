@@ -9,34 +9,44 @@ import SwiftUI
 
 @main
 struct NrvMap_3DApp: App {
-
     @State private var currentStyle: ImmersionStyle = .full
-    
     @State private var appModel = AppModel()
-
+    @StateObject private var noteVM = NoteViewModel()
+    
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
+        
+        // Main window
         WindowGroup {
-            ContentView()
+            ChooseModelView()
+                .environmentObject(noteVM)
                 .environment(appModel)
         }
         
-        WindowGroup(id: "ModelDF"){
+        // Notes window
+        WindowGroup(id: "NotesWindow") {
+            NoteListView()
+                .environmentObject(noteVM)
+        }
+
+        // Volumetric view for female model
+        WindowGroup(id: "ModelDF") {
             FemaleModelView()
                 .volumeBaseplateVisibility(.visible)
-        }.windowStyle(.volumetric)
-            .defaultSize(width: 600, height: 1600)
+        }
+        .windowStyle(.volumetric)
+        .defaultSize(width: 600, height: 1600)
         
-        
-        WindowGroup(id: "ModelDM"){
+        // Volumetric view for male model
+        WindowGroup(id: "ModelDM") {
             MaleModelView()
                 .volumeBaseplateVisibility(.visible)
-        }.windowStyle(.volumetric)
-            .defaultSize(width: 600, height: 1600)
-        
-        ImmersiveSpace(id: "test"){
-            Model3DViewTest()
-        }.immersionStyle(selection: $currentStyle, in: .full)
+        }
+        .windowStyle(.volumetric)
+        .defaultSize(width: 600, height: 1600)
 
+        // Primary Immersive Space using appModel
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()
                 .environment(appModel)
@@ -47,6 +57,6 @@ struct NrvMap_3DApp: App {
                     appModel.immersiveSpaceState = .closed
                 }
         }
-        .immersionStyle(selection: .constant(.progressive), in: .progressive)
+        .immersionStyle(selection: $currentStyle, in: .full)
     }
 }
