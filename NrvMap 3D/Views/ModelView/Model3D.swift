@@ -12,57 +12,85 @@ import RealityKitContent
 
 struct Model3DViewTest: View {
     
-    @Environment(\.openImmersiveSpace) var scene
+    @State private var angle = Angle(degrees: 1.0)
+    @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
+    @State private var originalTransform: Transform?
+    @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
-    @GestureState private var magnifyBy = 0.5
+    @State var initialScale: SIMD3<Float>? = nil
     
-    var magnification: some Gesture {
-        MagnifyGesture()
-            .updating($magnifyBy) { value, gestureState, transaction in
-                gestureState = value.magnification
+    var tap: some Gesture {
+        TapGesture()
+            .targetedToAnyEntity()
+            .onEnded { event in
+                selectedEntity = event.entity
+                fvm.highlightEntity(event.entity)
             }
     }
     
+    var drag: some Gesture {
+        DragGesture()
+            .targetedToAnyEntity()
+            .onChanged { event in
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    if let entity = selectedEntity {
+                        let delta = SIMD3<Float>(Float(event.translation.width) * -0.0001, 0, Float(event.translation.height) * -0.0001)
+                        entity.transform.translation += delta
+                    }
+                }
+            }
+            .onEnded { _ in print("Drag ended") }
+    }
+    
+    var scaleGesture: some Gesture {
+        MagnifyGesture()
+            .targetedToAnyEntity()
+            .onChanged { value in
+                let rootEntity = value.entity
+                if initialScale == nil {
+                    initialScale = rootEntity.scale
+                }
+                let scaleRate: Float = 1.0
+                rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
+            }
+            .onEnded { _ in
+                initialScale = nil
+            }
+    }
+    
+    var rotation: some Gesture {
+           RotateGesture()
+               .onChanged { value in
+                   angle = value.rotation
+               }
+       }
+    
     var body: some View {
         
-      
-            VStack {
-                
-                Model3D(named: "FemaleDModel") {
-                    model in model
-                        .scaleEffect(magnifyBy)
-                        .background(.clear)
-                        .simultaneousGesture(
-                            TapGesture()
-                                .targetedToAnyEntity()
-                                .onEnded { event in
-                                    selectedEntity = event.entity
-                                    fvm.highlightEntity(event.entity)
-                                }
-                        )
-                        .gesture(
-                            DragGesture()
-                                .targetedToAnyEntity()
-                                .onChanged { event in
-                                    
-                                    if let entity = selectedEntity {
-                                        let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
-                                        entity.transform.translation += delta
-                                    }
-                                }
-                                .onEnded { _ in print("Drag ended") }
-                            )
-                        .scaleEffect(magnifyBy)
-                        .gesture(magnification)
-                }placeholder: {
-                    ProgressView()
-                }
-                
+        RealityView{content in
+            
+            guard let skyboxEntity = fvm.createSkybox() else {
+                print("Error loading entity")
+                return
             }
+            
+            let model = await fvm.create3DModel()
+            
+            content.add(skyboxEntity)
+            content.add(model)
+            
         }
+        .simultaneousGesture(rotation)
+        .simultaneousGesture(scaleGesture)
+        .simultaneousGesture(drag)
+        .simultaneousGesture(tap)
+    }
     
 }
+
 
 #Preview{
     Model3DViewTest()
