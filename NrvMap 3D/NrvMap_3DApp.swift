@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct NrvMap_3DApp: App {
 
+    @State private var currentStyle: ImmersionStyle = .full
+    
     @State private var appModel = AppModel()
 
     var body: some Scene {
@@ -32,8 +34,8 @@ struct NrvMap_3DApp: App {
             .defaultSize(width: 600, height: 1600)
         
         ImmersiveSpace(id: "test"){
-            MaleModelView()
-        }
+            Model3DViewTest()
+        }.immersionStyle(selection: $currentStyle, in: .full)
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

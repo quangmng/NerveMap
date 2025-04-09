@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 import SwiftUI
+import RealityKitContent
 
 class FunctionViewModel: ObservableObject {
     
@@ -36,4 +37,42 @@ class FunctionViewModel: ObservableObject {
             }
         }
     }
+    
+    func create3DModel() async -> Entity{
+            
+           guard let modelEntity = try? await Entity(named: "Scene", in: realityKitContentBundle) else {
+               
+               fatalError("Fail to load entity")
+               
+            }
+            enableInteraction(for: modelEntity)
+            
+            
+            return modelEntity
+            
+        }
+    
+    func createSkybox() -> Entity?{
+            
+            let largeSphere = MeshResource.generateSphere(radius: 1000.0)
+            
+            var skyboxMaterial = UnlitMaterial()
+            
+            do{
+                let texture = try TextureResource.load(named: "Hospital")
+                skyboxMaterial.color = .init(texture: .init(texture))
+            }catch{
+                print("Error: \(error)")
+            }
+            
+            let skyBoxEntity = Entity()
+            skyBoxEntity.components.set(ModelComponent(mesh: largeSphere, materials: [skyboxMaterial]))
+            
+            skyBoxEntity.scale *= .init(x: -1, y: 1, z: 1)
+            
+            return skyBoxEntity
+            
+        }
+
+    
 }
