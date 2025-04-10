@@ -12,6 +12,7 @@ struct NrvMap_3DApp: App {
     @State private var currentStyle: ImmersionStyle = .full
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
+    @State private var avm = AnnotationViewModel()
     
     let persistenceController = PersistenceController.shared
     
@@ -41,11 +42,17 @@ struct NrvMap_3DApp: App {
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()
+                .environment(avm)
                 .volumeBaseplateVisibility(.visible)
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
 
+        WindowGroup(id: "AnnotationWindow") {
+            AddAnnotationVIew()
+                .environment(avm)
+        }
+        
         // Primary Immersive Space using appModel
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

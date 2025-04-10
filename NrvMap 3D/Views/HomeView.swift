@@ -34,7 +34,7 @@ struct HomeView: View {
                         
                         // Simulation Button
                         NavigationLink {
-                            SpaceControl()
+                            ImmersiveControl()
                         } label: {
                             Text("🏃\nSimulation")
                                 .font(.extraLargeTitle)
@@ -45,7 +45,7 @@ struct HomeView: View {
 
                         // Save Note Button
                         NavigationLink {
-                            NoteListView(noteVM: noteVM)
+                            NoteListView()
                         } label: {
                             Text("📝\nSaved Note")
                                 .font(.extraLargeTitle)
