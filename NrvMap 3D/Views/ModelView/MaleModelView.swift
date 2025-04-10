@@ -19,7 +19,7 @@ struct MaleModelView: View {
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
-    @State var annotationList: [AnnotationModel] = [AnnotationModel(title: "Hello1", description: "Try to test", position: SIMD3<Float>(-1, -1, -1)),AnnotationModel(title: "Hello2", description: "Try to test", position: SIMD3<Float>(-3, -3, -3))]
+    @Environment(AnnotationViewModel.self) private var avm
     
     var tap: some Gesture {
         TapGesture()
@@ -38,7 +38,7 @@ struct MaleModelView: View {
                     print("gesture blocked")
                 }else{
                     if let entity = selectedEntity {
-                        let delta = SIMD3<Float>(Float(event.translation.width) * -0.0001, 0, Float(event.translation.height) * -0.0001)
+                        let delta = SIMD3<Float>(Float(event.translation.width) * 0.0001, 0, Float(event.translation.height) * -0.0001)
                         entity.transform.translation += delta
                     }
                 }
@@ -87,7 +87,7 @@ struct MaleModelView: View {
                     
                 }update:{content, attachments in
                 
-                   for list in annotationList {
+                    for list in avm.annotationList {
                         if let listEntity = attachments.entity(for: list.id){
                             content.add(listEntity)
                            
@@ -96,7 +96,7 @@ struct MaleModelView: View {
                     
                 }
                 attachments: {
-                    ForEach(annotationList) { list in
+                    ForEach(avm.annotationList) { list in
                         Attachment(id: list.id) {
                             Button("\(list.title)"){
                                 openWindow(id: "ModelDM")
@@ -106,6 +106,15 @@ struct MaleModelView: View {
                 }
                
 //Gesture
+                
+                .gesture(SpatialTapGesture()
+                    .targetedToAnyEntity()
+                    .onEnded{value in
+                        let location = value.location3D
+                        let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
+                        avm.pendingLocation = convertedLocaiton
+                        openWindow(id: "AnnotationWindow")
+                    })
                 .simultaneousGesture(rotation)
                 .simultaneousGesture(scaleGesture)
                 .simultaneousGesture(drag)
