@@ -10,9 +10,11 @@ import RealityKit
 
 struct FemaleModelView: View {
     
+    @Environment(\.openWindow) public var openWindow
     @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
+    @State private var genderSelection: Bool = false
     @StateObject var fvm = FunctionViewModel()
     
     var body: some View {
@@ -20,11 +22,11 @@ struct FemaleModelView: View {
             ZStack {
                 RealityView { content in
                     do {
-//                        let entity = try await Entity.load(named: "FemaleDModel")
-                      let entity = try await ModelEntity(named: "FemaleDModel") //try this line to fix the warnings
+                        let modelName = genderSelection ? "MaleDModel" : "FemaleDModel"
+                        let entity = try await ModelEntity(named: "FemaleDModel") //try this line to fix the warnings
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.generateCollisionShapes(recursive: true) // Enable tap & drag
-                        entity.position = SIMD3<Float>(0, -0.5, 0)
+                        entity.position = SIMD3<Float>(x: -0.1, y: -0.5, z: -0.05)
                         
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
@@ -36,17 +38,22 @@ struct FemaleModelView: View {
                     }
                 }
                 // **Add Drag & Tap Gestures for Interaction**
+                // Drag Gesture
                 .gesture(
                     DragGesture()
                         .targetedToAnyEntity()
                         .onChanged { event in
                             if let entity = selectedEntity {
-                                let delta = SIMD3<Float>(Float(event.translation.width) * 0.001, 0, Float(event.translation.height) * -0.001)
+                                let delta = SIMD3<Float>(Float(event.translation.width) * 0.001,
+                                                           0,
+                                                           Float(event.translation.height) * -0.001)
                                 entity.transform.translation += delta
                             }
                         }
                         .onEnded { _ in print("Drag ended") }
                 )
+
+                // Tap Gesture
                 .gesture(
                     TapGesture()
                         .targetedToAnyEntity()
@@ -55,43 +62,45 @@ struct FemaleModelView: View {
                             fvm.highlightEntity(event.entity)
                         }
                 )
+
+                // Pinch (Zoom) Gesture added as a simultaneous gesture
+                .simultaneousGesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            if let entity = selectedEntity {
+                                // If an original transform exists, use it as the base scale
+                                if let orig = originalTransform {
+                                    entity.transform.scale = orig.scale * Float(value)
+                                } else {
+                                    entity.transform.scale *= Float(value)
+                                }
+                            }
+                        }
+                        .onEnded { value in
+                            if let entity = selectedEntity {
+                                // Save the final transform for future pinch gestures
+                                originalTransform = entity.transform
+                            }
+                        }
+                )
                 
-                
-                // **Right-aligned Button Bar**
+                // Right-aligned Button Bar
                 HStack {
                     Spacer().frame(width: 600)
-                    VStack {
+                    VStack(spacing: 50) {
                         Button {
-                            
+                            genderSelection.toggle()
                         } label: {
-                            Image(systemName: "house")
+                            Image(systemName: "arrow.left.arrow.right")
+                                .font(.title)
                         }
-                        .frame(width: 50, height: 50)
-                        .padding()
                         
                         Button {
-                            
+                            openWindow(id: "KnowledgeList")
                         } label: {
-                            Image(systemName: "square.resize")
+                            Image(systemName: "note.text")
+                                .font(.title)
                         }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "move.3d")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button {
-                            print("Favorite tapped")
-                        } label: {
-                            Image(systemName: "heart.text.clipboard")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
                     }
                 }
             }
@@ -104,5 +113,5 @@ struct FemaleModelView: View {
 #Preview(windowStyle: .volumetric) {
     FemaleModelView()
         .volumeBaseplateVisibility( .visible)
-        
+    
 }

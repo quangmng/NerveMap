@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct NrvMap_3DApp: App {
-    @State private var currentStyle: ImmersionStyle = .full
+    @State private var currentStyle: ImmersionStyle = .progressive
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
     @State private var avm = AnnotationViewModel()
@@ -20,10 +20,10 @@ struct NrvMap_3DApp: App {
         
         // Main window
         WindowGroup {
-            ChooseModelView()
-                .environmentObject(noteVM)
-                .environment(appModel)
+            FemaleModelView()
+                .volumeBaseplateVisibility(.visible)
         }
+        .defaultSize(width: 1600, height: 1600)
         
         // Notes window
         WindowGroup(id: "NotesWindow") {
@@ -53,17 +53,22 @@ struct NrvMap_3DApp: App {
                 .environment(avm)
         }
         
-        // Primary Immersive Space using appModel
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
-                .environment(appModel)
-                .onAppear {
-                    appModel.immersiveSpaceState = .open
-                }
-                .onDisappear {
-                    appModel.immersiveSpaceState = .closed
-                }
+        WindowGroup(id: "KnowledgeList") {
+            KnowledgeList()
         }
-        .immersionStyle(selection: $currentStyle, in: .full)
+        
+        // Primary Immersive Space using appModel
+        ImmersiveSpace(id: "xxx") {
+            FemaleModelView()
+//            ImmersiveView()
+//                .environment(appModel)
+//                .onAppear {
+//                    appModel.immersiveSpaceState = .open
+//                }
+//                .onDisappear {
+//                    appModel.immersiveSpaceState = .closed
+//                }
+        }
+        .immersionStyle(selection: $currentStyle, in: .progressive)
     }
 }
