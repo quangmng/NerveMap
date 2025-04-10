@@ -2,15 +2,26 @@
 ##################
 GoogleService-Info.plist
 
+# Xcode specific files #
+#######################
+xcuserdata/
+*.hmap
+timeline.xctimeline
+playground.xcworkspace
+iOSInjectionProject/
+
 # Compiled source #
 ###################
 *.com
 *.class
-.app
+*.app
 *.dll
 *.exe
 *.o
 *.so
+*.ipa
+*.dSYM.zip
+*.dSYM
 
 # Packages #
 ############
