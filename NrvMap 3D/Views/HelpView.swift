@@ -30,7 +30,7 @@ struct HelpView: View {
                     }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-
+                    
                     Image("onboard1")
                         .resizable()
                         .scaledToFit()
@@ -39,7 +39,7 @@ struct HelpView: View {
                 }
                 .frame(width: 800)
                 .tag(0)
-
+                
                 
                 // Page 2
                 HStack(alignment: .center, spacing: 40) {
@@ -48,31 +48,31 @@ struct HelpView: View {
                             ZStack {
                                 let spacingY: CGFloat = 80
                                 let centerX = geometry.size.width * 0.4
-
+                                
                                 // Rotate
                                 Image("rotateIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX - 150, y: spacingY)
-
+                                
                                 // Zoom In
                                 Image("zoomInIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX-25, y: spacingY * 1.8)
-
+                                
                                 // Zoom Out
                                 Image("zoomOutIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 80 , y: spacingY * 3)
-
+                                
                                 // Move Icon
                                 Image("moveIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 170, y: spacingY * 4.4)
-
+                                
                                 // Hand Gesture
                                 Image("handGesture")
                                     .resizable()
@@ -83,27 +83,31 @@ struct HelpView: View {
                         }
                         .frame(width: 400, height: 450)
                     }
-                  
+                    
                     VStack{
                         Text("Manipulate 3D\ndermatome maps\nmodel like never before!!")
                             .font(.system(size:40, weight: .bold))
                     }
                     .multilineTextAlignment(.center)
                 }
-
+                
                 .tag(1)
-
+                
                 // Page 3
-                    HStack(spacing: 10) {
-                        Image("onboard3")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 300, height: 300)
-                        Text("Immersive & Learn in One\nPowerful App")
-                            .font(.system(size:50, weight: .bold))
-                            .multilineTextAlignment(.center)
-                    }
-                    .tag(2)
+                HStack {
+                    Image("onboard3")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 450, height: 450)
+                        .padding(-30)
+                    Text("Immersive & Learn in One\nPowerful App")
+                        .font(.system(size: 50, weight: .bold))
+                        .multilineTextAlignment(.center)
+        
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.leading, -250)
+                .tag(2)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(.page(backgroundDisplayMode: .always))
