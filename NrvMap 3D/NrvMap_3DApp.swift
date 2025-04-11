@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct NrvMap_3DApp: App {
     @State private var currentStyle: ImmersionStyle = .progressive
+    @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
     @State private var avm = AnnotationViewModel()
@@ -20,8 +21,12 @@ struct NrvMap_3DApp: App {
         
         // Main window
         WindowGroup {
-            FemaleModelView()
-                .volumeBaseplateVisibility(.visible)
+            if hasSeenWelcomeScreen == false {
+                HelpView()
+            }else{
+                FemaleModelView()
+                    .volumeBaseplateVisibility(.visible)
+            }
         }
         .defaultSize(width: 1600, height: 1600)
         
