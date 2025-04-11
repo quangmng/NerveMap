@@ -14,70 +14,105 @@ struct HelpView: View {
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
-                HStack{
-                    VStack{
-                        Text("NrvMap 3D")
-                            .font(.extraLargeTitle)
-                            .frame(width:300)
-                            .bold()
-                            .padding(.horizontal)
+                
+                // Page 1
+                HStack {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("NRV 3D")
+                            .font(.system(size: 60, weight: .bold))
                         
-                        Text("Derma map learn with real 3D Model")
-                            .font(.extraLargeTitle2)
-                            .frame(width:300)
-                            .bold()
-                            .padding()
+                        Text("Dermatomes Map")
+                            .font(.system(size:40, weight:.bold))
                         
+                        Text("Learn with realistic 3D\nmodel")
+                            .font(.system(size:30))
+                            .multilineTextAlignment(.leading)
                     }
-                    
-                    //image
-                }.tag(0)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack{
-                    //image
-                    VStack{
-                        
-                        //image
-                        
-                        Text("Controll 3D derma model model like never before")
-                            .font(.extraLargeTitle)
-                            .frame(width:350)
-                            .bold()
-                            .padding(.horizontal)
-                        
-                        
+                    Image("onboard1")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 500)
+                        .padding()
+                }
+                .frame(width: 800)
+                .tag(0)
+
+                
+                // Page 2
+                HStack(alignment: .center, spacing: 40) {
+                    ZStack {
+                        GeometryReader { geometry in
+                            ZStack {
+                                let spacingY: CGFloat = 80
+                                let centerX = geometry.size.width * 0.4
+
+                                // Rotate
+                                Image("rotateIcon")
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                                    .position(x: centerX - 150, y: spacingY)
+
+                                // Zoom In
+                                Image("zoomInIcon")
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                                    .position(x: centerX-25, y: spacingY * 1.8)
+
+                                // Zoom Out
+                                Image("zoomOutIcon")
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                                    .position(x: centerX + 80 , y: spacingY * 3)
+
+                                // Move Icon
+                                Image("moveIcon")
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                                    .position(x: centerX + 170, y: spacingY * 4.4)
+
+                                // Hand Gesture
+                                Image("handGesture")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 250)
+                                    .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.90)
+                            }
+                        }
+                        .frame(width: 400, height: 450)
                     }
-                }.tag(1)
+                  
+                    VStack{
+                        Text("Manipulate 3D\ndermatome maps\nmodel like never before!!")
+                            .font(.system(size:40, weight: .bold))
+                    }
+                    .multilineTextAlignment(.center)
+                }
 
-                VStack{
-                    Text("Immersive experience on learning")
-                    .font(.extraLargeTitle)
-                    .bold()
-                    .padding()
-                    .leading()
-                    
-                    Text("Learn in a app")
-                    .font(.extraLargeTitle)
-                    .bold()
-                    .padding()
-                    .leading()
-                    
-                    Text("Make your notes")
-                    .font(.extraLargeTitle)
-                    .bold()
-                    .padding()
-                    .leading()
-                    
-                }.tag(2)
+                .tag(1)
+
+                // Page 3
+                    HStack(spacing: 10) {
+                        Image("onboard3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 300, height: 300)
+                        Text("Immersive & Learn in One\nPowerful App")
+                            .font(.system(size:50, weight: .bold))
+                            .multilineTextAlignment(.center)
+                    }
+                    .tag(2)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(.page(backgroundDisplayMode: .always))
 
             // Navigation Arrows
             HStack {
-                Button() {
+                Button {
                     if currentPage > 0 { currentPage -= 1 }
-                }label:{
+                } label: {
                     Image(systemName: "arrow.left.circle.fill")
                         .resizable()
                         .frame(width: 40, height: 40)
@@ -88,23 +123,25 @@ struct HelpView: View {
                 Spacer()
 
                 if currentPage < 2 {
-                    Button(action: {
-                        if currentPage < 2 { currentPage += 1 }
-                    }) {
+                    Button {
+                        currentPage += 1
+                    } label: {
                         Image(systemName: "arrow.right.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
                             .foregroundColor(.blue)
                     }
                 } else {
-                    Button(action: {
+                    Button {
                         hasSeenWelcomeScreen = true
-                    }) {
+                    } label: {
                         Text("Begin")
                             .font(.headline)
-                            .padding()
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 12)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .background(.blue)
+                            .cornerRadius(12)
                     }
                 }
             }
@@ -118,4 +155,3 @@ struct HelpView: View {
     HelpView()
         .environment(AppModel())
 }
-
