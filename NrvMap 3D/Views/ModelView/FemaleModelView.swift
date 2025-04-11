@@ -21,7 +21,7 @@ struct FemaleModelView: View {
     var body: some View {
         HStack {
             ZStack {
-                RealityView { content in
+                RealityView { content, attachments in
                     do {
                         let modelName = genderSelection ? "MaleDModel" : "FemaleDModel"
                         let entity = try await ModelEntity(named: "FemaleDModel") //try this line to fix the warnings
