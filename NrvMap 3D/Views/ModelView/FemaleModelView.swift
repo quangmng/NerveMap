@@ -17,6 +17,7 @@ struct FemaleModelView: View {
     @State private var genderSelection: Bool = false
     @StateObject var fvm = FunctionViewModel()
     @Environment(AnnotationViewModel.self) private var avm
+    @State var isAnnotationMode: Bool = false
     
     var body: some View {
         HStack {
@@ -57,10 +58,14 @@ struct FemaleModelView: View {
                 .gesture(SpatialTapGesture()
                     .targetedToAnyEntity()
                     .onEnded{value in
-                        let location = value.location3D
-                        let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
-                        avm.pendingLocation = convertedLocaiton
-                        openWindow(id: "AnnotationWindow")
+                        if isAnnotationMode == false{
+                            print("gesture blocked")
+                        }else{
+                            let location = value.location3D
+                            let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
+                            avm.pendingLocation = convertedLocaiton
+                            openWindow(id: "AnnotationWindow")
+                        }
                     })
                 // **Add Drag & Tap Gestures for Interaction**
                 // Drag Gesture
@@ -68,11 +73,15 @@ struct FemaleModelView: View {
                     DragGesture()
                         .targetedToAnyEntity()
                         .onChanged { event in
-                            if let entity = selectedEntity {
-                                let delta = SIMD3<Float>(Float(event.translation.width) * 0.001,
-                                                           0,
-                                                           Float(event.translation.height) * -0.001)
-                                entity.transform.translation += delta
+                            if isAnnotationMode {
+                                print("gesture blocked")
+                            }else{
+                                if let entity = selectedEntity {
+                                    let delta = SIMD3<Float>(Float(event.translation.width) * 0.001,
+                                                             0,
+                                                             Float(event.translation.height) * -0.001)
+                                    entity.transform.translation += delta
+                                }
                             }
                         }
                         .onEnded { _ in print("Drag ended") }
@@ -83,8 +92,12 @@ struct FemaleModelView: View {
                     TapGesture()
                         .targetedToAnyEntity()
                         .onEnded { event in
-                            selectedEntity = event.entity
-                            fvm.highlightEntity(event.entity)
+                            if isAnnotationMode {
+                                print("gesture blocked")
+                            }else{
+                                selectedEntity = event.entity
+                                fvm.highlightEntity(event.entity)
+                            }
                         }
                 )
 
@@ -92,12 +105,16 @@ struct FemaleModelView: View {
                 .simultaneousGesture(
                     MagnificationGesture()
                         .onChanged { value in
-                            if let entity = selectedEntity {
-                                // If an original transform exists, use it as the base scale
-                                if let orig = originalTransform {
-                                    entity.transform.scale = orig.scale * Float(value)
-                                } else {
-                                    entity.transform.scale *= Float(value)
+                            if isAnnotationMode {
+                                print("gesture blocked")
+                            }else{
+                                if let entity = selectedEntity {
+                                    // If an original transform exists, use it as the base scale
+                                    if let orig = originalTransform {
+                                        entity.transform.scale = orig.scale * Float(value)
+                                    } else {
+                                        entity.transform.scale *= Float(value)
+                                    }
                                 }
                             }
                         }
@@ -126,6 +143,21 @@ struct FemaleModelView: View {
                             Image(systemName: "note.text")
                                 .font(.title)
                         }
+                        
+                        Button{
+                            isAnnotationMode.toggle()
+                        }label:{
+                            Image(systemName: "list.bullet.clipboard")
+                                .font(.title)
+                        }
+                        
+                        Button{
+                            openWindow(id: "HelpWindow")
+                        }label: {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                        }
+                        
                     }
                 }
             }

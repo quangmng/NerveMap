@@ -25,10 +25,15 @@ struct NrvMap_3DApp: App {
                 HelpView()
             }else{
                 FemaleModelView()
+                    .environment(avm)
                     .volumeBaseplateVisibility(.visible)
             }
         }
         .defaultSize(width: 1600, height: 1600)
+        
+        WindowGroup(id: "HelpWindow"){
+            HelpView()
+        }
         
         // Notes window
         WindowGroup(id: "NotesWindow") {

@@ -25,8 +25,12 @@ struct MaleModelView: View {
         TapGesture()
             .targetedToAnyEntity()
             .onEnded { event in
-                selectedEntity = event.entity
-                fvm.highlightEntity(event.entity)
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    selectedEntity = event.entity
+                    fvm.highlightEntity(event.entity)
+                }
             }
     }
     
@@ -50,12 +54,16 @@ struct MaleModelView: View {
         MagnifyGesture()
             .targetedToAnyEntity()
             .onChanged { value in
-                let rootEntity = value.entity
-                if initialScale == nil {
-                    initialScale = rootEntity.scale
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    let rootEntity = value.entity
+                    if initialScale == nil {
+                        initialScale = rootEntity.scale
+                    }
+                    let scaleRate: Float = 1.0
+                    rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
                 }
-                let scaleRate: Float = 1.0
-                rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
             }
             .onEnded { _ in
                 initialScale = nil
@@ -65,7 +73,11 @@ struct MaleModelView: View {
     var rotation: some Gesture {
            RotateGesture()
                .onChanged { value in
-                   angle = value.rotation
+                   if isAnnotationMode {
+                       print("gesture blocked")
+                   }else{
+                       angle = value.rotation
+                   }
                }
        }
     
@@ -110,10 +122,14 @@ struct MaleModelView: View {
                 .gesture(SpatialTapGesture()
                     .targetedToAnyEntity()
                     .onEnded{value in
-                        let location = value.location3D
-                        let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
-                        avm.pendingLocation = convertedLocaiton
-                        openWindow(id: "AnnotationWindow")
+                        if isAnnotationMode == false{
+                            print("gesture blocked")
+                        }else{
+                            let location = value.location3D
+                            let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
+                            avm.pendingLocation = convertedLocaiton
+                            openWindow(id: "AnnotationWindow")
+                        }
                     })
                 .simultaneousGesture(rotation)
                 .simultaneousGesture(scaleGesture)
