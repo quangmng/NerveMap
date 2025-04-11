@@ -9,15 +9,17 @@ import SwiftUI
 
 struct KnowledgeList: View {
     var body: some View {
-        List(allDermatomes) { derm in
-            VStack(alignment: .leading) {
-                Text(derm.nerveLevel)
-                    .font(.headline)
-                Text(derm.area)
-                    .font(.subheadline)
-                Text(derm.clinicalNote)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+        ScrollView{
+            List(allDermatomes) { derm in
+                VStack(alignment: .leading) {
+                    Text(derm.nerveLevel)
+                        .font(.headline)
+                    Text(derm.area)
+                        .font(.subheadline)
+                    Text(derm.clinicalNote)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }

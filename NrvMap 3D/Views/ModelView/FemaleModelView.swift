@@ -16,6 +16,7 @@ struct FemaleModelView: View {
     @State private var originalTransform: Transform?
     @State private var genderSelection: Bool = false
     @StateObject var fvm = FunctionViewModel()
+    @Environment(AnnotationViewModel.self) private var avm
     
     var body: some View {
         HStack {
@@ -36,7 +37,31 @@ struct FemaleModelView: View {
                     } catch {
                         print("Failed to load model: \(error)")
                     }
+                } update:{content, attachments in
+                    for list in avm.annotationList {
+                        if let listEntity = attachments.entity(for: list.id){
+                            content.add(listEntity)
+                       }
+                    }
                 }
+                attachments: {
+                    ForEach(avm.annotationList) { list in
+                        Attachment(id: list.id) {
+                            Button("\(list.title)"){
+                                openWindow(id: "ModelDM")
+                            }
+                        }
+                    }
+                }
+                
+                .gesture(SpatialTapGesture()
+                    .targetedToAnyEntity()
+                    .onEnded{value in
+                        let location = value.location3D
+                        let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
+                        avm.pendingLocation = convertedLocaiton
+                        openWindow(id: "AnnotationWindow")
+                    })
                 // **Add Drag & Tap Gestures for Interaction**
                 // Drag Gesture
                 .gesture(
