@@ -13,13 +13,15 @@ struct MaleModelView: View {
     
     @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
-    @State private var modelEntity: Entity?
+    @State private var modelEntity: Entity? = nil
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
     @Environment(AnnotationViewModel.self) private var avm
+    @State private var AnnotationAnchor = AnchorEntity()
+    @State private var genderSelect: Bool = false
     
     var tap: some Gesture {
         TapGesture()
@@ -92,19 +94,37 @@ struct MaleModelView: View {
                         let entity = await fvm.create3DModel()
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.position = SIMD3<Float>(0, -0.5, 0)
+                        AnnotationAnchor.position = [0, -0.9, 0]
+                        entity.addChild(AnnotationAnchor)
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
                         modelEntity = entity
                         originalTransform = entity.transform
                     
+                    
+                    
                 }update:{content, attachments in
                 
+                    if (genderSelect){
+                        if let modelEntity{
+                            content.add(modelEntity)
+                        }
+                    }
+                    else{
+                        if let modelEntity {
+                            content.remove(modelEntity)
+                            }
+                    }
+                    
                     for list in avm.annotationList {
                         if let listEntity = attachments.entity(for: list.id){
                             content.add(listEntity)
                            
                        }
                     }
+                    if let entity = content.entities.first(where: { $0.name == "MainModel" }) {
+                        entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
+                               }
                     
                 }
                 attachments: {
@@ -156,7 +176,7 @@ struct MaleModelView: View {
                         .padding()
                         
                         Button {
-                            
+                            genderSelect.toggle( )
                         } label: {
                             Image(systemName: "move.3d")
                         }

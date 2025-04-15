@@ -26,6 +26,7 @@ def Xform "Root"
         prepend references = @FemaleDModel.usdz@
     )
     {
+        float3 xformOp:scale = (1, 1, 1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

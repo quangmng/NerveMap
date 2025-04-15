@@ -11,7 +11,9 @@ struct HelpView: View {
     @AppStorage("hasSeenWelcomeScreen") private var hasSeenWelcomeScreen = false
     @State private var currentPage = 0
     @Environment(\.dismissWindow) private var  dismiss
-    
+    @Environment(\.openWindow) public var open
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    @State private var isVisible = false
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
@@ -21,11 +23,14 @@ struct HelpView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("NrvMap 3D")
                             .font(.system(size: 60, weight: .bold))
+                            .opacity(isVisible ? 1 : 0)
                         
                         Text("Digital Anatomy - Dermatomes Map")
+                            .opacity(isVisible ? 1 : 0)
                             .font(.system(size:40, weight:.bold))
                         
                         Text("Learn with realistic 3D\nmodels")
+                            .opacity(isVisible ? 1 : 0)
                             .font(.system(size:30))
                             .multilineTextAlignment(.leading)
                     }
@@ -35,6 +40,7 @@ struct HelpView: View {
                     Image("onboard1")
                         .resizable()
                         .scaledToFit()
+                        .opacity(isVisible ? 1 : 0)
                         .frame(width: 300, height: 500)
                         .padding()
                 }
@@ -55,31 +61,40 @@ struct HelpView: View {
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX - 150, y: spacingY)
+                                    .opacity(isVisible ? 1 : 0)
                                 
                                 // Zoom In
                                 Image("zoomInIcon")
+                                    
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX-25, y: spacingY * 1.8)
+                                    .opacity(isVisible ? 1 : 0)
                                 
                                 // Zoom Out
                                 Image("zoomOutIcon")
+                                    
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 80 , y: spacingY * 3)
+                                    .opacity(isVisible ? 1 : 0)
                                 
                                 // Move Icon
                                 Image("moveIcon")
+
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 170, y: spacingY * 4.4)
+                                    .opacity(isVisible ? 1 : 0)
                                 
                                 // Hand Gesture
                                 Image("handGesture")
+                                    
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 250)
                                     .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.90)
+                                    .opacity(isVisible ? 1 : 0)
                             }
                         }
                         .frame(width: 400, height: 450)
@@ -87,6 +102,7 @@ struct HelpView: View {
                     
                     VStack{
                         Text("Manipulate 3D\ndermatome maps\nmodel like never before!!")
+                            .opacity(isVisible ? 1 : 0)
                             .font(.system(size:40, weight: .bold))
                     }
                     .multilineTextAlignment(.center)
@@ -97,11 +113,15 @@ struct HelpView: View {
                 // Page 3
                 HStack {
                     Image("onboard3")
+                        
                         .resizable()
                         .scaledToFit()
                         .frame(width: 450, height: 450)
                         .padding(-30)
+                        .opacity(isVisible ? 1 : 0)
+                    
                     Text("Immersive & Learn in One\nPowerful App")
+                        .opacity(isVisible ? 1 : 0)
                         .font(.system(size: 50, weight: .bold))
                         .multilineTextAlignment(.center)
                     
@@ -120,12 +140,16 @@ struct HelpView: View {
                 } label: {
                     if currentPage > 0{
                         Image(systemName: "arrow.left.circle.fill")
+                            
                             .resizable()
                             .frame(width: 40, height: 40)
+                            .opacity(isVisible ? 1 : 0)
                     } else {
                         Image(systemName: "arrow.left.circle")
+                           
                             .resizable()
                             .frame(width: 40, height: 40)
+                            .opacity(isVisible ? 1 : 0)
                     }
                     //
                 }
@@ -140,6 +164,7 @@ struct HelpView: View {
                     } label: {
                         Image(systemName: "arrow.right.circle.fill")
                             .resizable()
+                            .opacity(isVisible ? 1 : 0)
                             .frame(width: 40, height: 40)
                         //                            .foregroundColor(.blue)
                     }
@@ -149,9 +174,11 @@ struct HelpView: View {
                     Button {
                         hasSeenWelcomeScreen = true
                         dismiss(id: "HelpWindow")
+                        open(id: "ModelDM")
                     } label: {
                         Text("Begin")
                             .padding(.horizontal, 30)
+                            .opacity(isVisible ? 1 : 0)
                             .padding(.vertical, 12)
                     }
                 }
@@ -159,6 +186,10 @@ struct HelpView: View {
             
             .padding(.horizontal, 50)
             .padding(.bottom, 50)
+        }
+        .background(Color.clear)
+        .onAppear {
+            self.isVisible = true
         }
     }
 }
