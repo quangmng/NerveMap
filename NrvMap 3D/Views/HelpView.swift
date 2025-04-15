@@ -10,7 +10,8 @@ import SwiftUI
 struct HelpView: View {
     @AppStorage("hasSeenWelcomeScreen") private var hasSeenWelcomeScreen = false
     @State private var currentPage = 0
-
+    @Environment(\.dismissWindow) private var  dismiss
+    
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
@@ -18,13 +19,13 @@ struct HelpView: View {
                 // Page 1
                 HStack {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("NRV 3D")
+                        Text("NrvMap 3D")
                             .font(.system(size: 60, weight: .bold))
                         
-                        Text("Dermatomes Map")
+                        Text("Digital Anatomy - Dermatomes Map")
                             .font(.system(size:40, weight:.bold))
                         
-                        Text("Learn with realistic 3D\nmodel")
+                        Text("Learn with realistic 3D\nmodels")
                             .font(.system(size:30))
                             .multilineTextAlignment(.leading)
                     }
@@ -103,7 +104,7 @@ struct HelpView: View {
                     Text("Immersive & Learn in One\nPowerful App")
                         .font(.system(size: 50, weight: .bold))
                         .multilineTextAlignment(.center)
-        
+                    
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading, -250)
@@ -111,21 +112,28 @@ struct HelpView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(.page(backgroundDisplayMode: .always))
-
+            
             // Navigation Arrows
             HStack {
                 Button {
                     if currentPage > 0 { currentPage -= 1 }
                 } label: {
-                    Image(systemName: "arrow.left.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(currentPage == 0 ? .gray : .blue)
+                    if currentPage > 0{
+                        Image(systemName: "arrow.left.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    } else {
+                        Image(systemName: "arrow.left.circle")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    }
+                    //
                 }
+                .buttonBorderShape(.circle)
                 .disabled(currentPage == 0)
-
+                
                 Spacer()
-
+                
                 if currentPage < 2 {
                     Button {
                         currentPage += 1
@@ -133,24 +141,24 @@ struct HelpView: View {
                         Image(systemName: "arrow.right.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
-                            .foregroundColor(.blue)
+                        //                            .foregroundColor(.blue)
                     }
+                    .buttonBorderShape(.circle)
+
                 } else {
                     Button {
                         hasSeenWelcomeScreen = true
+                        dismiss(id: "HelpWindow")
                     } label: {
                         Text("Begin")
-                            .font(.headline)
                             .padding(.horizontal, 30)
                             .padding(.vertical, 12)
-                            .foregroundColor(.white)
-                            .background(.blue)
-                            .cornerRadius(12)
                     }
                 }
             }
+            
             .padding(.horizontal, 50)
-            .padding(.bottom, 30)
+            .padding(.bottom, 50)
         }
     }
 }

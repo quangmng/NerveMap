@@ -8,6 +8,8 @@ xcuserdata/
 *.hmap
 timeline.xctimeline
 playground.xcworkspace
+*.xcbkptlist
+*.xcuserstate
 iOSInjectionProject/
 
 # Compiled source #
@@ -51,4 +53,5 @@ iOSInjectionProject/
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.swp
 
