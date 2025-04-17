@@ -20,16 +20,23 @@ struct NrvMap_3DApp: App {
     var body: some Scene {
         
         // Main window
-        WindowGroup {
+        WindowGroup(id: "launch"){
+            InitialLauncherView()
+                .environment(appModel)
+        }
+        .windowStyle(.plain)
+        
+        WindowGroup(id: "WelcomeView"){
             if hasSeenWelcomeScreen == false {
                 HelpView()
             }else{
-                FemaleModelView()
+                MaleModelView()
                     .environment(avm)
                     .volumeBaseplateVisibility(.visible)
             }
         }
-        .defaultSize(width: 1600, height: 1600)
+        .windowStyle(.volumetric)
+        .defaultSize(width: 2000, height: 2000)
         
         WindowGroup(id: "HelpWindow"){
             HelpView()

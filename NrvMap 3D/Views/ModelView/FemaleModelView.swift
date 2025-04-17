@@ -69,7 +69,7 @@ struct FemaleModelView: View {
                     })
                 // **Add Drag & Tap Gestures for Interaction**
                 // Drag Gesture
-                .gesture(
+                .simultaneousGesture(
                     DragGesture()
                         .targetedToAnyEntity()
                         .onChanged { event in
@@ -88,7 +88,7 @@ struct FemaleModelView: View {
                 )
 
                 // Tap Gesture
-                .gesture(
+                .simultaneousGesture(
                     TapGesture()
                         .targetedToAnyEntity()
                         .onEnded { event in
