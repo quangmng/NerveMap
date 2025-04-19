@@ -34,7 +34,7 @@ struct ChooseModelView: View {
                         if !noteText.isEmpty {
                             // Create a new Core Data note entity
                             let newNote = NoteEntity(context: viewContext)
-                            newNote.text = noteText
+                            newNote.title = noteText
                             newNote.dateCreated = Date()
                             
                             // Save the context

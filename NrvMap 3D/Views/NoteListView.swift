@@ -19,7 +19,7 @@ struct NoteListView: View {
             List {
                 ForEach(notes) { note in
                     VStack(alignment: .leading) {
-                        Text(note.text ?? "No text")
+                        Text(note.title ?? "No text")
                             .font(.headline)
                         Text(note.dateCreated!, style: .date)
                             .font(.subheadline)

@@ -18,7 +18,7 @@ struct NoteRowView: View {
                 formatter.dateStyle = .short
                 return formatter
             }()
-            Text(note.text)
+            Text(note.title)
             Text(dateFormatter.string(from: note.dateCreated))
         }
     }

@@ -18,8 +18,8 @@ struct MaleModelView: View {
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
     @StateObject var fvm = FunctionViewModel()
+    @StateObject var noteVM = NoteViewModel()
     @State var initialScale: SIMD3<Float>? = nil
-    @Environment(AnnotationViewModel.self) private var avm
     @State private var AnnotationAnchor = AnchorEntity()
     @State private var genderSelect: Bool = false
     
@@ -116,7 +116,7 @@ struct MaleModelView: View {
                             }
                     }
                     
-                    for list in avm.annotationList {
+                    for list in noteVM.notes {
                         if let listEntity = attachments.entity(for: list.id){
                             content.add(listEntity)
                            
@@ -128,11 +128,10 @@ struct MaleModelView: View {
                     
                 }
                 attachments: {
-                    ForEach(avm.annotationList) { list in
+                    ForEach(noteVM.notes) { list in
                         Attachment(id: list.id) {
-                            Button("\(list.title)"){
-                                openWindow(id: "ModelDM")
-                            }
+                            
+                            
                         }
                     }
                 }
@@ -147,7 +146,7 @@ struct MaleModelView: View {
                         }else{
                             let location = value.location3D
                             let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
-                            avm.pendingLocation = convertedLocaiton
+                            noteVM.pendingLocation = convertedLocaiton
                             openWindow(id: "AnnotationWindow")
                         }
                     })

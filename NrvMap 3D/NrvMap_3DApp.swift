@@ -13,7 +13,6 @@ struct NrvMap_3DApp: App {
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
-    @State private var avm = AnnotationViewModel()
     
     let persistenceController = PersistenceController.shared
     
@@ -31,7 +30,7 @@ struct NrvMap_3DApp: App {
                 HelpView()
             }else{
                 MaleModelView()
-                    .environment(avm)
+                    .environmentObject(noteVM)
                     .volumeBaseplateVisibility(.visible)
             }
         }
@@ -59,7 +58,7 @@ struct NrvMap_3DApp: App {
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()
-                .environment(avm)
+                .environmentObject(noteVM)
                 .volumeBaseplateVisibility(.visible)
         }
         .windowStyle(.volumetric)
@@ -67,7 +66,7 @@ struct NrvMap_3DApp: App {
 
         WindowGroup(id: "AnnotationWindow") {
             AddAnnotationVIew()
-                .environment(avm)
+                .environmentObject(noteVM)
         }
         
         WindowGroup(id: "KnowledgeList") {

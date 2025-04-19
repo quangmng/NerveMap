@@ -11,25 +11,33 @@ import RealityKitContent
 
 struct AddAnnotationVIew: View {
     
-    @Environment(AnnotationViewModel.self) private var viewModel
+    
         @Environment(\.dismissWindow) private var dismissWindow
 
+        @StateObject private var noteVM = NoteViewModel()
         @State private var title = ""
-        @State private var description = ""
+        @State private var content = ""
 
         var body: some View {
             VStack(spacing: 16) {
                 Text("Add Note").font(.headline)
                 TextField("Title", text: $title)
-                TextField("Description", text: $description)
+                TextField("Description", text: $content)
                 Button("Save") {
-                    if let position = viewModel.pendingLocation {
-                        let newAnnotation = AnnotationModel(title: title, description: description, position: position)
-                        viewModel.annotationList.append(newAnnotation)
-                        viewModel.pendingLocation = nil
+                    if let position = noteVM.pendingLocation {
+                        noteVM.addNote(title: title, content: content, position: position, date: Date())
+                        noteVM.pendingLocation = nil
                     }
                     dismissWindow(id: "AnnotationWindow")
                 }
+                
+                Button("Cancel") {
+                    dismissWindow(id: "AnnotationWindow")
+                }
+                
+                List(noteVM.notes){list in Text("\(list.title)")}
+                
+
             }
             .frame(width: 300)
             .padding()
