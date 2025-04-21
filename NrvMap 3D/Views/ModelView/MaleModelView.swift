@@ -23,6 +23,9 @@ struct MaleModelView: View {
     @State private var AnnotationAnchor = AnchorEntity()
     @State private var genderSelect: Bool = false
     
+    @State private var expendButton: Int? = nil
+    @State private var activeID: Int?
+    
     var tap: some Gesture {
         TapGesture()
             .targetedToAnyEntity()
@@ -158,38 +161,16 @@ struct MaleModelView: View {
                 HStack {
                     Spacer().frame(width: 600)
                     VStack {
-                        Button {
-                           
-                        } label: {
-                            Image(systemName: "house")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
+                       
+                        ExpendButton(id: 0, systemImage: "house", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
                         
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "square.resize")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button {
-                            genderSelect.toggle( )
-                        } label: {
-                            Image(systemName: "move.3d")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button {
-                            isAnnotationMode.toggle()
-                            print(isAnnotationMode)
-                        } label: {
-                            Image(systemName: "heart.text.clipboard")
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
+                        HoverRevealButton(
+                                      mainIcon: "note.text",
+                                      mainAction: { print("Note tapped") },
+                                      extraButtons: [
+                                          ("doc.text", { print("Doc tapped") })
+                                      ]
+                                  )
                     }
                     .background(Color.gray.cornerRadius(30))
                 }
