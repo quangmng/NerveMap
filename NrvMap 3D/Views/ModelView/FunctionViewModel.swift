@@ -38,9 +38,23 @@ class FunctionViewModel: ObservableObject {
         }
     }
     
-    func create3DModel() async -> Entity{
+    func createFemaleModel() async -> Entity{
             
            guard let modelEntity = try? await Entity(named: "Scene", in: realityKitContentBundle) else {
+               
+               fatalError("Fail to load entity")
+               
+            }
+            enableInteraction(for: modelEntity)
+            
+            
+            return modelEntity
+            
+        }
+    
+    func createMaleModel() async -> Entity{
+            
+           guard let modelEntity = try? await Entity(named: "Untitle_Scene", in: realityKitContentBundle) else {
                
                fatalError("Fail to load entity")
                

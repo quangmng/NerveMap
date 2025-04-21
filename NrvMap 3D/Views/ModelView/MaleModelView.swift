@@ -13,7 +13,8 @@ struct MaleModelView: View {
     
     @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
-    @State private var modelEntity: Entity? = nil
+    @State private var femaleModel: Entity? = nil
+    @State private var maleModel: Entity? = nil
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
@@ -94,14 +95,16 @@ struct MaleModelView: View {
 //3D model generation
                 RealityView{ content, attachments in
     
-                        let entity = await fvm.create3DModel()
+                        let entity = await fvm.createFemaleModel()
+                        let entity2 = await fvm.createMaleModel()
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.position = SIMD3<Float>(0, -0.5, 0)
                         AnnotationAnchor.position = [0, -0.9, 0]
                         entity.addChild(AnnotationAnchor)
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
-                        modelEntity = entity
+                        femaleModel = entity
+                        maleModel = entity2
                         originalTransform = entity.transform
                     
                     
@@ -109,14 +112,20 @@ struct MaleModelView: View {
                 }update:{content, attachments in
                 
                     if (genderSelect){
-                        if let modelEntity{
-                            content.add(modelEntity)
+                        if let maleModel{
+                            content.remove(maleModel)
+                            if let femaleModel{
+                                content.add(femaleModel)
+                            }
                         }
                     }
                     else{
-                        if let modelEntity {
-                            content.remove(modelEntity)
+                        if let femaleModel{
+                            content.remove(femaleModel)
+                            if let maleModel{
+                                content.add(maleModel)
                             }
+                        }
                     }
                     
                     for list in noteVM.notes {
@@ -166,7 +175,8 @@ struct MaleModelView: View {
                         
                         HoverRevealButton(
                                       mainIcon: "note.text",
-                                      mainAction: { print("Note tapped") },
+                                      mainAction: { genderSelect.toggle()
+                                          print(genderSelect)},
                                       extraButtons: [
                                           ("doc.text", { print("Doc tapped") })
                                       ]

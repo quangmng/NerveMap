@@ -77,7 +77,7 @@ struct Model3DViewTest: View {
                 return
             }
             
-            let model = await fvm.create3DModel()
+            let model = await fvm.createFemaleModel()
             
             content.add(skyboxEntity)
             content.add(model)
