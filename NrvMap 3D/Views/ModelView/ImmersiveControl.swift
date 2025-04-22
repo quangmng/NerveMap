@@ -20,12 +20,14 @@ struct ImmersiveControl: View {
         Button{
             Task {
                 if isImmersive == false {
-                    await openImmersiveSpace(id: "test")
+                    await openImmersiveSpace(id: "Immersive")
                     isImmersive = true
+                    dismissWindow(id: "WelcomeView")
                     
                 } else {
                     await dismissImmersiveSpace()
                     isImmersive = false
+                    openWindow(id: "WelcomeView")
                 }
             }
         }label:{

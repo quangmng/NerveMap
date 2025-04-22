@@ -55,6 +55,14 @@ struct NrvMap_3DApp: App {
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
         
+        WindowGroup(id: "Control") {
+            ImmersiveControl()
+        }
+        
+        ImmersiveSpace(id: "Immersive") {
+            Model3DViewTest()
+        }
+        
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()

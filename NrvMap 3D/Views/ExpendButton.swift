@@ -17,7 +17,7 @@ struct ExpendButton: View {
     @Binding var expendButton: Int?
 
     var body: some View {
-        VStack(spacing: 8) {
+        HStack(spacing: 8) {
             Button(action: {
                 if expendButton == id {
                     expendButton = nil

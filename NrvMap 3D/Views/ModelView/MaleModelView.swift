@@ -95,17 +95,17 @@ struct MaleModelView: View {
 //3D model generation
                 RealityView{ content, attachments in
     
-                        let entity = await fvm.createFemaleModel()
-                        let entity2 = await fvm.createMaleModel()
-                        entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                        entity.position = SIMD3<Float>(0, -0.5, 0)
+                        let femaleEntity = await fvm.createFemaleModel()
+                        let maleEntity = await fvm.createMaleModel()
+                        femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
+                        femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
                         AnnotationAnchor.position = [0, -0.9, 0]
-                        entity.addChild(AnnotationAnchor)
-                        fvm.enableInteraction(for: entity)
-                        content.add(entity)
-                        femaleModel = entity
-                        maleModel = entity2
-                        originalTransform = entity.transform
+                        femaleEntity.addChild(AnnotationAnchor)
+                        fvm.enableInteraction(for: femaleEntity)
+                        content.add(femaleEntity)
+                        femaleModel = femaleEntity
+                        maleModel = maleEntity
+                        originalTransform = femaleEntity.transform
                     
                     
                     
@@ -167,20 +167,17 @@ struct MaleModelView: View {
                 .simultaneousGesture(drag)
                 .simultaneousGesture(tap)
                 
-                HStack {
+                VStack {
                     Spacer().frame(width: 600)
-                    VStack {
+                    HStack {
                        
-                        ExpendButton(id: 0, systemImage: "house", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                        // TODO: swiching gender - Motion - Simulation - Note taking - Info
                         
-                        HoverRevealButton(
-                                      mainIcon: "note.text",
-                                      mainAction: { genderSelect.toggle()
-                                          print(genderSelect)},
-                                      extraButtons: [
-                                          ("doc.text", { print("Doc tapped") })
-                                      ]
-                                  )
+                        ExpendButton(id: 0, systemImage: "arrow.left.arrow.right", action: {}, extraButtons: [("figure.stand", {genderSelect = false}),("figure.stand.dress", {genderSelect = true})], expendButton: $expendButton)
+                        
+                        ExpendButton(id: 1, systemImage: "house", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                        
+                        ExpendButton(id: 2, systemImage: "house", action: {}, extraButtons: [("note.text", {openWindow(id: "Control")})], expendButton: $expendButton)
                     }
                     .background(Color.gray.cornerRadius(30))
                 }
