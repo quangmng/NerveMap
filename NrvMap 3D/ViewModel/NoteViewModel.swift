@@ -31,4 +31,14 @@ class NoteViewModel: ObservableObject {
             print("❌ Failed to save note: \(error.localizedDescription)")
         }
     }
+    
+    func fetchNotes() {
+        let request: NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
+        do {
+            notes = try context.fetch(request)
+        } catch {
+            print("❌ Failed to fetch notes: \(error.localizedDescription)")
+        }
+    }
+    
 }

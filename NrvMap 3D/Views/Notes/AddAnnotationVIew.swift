@@ -11,9 +11,7 @@ import RealityKitContent
 
 struct AddAnnotationVIew: View {
     
-    
         @Environment(\.dismissWindow) private var dismissWindow
-
         @StateObject private var noteVM = NoteViewModel()
         @State private var title = ""
         @State private var content = ""
@@ -35,11 +33,16 @@ struct AddAnnotationVIew: View {
                     dismissWindow(id: "AnnotationWindow")
                 }
                 
-                List(noteVM.notes){list in Text("\(list.title)")}
+                List(noteVM.notes) { note in
+                    Text(note.title ?? "Untitled")
+                }
                 
 
             }
             .frame(width: 300)
             .padding()
+            .onAppear {
+                noteVM.fetchNotes()
+            }
         }
     }

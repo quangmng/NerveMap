@@ -6,20 +6,24 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NoteRowView: View {
     
-    let note: Note
+    @ObservedObject var note: NoteEntity
+    
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
     
     var body: some View {
         VStack {
-            let dateFormatter: DateFormatter = {
-                let formatter = DateFormatter()
-                formatter.dateStyle = .short
-                return formatter
-            }()
-            Text(note.title)
-            Text(dateFormatter.string(from: note.dateCreated))
+            Text(note.title ?? "Untitled")
+            if let date = note.dateCreated {
+                Text(Self.dateFormatter.string(from: date))
+            }
         }
     }
 }
