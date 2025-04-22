@@ -35,9 +35,23 @@ class NoteViewModel: ObservableObject {
     func fetchNotes() {
         let request: NSFetchRequest<NoteEntity> = NoteEntity.fetchRequest()
         do {
-            notes = try context.fetch(request)
+            let entities = try context.fetch(request)
+            // Map each Core Data object into your Swift struct,
+            // rebuilding the vector from the stored Float:
+            let models = entities.map { e in
+                NoteModel(
+                    id: e.id ?? UUID(),
+                    title: e.title,
+                    details: e.details,
+                    position: SIMD3<Float>(e.position, 0, 0),
+                    dateCreated: e.dateCreated
+                )
+            }
+            // If you keep notes as NoteEntity, assign `entities`;
+            // if you switch to [NoteModel], assign `models` instead.
+            notes = entities
         } catch {
-            print("❌ Failed to fetch notes: \(error.localizedDescription)")
+            print("❌ Failed to fetch notes: \(error)")
         }
     }
     
