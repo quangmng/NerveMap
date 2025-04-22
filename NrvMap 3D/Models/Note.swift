@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Note: Identifiable {
-    let id = UUID()
-    var title: String
-    var content: String
-    var position: SIMD3<Float>
-    var dateCreated: Date = Date()
-}
+//struct Note: Identifiable {
+//    let id = UUID()
+//    var title: String
+//    var content: String
+//    var position: SIMD3<Float>
+//    var dateCreated: Date = Date()
+//}

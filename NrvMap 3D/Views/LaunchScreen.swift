@@ -13,10 +13,12 @@ struct InitialLauncherView: View {
     var body: some View {
         
         EmptyView()
-        .task {
-            try? await Task.sleep(nanoseconds: 1_000_000_000) // Optional delay
-            await open(id: "WelcomeView")
-            dismiss(id: "launch")
-        }
+            .task {
+                Task {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+                    await open(id: "WelcomeView")
+                    dismiss(id: "launch")
+                }
+            }
     }
 }
