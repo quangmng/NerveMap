@@ -11,6 +11,40 @@
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
+		FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358B2DBA013900ECC559 /* AnnotationModel.swift */; };
+		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
+		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
+		FD9035B82DBA013900ECC559 /* ModelMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358E2DBA013900ECC559 /* ModelMesh.swift */; };
+		FD9035B92DBA013900ECC559 /* NoteEntity+SIMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358F2DBA013900ECC559 /* NoteEntity+SIMD.swift */; };
+		FD9035BA2DBA013900ECC559 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035902DBA013900ECC559 /* NoteModel.swift */; };
+		FD9035BB2DBA013900ECC559 /* SIMD3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035912DBA013900ECC559 /* SIMD3.swift */; };
+		FD9035BC2DBA013900ECC559 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035922DBA013900ECC559 /* UIExtension.swift */; };
+		FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */; };
+		FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035982DBA013900ECC559 /* NoteViewModel.swift */; };
+		FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359A2DBA013900ECC559 /* ChooseModelView.swift */; };
+		FD9035C02DBA013900ECC559 /* FemaleModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359B2DBA013900ECC559 /* FemaleModelView.swift */; };
+		FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */; };
+		FD9035C22DBA013900ECC559 /* ImmersiveControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */; };
+		FD9035C32DBA013900ECC559 /* MaleModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359E2DBA013900ECC559 /* MaleModelView.swift */; };
+		FD9035C42DBA013900ECC559 /* Model3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359F2DBA013900ECC559 /* Model3D.swift */; };
+		FD9035C52DBA013900ECC559 /* AddAnnotationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */; };
+		FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A22DBA013900ECC559 /* NoteListView.swift */; };
+		FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A32DBA013900ECC559 /* NoteRowView.swift */; };
+		FD9035C82DBA013900ECC559 /* CustomNavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A52DBA013900ECC559 /* CustomNavLink.swift */; };
+		FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A62DBA013900ECC559 /* ExpendButton.swift */; };
+		FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A72DBA013900ECC559 /* HelpView.swift */; };
+		FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A82DBA013900ECC559 /* HomeView.swift */; };
+		FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A92DBA013900ECC559 /* HoverButton2.swift */; };
+		FD9035CD2DBA013900ECC559 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */; };
+		FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */; };
+		FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */; };
+		FD9035D02DBA013900ECC559 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AD2DBA013900ECC559 /* SearchView.swift */; };
+		FD9035D12DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AE2DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift */; };
+		FD9035D22DBA013900ECC559 /* NrvMap_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035B22DBA013900ECC559 /* NrvMap_3DApp.swift */; };
+		FD9035D32DBA013900ECC559 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035B32DBA013900ECC559 /* PersistenceController.swift */; };
+		FD9035D42DBA013900ECC559 /* FemaleDModel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = FD9035942DBA013900ECC559 /* FemaleDModel.usdz */; };
+		FD9035D52DBA013900ECC559 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9035952DBA013900ECC559 /* Preview Assets.xcassets */; };
+		FD9035D62DBA013900ECC559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9035B02DBA013900ECC559 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,28 +53,42 @@
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		C5477C9B2D7F092A00C09342 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
+		FD90358B2DBA013900ECC559 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
+		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
+		FD90358E2DBA013900ECC559 /* ModelMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMesh.swift; sourceTree = "<group>"; };
+		FD90358F2DBA013900ECC559 /* NoteEntity+SIMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteEntity+SIMD.swift"; sourceTree = "<group>"; };
+		FD9035902DBA013900ECC559 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		FD9035912DBA013900ECC559 /* SIMD3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIMD3.swift; sourceTree = "<group>"; };
+		FD9035922DBA013900ECC559 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
+		FD9035942DBA013900ECC559 /* FemaleDModel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = FemaleDModel.usdz; sourceTree = "<group>"; };
+		FD9035952DBA013900ECC559 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewModel.swift; sourceTree = "<group>"; };
+		FD9035982DBA013900ECC559 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		FD90359A2DBA013900ECC559 /* ChooseModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseModelView.swift; sourceTree = "<group>"; };
+		FD90359B2DBA013900ECC559 /* FemaleModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FemaleModelView.swift; sourceTree = "<group>"; };
+		FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionViewModel.swift; sourceTree = "<group>"; };
+		FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveControl.swift; sourceTree = "<group>"; };
+		FD90359E2DBA013900ECC559 /* MaleModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaleModelView.swift; sourceTree = "<group>"; };
+		FD90359F2DBA013900ECC559 /* Model3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3D.swift; sourceTree = "<group>"; };
+		FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnnotationVIew.swift; sourceTree = "<group>"; };
+		FD9035A22DBA013900ECC559 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		FD9035A32DBA013900ECC559 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
+		FD9035A52DBA013900ECC559 /* CustomNavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavLink.swift; sourceTree = "<group>"; };
+		FD9035A62DBA013900ECC559 /* ExpendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendButton.swift; sourceTree = "<group>"; };
+		FD9035A72DBA013900ECC559 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		FD9035A82DBA013900ECC559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FD9035A92DBA013900ECC559 /* HoverButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverButton2.swift; sourceTree = "<group>"; };
+		FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeList.swift; sourceTree = "<group>"; };
+		FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		FD9035AD2DBA013900ECC559 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		FD9035AE2DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
+		FD9035B02DBA013900ECC559 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD9035B12DBA013900ECC559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD9035B22DBA013900ECC559 /* NrvMap_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NrvMap_3DApp.swift; sourceTree = "<group>"; };
+		FD9035B32DBA013900ECC559 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C5477C952D7F080300C09342 /* Exceptions for "NrvMap 3D" folder in "NrvMap 3D" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = C5477C7D2D7F080100C09342 /* NrvMap 3D */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		C5477C802D7F080100C09342 /* NrvMap 3D */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				C5477C952D7F080300C09342 /* Exceptions for "NrvMap 3D" folder in "NrvMap 3D" target */,
-			);
-			path = "NrvMap 3D";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C5477C7B2D7F080100C09342 /* Frameworks */ = {
@@ -59,7 +107,7 @@
 			children = (
 				C500A7202D983D18008734CA /* README.md */,
 				C5477C9B2D7F092A00C09342 /* .gitignore */,
-				C5477C802D7F080100C09342 /* NrvMap 3D */,
+				FD9035B42DBA013900ECC559 /* NrvMap 3D */,
 				C5477C812D7F080100C09342 /* Packages */,
 				D55F3AE62D98FE74004DA0E2 /* Frameworks */,
 				C5477C7F2D7F080100C09342 /* Products */,
@@ -90,6 +138,96 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD9035932DBA013900ECC559 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FD90358F2DBA013900ECC559 /* NoteEntity+SIMD.swift */,
+				FD90358C2DBA013900ECC559 /* AppModel.swift */,
+				FD90358B2DBA013900ECC559 /* AnnotationModel.swift */,
+				FD90358D2DBA013900ECC559 /* Dermatome.swift */,
+				FD90358E2DBA013900ECC559 /* ModelMesh.swift */,
+				FD9035902DBA013900ECC559 /* NoteModel.swift */,
+				FD9035912DBA013900ECC559 /* SIMD3.swift */,
+				FD9035922DBA013900ECC559 /* UIExtension.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FD9035962DBA013900ECC559 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FD9035942DBA013900ECC559 /* FemaleDModel.usdz */,
+				FD9035952DBA013900ECC559 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FD9035992DBA013900ECC559 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */,
+				FD9035982DBA013900ECC559 /* NoteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FD9035A02DBA013900ECC559 /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+				FD90359A2DBA013900ECC559 /* ChooseModelView.swift */,
+				FD90359B2DBA013900ECC559 /* FemaleModelView.swift */,
+				FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */,
+				FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */,
+				FD90359E2DBA013900ECC559 /* MaleModelView.swift */,
+				FD90359F2DBA013900ECC559 /* Model3D.swift */,
+			);
+			path = ModelView;
+			sourceTree = "<group>";
+		};
+		FD9035A42DBA013900ECC559 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */,
+				FD9035A22DBA013900ECC559 /* NoteListView.swift */,
+				FD9035A32DBA013900ECC559 /* NoteRowView.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		FD9035AF2DBA013900ECC559 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD9035A02DBA013900ECC559 /* ModelView */,
+				FD9035A42DBA013900ECC559 /* Notes */,
+				FD9035A52DBA013900ECC559 /* CustomNavLink.swift */,
+				FD9035A62DBA013900ECC559 /* ExpendButton.swift */,
+				FD9035A72DBA013900ECC559 /* HelpView.swift */,
+				FD9035A82DBA013900ECC559 /* HomeView.swift */,
+				FD9035A92DBA013900ECC559 /* HoverButton2.swift */,
+				FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */,
+				FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */,
+				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
+				FD9035AD2DBA013900ECC559 /* SearchView.swift */,
+				FD9035AE2DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD9035B42DBA013900ECC559 /* NrvMap 3D */ = {
+			isa = PBXGroup;
+			children = (
+				FD9035932DBA013900ECC559 /* Models */,
+				FD9035962DBA013900ECC559 /* Preview Content */,
+				FD9035992DBA013900ECC559 /* ViewModel */,
+				FD9035AF2DBA013900ECC559 /* Views */,
+				FD9035B02DBA013900ECC559 /* Assets.xcassets */,
+				FD9035B12DBA013900ECC559 /* Info.plist */,
+				FD9035B22DBA013900ECC559 /* NrvMap_3DApp.swift */,
+				FD9035B32DBA013900ECC559 /* PersistenceController.swift */,
+			);
+			path = "NrvMap 3D";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,9 +242,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				C5477C802D7F080100C09342 /* NrvMap 3D */,
 			);
 			name = "NrvMap 3D";
 			packageProductDependencies = (
@@ -157,6 +292,9 @@
 			files = (
 				C500A7212D983D18008734CA /* README.md in Resources */,
 				C5477C9C2D7F093100C09342 /* .gitignore in Resources */,
+				FD9035D42DBA013900ECC559 /* FemaleDModel.usdz in Resources */,
+				FD9035D52DBA013900ECC559 /* Preview Assets.xcassets in Resources */,
+				FD9035D62DBA013900ECC559 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +306,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */,
+				FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */,
+				FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */,
+				FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */,
+				FD9035B82DBA013900ECC559 /* ModelMesh.swift in Sources */,
+				FD9035B92DBA013900ECC559 /* NoteEntity+SIMD.swift in Sources */,
+				FD9035BA2DBA013900ECC559 /* NoteModel.swift in Sources */,
+				FD9035BB2DBA013900ECC559 /* SIMD3.swift in Sources */,
+				FD9035BC2DBA013900ECC559 /* UIExtension.swift in Sources */,
+				FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */,
+				FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */,
+				FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */,
+				FD9035C02DBA013900ECC559 /* FemaleModelView.swift in Sources */,
+				FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */,
+				FD9035C22DBA013900ECC559 /* ImmersiveControl.swift in Sources */,
+				FD9035C32DBA013900ECC559 /* MaleModelView.swift in Sources */,
+				FD9035C42DBA013900ECC559 /* Model3D.swift in Sources */,
+				FD9035C52DBA013900ECC559 /* AddAnnotationVIew.swift in Sources */,
+				FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */,
+				FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */,
+				FD9035C82DBA013900ECC559 /* CustomNavLink.swift in Sources */,
+				FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */,
+				FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */,
+				FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */,
+				FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */,
+				FD9035CD2DBA013900ECC559 /* ImmersiveView.swift in Sources */,
+				FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */,
+				FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */,
+				FD9035D02DBA013900ECC559 /* SearchView.swift in Sources */,
+				FD9035D12DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift in Sources */,
+				FD9035D22DBA013900ECC559 /* NrvMap_3DApp.swift in Sources */,
+				FD9035D32DBA013900ECC559 /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

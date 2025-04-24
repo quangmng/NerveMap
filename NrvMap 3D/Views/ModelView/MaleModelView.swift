@@ -23,9 +23,9 @@ struct MaleModelView: View {
     @State var initialScale: SIMD3<Float>? = nil
     @State private var AnnotationAnchor = AnchorEntity()
     @State private var genderSelect: Bool = false
-    
     @State private var expendButton: Int? = nil
     @State private var activeID: Int?
+    @State private var showingMotion: Bool = false
     
     var tap: some Gesture {
         TapGesture()
@@ -77,40 +77,40 @@ struct MaleModelView: View {
     }
     
     var rotation: some Gesture {
-           RotateGesture()
-               .onChanged { value in
-                   if isAnnotationMode {
-                       print("gesture blocked")
-                   }else{
-                       angle = value.rotation
-                   }
-               }
-       }
+        RotateGesture()
+            .onChanged { value in
+                if isAnnotationMode {
+                    print("gesture blocked")
+                }else{
+                    angle = value.rotation
+                }
+            }
+    }
     
     var body: some View {
         
         HStack {
             ZStack {
-               
-//3D model generation
+                
+                //3D model generation
                 RealityView{ content, attachments in
-    
-                        let femaleEntity = await fvm.createFemaleModel()
-                        let maleEntity = await fvm.createMaleModel()
-                        femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                        femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
-                        AnnotationAnchor.position = [0, -0.9, 0]
-                        femaleEntity.addChild(AnnotationAnchor)
-                        fvm.enableInteraction(for: femaleEntity)
-                        content.add(femaleEntity)
-                        femaleModel = femaleEntity
-                        maleModel = maleEntity
-                        originalTransform = femaleEntity.transform
+                    
+                    let femaleEntity = await fvm.createFemaleModel()
+                    let maleEntity = await fvm.createMaleModel()
+                    femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
+                    femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
+                    AnnotationAnchor.position = [0, -0.9, 0]
+                    femaleEntity.addChild(AnnotationAnchor)
+                    fvm.enableInteraction(for: femaleEntity)
+                    content.add(femaleEntity)
+                    femaleModel = femaleEntity
+                    maleModel = maleEntity
+                    originalTransform = femaleEntity.transform
                     
                     
                     
                 }update:{content, attachments in
-                
+                    
                     if (genderSelect){
                         if let maleModel{
                             content.remove(maleModel)
@@ -118,8 +118,7 @@ struct MaleModelView: View {
                                 content.add(femaleModel)
                             }
                         }
-                    }
-                    else{
+                    } else {
                         if let femaleModel{
                             content.remove(femaleModel)
                             if let maleModel{
@@ -131,12 +130,11 @@ struct MaleModelView: View {
                     for list in noteVM.notes {
                         if let listEntity = attachments.entity(for: list.id){
                             content.add(listEntity)
-                           
-                       }
+                        }
                     }
                     if let entity = content.entities.first(where: { $0.name == "MainModel" }) {
                         entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
-                               }
+                    }
                     
                 }
                 attachments: {
@@ -147,8 +145,8 @@ struct MaleModelView: View {
                         }
                     }
                 }
-               
-//Gesture
+                
+                //Gesture
                 
                 .gesture(SpatialTapGesture()
                     .targetedToAnyEntity()
@@ -167,26 +165,62 @@ struct MaleModelView: View {
                 .simultaneousGesture(drag)
                 .simultaneousGesture(tap)
                 
+                /*
                 VStack {
                     Spacer().frame(width: 600)
                     HStack {
-                       
+                        
                         // TODO: swiching gender - Motion - Simulation - Note taking - Info
                         
-                        ExpendButton(id: 0, systemImage: "arrow.left.arrow.right", action: {}, extraButtons: [("figure.stand", {genderSelect = false}),("figure.stand.dress", {genderSelect = true})], expendButton: $expendButton)
                         
-                        ExpendButton(id: 1, systemImage: "house", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                        ExpendButton(id: 0, systemImage: "figure.stand", action: {}, extraButtons: [("figure.stand", {genderSelect = false}),("figure.stand.dress", {genderSelect = true})], expendButton: $expendButton)
+                        
+                        ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
                         
                         ExpendButton(id: 2, systemImage: "house", action: {}, extraButtons: [("note.text", {openWindow(id: "Control")})], expendButton: $expendButton)
                     }
                     .background(Color.gray.cornerRadius(30))
                 }
+                 */
             }
-        }.background{
+        }
+        .background{
             if isAnnotationMode == true {
                 Color.black.opacity(0.5)
             }
         }
+        .ornament(attachmentAnchor: .scene(.bottomFront)) {
+            HStack(spacing: 10) {
+                Button {
+                    genderSelect.toggle()
+                } label: {
+                    Image(systemName: genderSelect ? "figure.stand" : "figure.stand.dress")
+                        .font(.largeTitle)
+                }
+                .background {
+                    Circle().foregroundStyle(genderSelect ? Color.maleBule : Color.femalePink)
+                }
+                
+                Button {
+                    showingMotion.toggle()
+                } label: {
+                    Image(systemName: "figure.walk.motion")
+                        .font(.largeTitle)
+                }
+                
+                ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                
+                ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                
+                ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                
+                ExpendButton(id: 4, systemImage: "info.circle.fill", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+            }
+        }
+        .sheet(isPresented: $showingMotion) {
+            Text("🚶🏼Walking")
+        }
+        
     }
 }
 
@@ -194,5 +228,20 @@ struct MaleModelView: View {
 #Preview(windowStyle: .volumetric) {
     MaleModelView()
         .volumeBaseplateVisibility( .visible)
-        
+    
+}
+
+import SwiftUI
+
+struct MotionTextView: View {
+    @State private var selection = 0
+    var body: some View {
+        TabView {
+            Text("Walk").tag(0)
+            Text("Stand Up").tag(1)
+            Text("Sit Down").tag(2)
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle())
+    }
 }
