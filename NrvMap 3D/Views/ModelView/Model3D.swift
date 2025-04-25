@@ -37,7 +37,7 @@ struct Model3DViewTest: View {
                     print("gesture blocked")
                 }else{
                     if let entity = selectedEntity {
-                        let delta = SIMD3<Float>(Float(event.translation.width) * -0.0001, 0, Float(event.translation.height) * -0.0001)
+                        let delta = SIMD3<Float>(Float(event.translation.width) * 0.0001, 0, Float(event.translation.height) * -0.0001)
                         entity.transform.translation += delta
                     }
                 }
@@ -72,12 +72,16 @@ struct Model3DViewTest: View {
         
         RealityView{content in
             
+            let worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
+            
             guard let skyboxEntity = fvm.createSkybox() else {
                 print("Error loading entity")
                 return
             }
             
             let model = await fvm.createFemaleModel()
+            
+            worldAnchor.addChild(model)
             
             content.add(skyboxEntity)
             content.add(model)

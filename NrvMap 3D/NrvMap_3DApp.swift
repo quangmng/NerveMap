@@ -57,7 +57,7 @@ struct NrvMap_3DApp: App {
         
         WindowGroup(id: "Control") {
             ImmersiveControl()
-        }
+        }.defaultSize(width: 100, height: 50)
         
         ImmersiveSpace(id: "Immersive") {
             Model3DViewTest()
@@ -81,6 +81,12 @@ struct NrvMap_3DApp: App {
             KnowledgeList()
         }
         
+        WindowGroup(id: "MotionWindow") {
+            MotionTextView()
+        }
+        .defaultSize(width: 100, height: 50)
+        
+       
         // Primary Immersive Space using appModel
         ImmersiveSpace(id: "xxx") {
             FemaleModelView()

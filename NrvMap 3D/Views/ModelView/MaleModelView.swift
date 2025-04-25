@@ -13,8 +13,11 @@ struct MaleModelView: View {
     
     @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
-    @State private var femaleModel: Entity? = nil
-    @State private var maleModel: Entity? = nil
+    
+    @State var femaleModel: Entity? = nil
+    @State var maleModel: Entity?
+    @State var currentModel: Entity? = nil
+    
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
@@ -97,6 +100,8 @@ struct MaleModelView: View {
                     
                     let femaleEntity = await fvm.createFemaleModel()
                     let maleEntity = await fvm.createMaleModel()
+                    currentModel = femaleEntity
+                    
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
                     AnnotationAnchor.position = [0, -0.9, 0]
@@ -111,20 +116,17 @@ struct MaleModelView: View {
                     
                 }update:{content, attachments in
                     
-                    if (genderSelect){
-                        if let maleModel{
-                            content.remove(maleModel)
-                            if let femaleModel{
-                                content.add(femaleModel)
-                            }
-                        }
-                    } else {
-                        if let femaleModel{
-                            content.remove(femaleModel)
-                            if let maleModel{
-                                content.add(maleModel)
-                            }
-                        }
+                    guard let male = maleModel, let female = femaleModel
+                    else{return}
+                    
+                    if !genderSelect || currentModel == male{
+                        content.remove(male)
+                        content.add(female)
+                        currentModel = female
+                    }else if genderSelect || currentModel == female{
+                        content.remove(female)
+                        content.add(male)
+                        currentModel = male
                     }
                     
                     for list in noteVM.notes {
@@ -190,37 +192,24 @@ struct MaleModelView: View {
             }
         }
         .ornament(attachmentAnchor: .scene(.bottomFront)) {
-            HStack(spacing: 10) {
-                Button {
-                    genderSelect.toggle()
-                } label: {
-                    Image(systemName: genderSelect ? "figure.stand" : "figure.stand.dress")
-                        .font(.largeTitle)
-                }
-                .background {
-                    Circle().foregroundStyle(genderSelect ? Color.maleBule : Color.femalePink)
-                }
+            HStack(spacing: 10) {                
                 
-                Button {
-                    showingMotion.toggle()
-                } label: {
-                    Image(systemName: "figure.walk.motion")
-                        .font(.largeTitle)
-                }
+                ExpendButton(id: 0, systemImage: genderSelect ? "figure.stand" : "figure.stand.dress", action: {genderSelect.toggle()}, extraButtons: [], expendButton: $expendButton)
+                    .background(genderSelect ? Color.maleBule : Color.femalePink)
+                    .cornerRadius(25)
                 
-                ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                // i should ask...
+                ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
+                     // action, label
+                ], expendButton: $expendButton)
                 
-                ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $expendButton)
                 
-                ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $expendButton)
                 
                 ExpendButton(id: 4, systemImage: "info.circle.fill", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
             }
         }
-        .sheet(isPresented: $showingMotion) {
-            Text("🚶🏼Walking")
-        }
-        
     }
 }
 
@@ -228,20 +217,4 @@ struct MaleModelView: View {
 #Preview(windowStyle: .volumetric) {
     MaleModelView()
         .volumeBaseplateVisibility( .visible)
-    
-}
-
-import SwiftUI
-
-struct MotionTextView: View {
-    @State private var selection = 0
-    var body: some View {
-        TabView {
-            Text("Walk").tag(0)
-            Text("Stand Up").tag(1)
-            Text("Sit Down").tag(2)
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle())
-    }
 }

@@ -40,6 +40,6 @@ struct ExpendButton: View {
                 }
             }
         }
-        .animation(.easeInOut, value: expendButton)
+        .animation(.spring(), value: expendButton)
     }
 }
