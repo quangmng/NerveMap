@@ -10,12 +10,16 @@
 
 def Xform "Root"
 {
-    def "Earth" (
+    def "walkingFemale" (
         active = true
-        prepend references = @Earth.usdz@
+        customData = {
+            float3 rotationEulerHint = (4.7123885, 0, 0)
+        }
+        prepend references = @walkingFemale.usdz@
     )
     {
-        float3 xformOp:scale = (3, 3, 3)
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

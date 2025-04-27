@@ -15,6 +15,7 @@ struct ImmersiveControl: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @State private var isImmersive: Bool = false
+    @EnvironmentObject var ivm: ImmersiveViewModel
     
     var body: some View {
         Button{
@@ -39,5 +40,21 @@ struct ImmersiveControl: View {
                     .font(.extraLargeTitle)
             }
         }
+        
+        Button{
+            ivm.playWalkingAnimation()
+        }label:{
+            Text("Start Animation")
+                .font(.extraLargeTitle)
+        }
+        
+        Button{
+            ivm.stopAnimation()
+        }label:{
+            Text("Stop Animation")
+                .font(.extraLargeTitle)
+        }
+        
+        
     }
 }

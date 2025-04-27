@@ -13,6 +13,7 @@ struct NrvMap_3DApp: App {
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
+    @StateObject var immersiveViewModel = ImmersiveViewModel()
     
     let persistenceController = PersistenceController.shared
     
@@ -55,12 +56,15 @@ struct NrvMap_3DApp: App {
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
         
+        
         WindowGroup(id: "Control") {
             ImmersiveControl()
-        }.defaultSize(width: 100, height: 50)
+                .environmentObject(immersiveViewModel)
+        }
         
         ImmersiveSpace(id: "Immersive") {
-            Model3DViewTest()
+            ImmersiveView()
+                .environmentObject(immersiveViewModel)
         }
         
         // Volumetric view for male model

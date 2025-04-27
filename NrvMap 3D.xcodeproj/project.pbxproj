@@ -11,6 +11,7 @@
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
+		D5D188892DBE1B7F008F8387 /* ImmersiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D188882DBE1B79008F8387 /* ImmersiveViewModel.swift */; };
 		FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358B2DBA013900ECC559 /* AnnotationModel.swift */; };
 		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
 		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
@@ -26,7 +27,7 @@
 		FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */; };
 		FD9035C22DBA013900ECC559 /* ImmersiveControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */; };
 		FD9035C32DBA013900ECC559 /* MaleModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359E2DBA013900ECC559 /* MaleModelView.swift */; };
-		FD9035C42DBA013900ECC559 /* Model3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359F2DBA013900ECC559 /* Model3D.swift */; };
+		FD9035C42DBA013900ECC559 /* ImmersiveVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */; };
 		FD9035C52DBA013900ECC559 /* AddAnnotationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */; };
 		FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A22DBA013900ECC559 /* NoteListView.swift */; };
 		FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A32DBA013900ECC559 /* NoteRowView.swift */; };
@@ -35,7 +36,7 @@
 		FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A72DBA013900ECC559 /* HelpView.swift */; };
 		FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A82DBA013900ECC559 /* HomeView.swift */; };
 		FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A92DBA013900ECC559 /* HoverButton2.swift */; };
-		FD9035CD2DBA013900ECC559 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */; };
+		FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */; };
 		FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */; };
 		FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */; };
 		FD9035D02DBA013900ECC559 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AD2DBA013900ECC559 /* SearchView.swift */; };
@@ -54,6 +55,7 @@
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		C5477C9B2D7F092A00C09342 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
+		D5D188882DBE1B79008F8387 /* ImmersiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveViewModel.swift; sourceTree = "<group>"; };
 		FD90358B2DBA013900ECC559 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionViewModel.swift; sourceTree = "<group>"; };
 		FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveControl.swift; sourceTree = "<group>"; };
 		FD90359E2DBA013900ECC559 /* MaleModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaleModelView.swift; sourceTree = "<group>"; };
-		FD90359F2DBA013900ECC559 /* Model3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3D.swift; sourceTree = "<group>"; };
+		FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveVIew.swift; sourceTree = "<group>"; };
 		FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnnotationVIew.swift; sourceTree = "<group>"; };
 		FD9035A22DBA013900ECC559 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		FD9035A32DBA013900ECC559 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 		FD9035A72DBA013900ECC559 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		FD9035A82DBA013900ECC559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FD9035A92DBA013900ECC559 /* HoverButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverButton2.swift; sourceTree = "<group>"; };
-		FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImmersiveView.swift; sourceTree = "<group>"; };
 		FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeList.swift; sourceTree = "<group>"; };
 		FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		FD9035AD2DBA013900ECC559 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */,
 				FD9035982DBA013900ECC559 /* NoteViewModel.swift */,
+				D5D188882DBE1B79008F8387 /* ImmersiveViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -182,7 +185,7 @@
 				FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */,
 				FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */,
 				FD90359E2DBA013900ECC559 /* MaleModelView.swift */,
-				FD90359F2DBA013900ECC559 /* Model3D.swift */,
+				FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -207,7 +210,7 @@
 				FD9035A72DBA013900ECC559 /* HelpView.swift */,
 				FD9035A82DBA013900ECC559 /* HomeView.swift */,
 				FD9035A92DBA013900ECC559 /* HoverButton2.swift */,
-				FD9035AA2DBA013900ECC559 /* ImmersiveView.swift */,
+				FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */,
 				FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */,
 				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
 				FD9035AD2DBA013900ECC559 /* SearchView.swift */,
@@ -325,16 +328,17 @@
 				FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */,
 				FD9035C22DBA013900ECC559 /* ImmersiveControl.swift in Sources */,
 				FD9035C32DBA013900ECC559 /* MaleModelView.swift in Sources */,
-				FD9035C42DBA013900ECC559 /* Model3D.swift in Sources */,
+				FD9035C42DBA013900ECC559 /* ImmersiveVIew.swift in Sources */,
 				FD9035C52DBA013900ECC559 /* AddAnnotationVIew.swift in Sources */,
 				FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */,
 				FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */,
 				FD9035C82DBA013900ECC559 /* CustomNavLink.swift in Sources */,
+				D5D188892DBE1B7F008F8387 /* ImmersiveViewModel.swift in Sources */,
 				FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */,
 				FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */,
 				FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */,
 				FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */,
-				FD9035CD2DBA013900ECC559 /* ImmersiveView.swift in Sources */,
+				FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */,
 				FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */,
 				FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */,
 				FD9035D02DBA013900ECC559 /* SearchView.swift in Sources */,

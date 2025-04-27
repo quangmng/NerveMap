@@ -6,47 +6,44 @@
 //
 
 import SwiftUI
+import RealityFoundation
 
 struct MotionTextView: View {
+    
     @State private var mmv = MaleModelView()
-    @State private var isMoving: Bool = false
+    @State private var isMoving: Bool = true
+    @State private var modelEntity: Entity?
+    @StateObject private var fvm = FunctionViewModel()
+    
     var body: some View {
         TabView {
             VStack{
                 Text("🚶🏼Walking")
                 
                 Button(isMoving ? "Start" : "Stop"){
-                    if let entity = mmv.maleModel{if !isMoving{entity.playAnimation(named: "" ,  transitionDuration: 0.5, startsPaused: false)}
+                    modelEntity = mmv.currentModel
+                    if let entity = modelEntity{if !isMoving{entity.playAnimation(named: "default subtree animation" ,  transitionDuration: 0.5, startsPaused: false)}
                         isMoving = true
-                    }else if let entity = mmv.maleModel{ if isMoving{entity.stopAllAnimations()
+                    }else if let entity = modelEntity{ if isMoving{entity.stopAllAnimations()
                     isMoving = false}}
                 }
-                
             }.tag(0)
             
-            VStack{
-                Text("🧍🏻Stand Up")
-                
-                Button(isMoving ? "Start" : "Stop"){
-                    if let entity = mmv.maleModel{if !isMoving{entity.playAnimation(named: "" ,  transitionDuration: 0.5, startsPaused: false)}
-                        isMoving = true
-                    }else if let entity = mmv.maleModel{ if isMoving{entity.stopAllAnimations()
-                    isMoving = false}}
-                }
-                
-            }.tag(1)
+                VStack{
+                    Text("🧍🏻Stand Up")
+                    
+                    Button(isMoving ? "Start" : "Stop"){
+                       
+                    }
+                }.tag(1)
             
-            VStack{
-                Text("🪑Sitting")
-                
-                Button(isMoving ? "Start" : "Stop"){
-                    if let entity = mmv.maleModel{if !isMoving{entity.playAnimation(named: "" ,  transitionDuration: 0.5, startsPaused: false)}
-                        isMoving = true
-                    }else if let entity = mmv.maleModel{ if isMoving{entity.stopAllAnimations()
-                    isMoving = false}}
-                }
-                
-            }.tag(2)
+                VStack{
+                    Text("🪑Sitting")
+                    
+                    Button(isMoving ? "Start" : "Stop"){
+                       
+                    }
+                }.tag(2)
         }
 //        .frame(width: 100, height: 50)
 //        .background(.ultraThickMaterial)

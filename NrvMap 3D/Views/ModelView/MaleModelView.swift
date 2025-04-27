@@ -119,14 +119,16 @@ struct MaleModelView: View {
                     guard let male = maleModel, let female = femaleModel
                     else{return}
                     
-                    if !genderSelect || currentModel == male{
+                    if !genderSelect{
+                        currentModel == female
                         content.remove(male)
                         content.add(female)
-                        currentModel = female
-                    }else if genderSelect || currentModel == female{
+                        
+                    }else if genderSelect {
+                        currentModel == male
                         content.remove(female)
                         content.add(male)
-                        currentModel = male
+                        
                     }
                     
                     for list in noteVM.notes {
@@ -207,7 +209,7 @@ struct MaleModelView: View {
                 
                 ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $expendButton)
                 
-                ExpendButton(id: 4, systemImage: "info.circle.fill", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
+                ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $expendButton)
             }
         }
     }
