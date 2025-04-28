@@ -13,7 +13,7 @@ struct MotionTextView: View {
     @State private var mmv = MaleModelView()
     @State private var isMoving: Bool = true
     @State private var modelEntity: Entity?
-    @StateObject private var fvm = FunctionViewModel()
+    @EnvironmentObject var fvm: FunctionViewModel
     
     var body: some View {
         TabView {

@@ -32,17 +32,11 @@ struct AddAnnotationVIew: View {
                 Button("Cancel") {
                     dismissWindow(id: "AnnotationWindow")
                 }
-                
-                List(noteVM.notes) { note in
-                    Text(note.title ?? "Untitled")
-                }
-                
-
             }
             .frame(width: 300)
             .padding()
             .onAppear {
-                noteVM.fetchNotes()
+                noteVM.fetchCoreData()
             }
         }
     }

@@ -21,7 +21,6 @@ struct MaleModelView: View {
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
-    @StateObject var fvm = FunctionViewModel()
     @StateObject var noteVM = NoteViewModel()
     @State var initialScale: SIMD3<Float>? = nil
     @State private var AnnotationAnchor = AnchorEntity()
@@ -29,6 +28,8 @@ struct MaleModelView: View {
     @State private var expendButton: Int? = nil
     @State private var activeID: Int?
     @State private var showingMotion: Bool = false
+    
+    @EnvironmentObject var fvm: FunctionViewModel
     
     var tap: some Gesture {
         TapGesture()

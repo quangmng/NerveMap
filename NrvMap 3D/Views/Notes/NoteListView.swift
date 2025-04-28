@@ -10,9 +10,11 @@ import CoreData
 
 struct NoteListView: View {
     @FetchRequest(
-        entity: NoteEntity.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \NoteEntity.dateCreated, ascending: false)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \NoteEntity.dateCreated, ascending: false)],
+        animation: .default
     ) var notes: FetchedResults<NoteEntity>
+    
+    @State var noteVM = NoteViewModel()
 
     var body: some View {
         NavigationStack {
@@ -24,6 +26,12 @@ struct NoteListView: View {
                         Text(note.dateCreated!, style: .date)
                             .font(.subheadline)
                             .foregroundColor(.gray)
+                        
+                        if let position = noteVM.decodePosition(from: note){
+                            Text("Position \(position.x), \(position.y), \(position.z)")
+                                .font(.caption)
+                        }
+                        
                     }
                 }
             }

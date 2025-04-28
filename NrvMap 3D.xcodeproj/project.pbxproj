@@ -35,7 +35,6 @@
 		FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A62DBA013900ECC559 /* ExpendButton.swift */; };
 		FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A72DBA013900ECC559 /* HelpView.swift */; };
 		FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A82DBA013900ECC559 /* HomeView.swift */; };
-		FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A92DBA013900ECC559 /* HoverButton2.swift */; };
 		FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */; };
 		FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */; };
 		FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */; };
@@ -81,7 +80,6 @@
 		FD9035A62DBA013900ECC559 /* ExpendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendButton.swift; sourceTree = "<group>"; };
 		FD9035A72DBA013900ECC559 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		FD9035A82DBA013900ECC559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		FD9035A92DBA013900ECC559 /* HoverButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverButton2.swift; sourceTree = "<group>"; };
 		FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImmersiveView.swift; sourceTree = "<group>"; };
 		FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeList.swift; sourceTree = "<group>"; };
 		FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -170,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */,
+				FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */,
 				FD9035982DBA013900ECC559 /* NoteViewModel.swift */,
 				D5D188882DBE1B79008F8387 /* ImmersiveViewModel.swift */,
 			);
@@ -182,7 +181,6 @@
 				FD9035D82DBA654400ECC559 /* MotionTextView.swift */,
 				FD90359A2DBA013900ECC559 /* ChooseModelView.swift */,
 				FD90359B2DBA013900ECC559 /* FemaleModelView.swift */,
-				FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */,
 				FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */,
 				FD90359E2DBA013900ECC559 /* MaleModelView.swift */,
 				FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */,
@@ -209,7 +207,6 @@
 				FD9035A62DBA013900ECC559 /* ExpendButton.swift */,
 				FD9035A72DBA013900ECC559 /* HelpView.swift */,
 				FD9035A82DBA013900ECC559 /* HomeView.swift */,
-				FD9035A92DBA013900ECC559 /* HoverButton2.swift */,
 				FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */,
 				FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */,
 				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
@@ -337,7 +334,6 @@
 				FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */,
 				FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */,
 				FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */,
-				FD9035CC2DBA013900ECC559 /* HoverButton2.swift in Sources */,
 				FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */,
 				FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */,
 				FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */,

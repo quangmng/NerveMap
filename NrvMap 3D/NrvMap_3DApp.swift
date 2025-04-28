@@ -13,7 +13,7 @@ struct NrvMap_3DApp: App {
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
-    @StateObject var immersiveViewModel = ImmersiveViewModel()
+    @StateObject var fvm = FunctionViewModel()
     
     let persistenceController = PersistenceController.shared
     
@@ -32,11 +32,11 @@ struct NrvMap_3DApp: App {
             }else{
                 MaleModelView()
                     .environmentObject(noteVM)
+                    .environmentObject(fvm)
                     .volumeBaseplateVisibility(.visible)
             }
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 2000, height: 2000)
         
         WindowGroup(id: "HelpWindow"){
             HelpView()
@@ -46,11 +46,14 @@ struct NrvMap_3DApp: App {
         WindowGroup(id: "NotesWindow") {
             NoteListView()
                 .environmentObject(noteVM)
+                .environmentObject(fvm)
         }
-
+        
         // Volumetric view for female model
         WindowGroup(id: "ModelDF") {
             FemaleModelView()
+                .environmentObject(noteVM)
+                .environmentObject(fvm)
                 .volumeBaseplateVisibility(.visible)
         }
         .windowStyle(.volumetric)
@@ -59,23 +62,27 @@ struct NrvMap_3DApp: App {
         
         WindowGroup(id: "Control") {
             ImmersiveControl()
-                .environmentObject(immersiveViewModel)
+                .environmentObject(noteVM)
+                .environmentObject(fvm)
+                .environmentObject(fvm)
         }
         
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()
-                .environmentObject(immersiveViewModel)
+                .environmentObject(noteVM)
+                .environmentObject(fvm)
         }
         
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()
                 .environmentObject(noteVM)
+                .environmentObject(fvm)
                 .volumeBaseplateVisibility(.visible)
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
-
+        
         WindowGroup(id: "AnnotationWindow") {
             AddAnnotationVIew()
                 .environmentObject(noteVM)
@@ -87,22 +94,10 @@ struct NrvMap_3DApp: App {
         
         WindowGroup(id: "MotionWindow") {
             MotionTextView()
+                .environmentObject(noteVM)
+                .environmentObject(fvm)
         }
         .defaultSize(width: 100, height: 50)
         
-       
-        // Primary Immersive Space using appModel
-        ImmersiveSpace(id: "xxx") {
-            FemaleModelView()
-//            ImmersiveView()
-//                .environment(appModel)
-//                .onAppear {
-//                    appModel.immersiveSpaceState = .open
-//                }
-//                .onDisappear {
-//                    appModel.immersiveSpaceState = .closed
-//                }
-        }
-        .immersionStyle(selection: $currentStyle, in: .progressive)
     }
 }

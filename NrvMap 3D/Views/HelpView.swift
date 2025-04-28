@@ -172,9 +172,12 @@ struct HelpView: View {
 
                 } else {
                     Button {
-                        hasSeenWelcomeScreen = true
                         dismiss(id: "HelpWindow")
-                        open(id: "ModelDM")
+                        if hasSeenWelcomeScreen == false{
+                            open(id: "ModelDM")
+                            dismiss(id: "WelcomeView")
+                            hasSeenWelcomeScreen = true
+                        }
                     } label: {
                         Text("Begin")
                             .padding(.horizontal, 30)

@@ -17,9 +17,9 @@ struct ImmersiveView: View {
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
-    @StateObject var fvm = FunctionViewModel()
     @State var initialScale: SIMD3<Float>? = nil
-    @EnvironmentObject var ivm: ImmersiveViewModel
+    @StateObject var noteVM = NoteViewModel()
+    @EnvironmentObject var fvm: FunctionViewModel
     
     var tap: some Gesture {
         TapGesture()
@@ -71,7 +71,7 @@ struct ImmersiveView: View {
     
     var body: some View {
         
-        RealityView{content in
+        RealityView{content, attachments in
             
             let worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
             
@@ -80,15 +80,39 @@ struct ImmersiveView: View {
                 return
             }
             
-            let model = await fvm.createMaleModel()
+            let model = await fvm.createWalkingModel()
             
             worldAnchor.addChild(model)
             
             content.add(skyboxEntity)
             content.add(model)
             
-            ivm.modelEntity = model
+            fvm.modelEntity = model
            
+            
+        }update:{ content, attachments in
+            
+            
+            
+            for list in noteVM.notes {
+                if let listEntity = attachments.entity(for: list.id){
+                    content.add(listEntity)
+                }
+            }
+            if let entity = content.entities.first(where: { $0.name == "MainModel" }) {
+                entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
+            }
+            
+        }attachments:{
+         
+            ForEach(noteVM.notes) { list in
+                Attachment(id: list.id) {
+                    Text("\(list.title)")
+                        .font(.headline)
+                        .bold()
+                }
+            }
+
             
         }
         .simultaneousGesture(rotation)
