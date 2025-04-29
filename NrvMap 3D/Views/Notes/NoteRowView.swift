@@ -10,7 +10,7 @@ import CoreData
 
 struct NoteRowView: View {
     
-    @ObservedObject var note: NoteEntity
+    let note: NoteEntity
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,6 +23,8 @@ struct NoteRowView: View {
             Text(note.title ?? "Untitled")
             if let date = note.dateCreated {
                 Text(Self.dateFormatter.string(from: date))
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
             }
         }
     }

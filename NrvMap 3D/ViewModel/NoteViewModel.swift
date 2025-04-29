@@ -21,10 +21,9 @@ extension NoteEntity {
 }
 
 class NoteViewModel: ObservableObject {
+    
     @Published var notes: [NoteEntity] = []
     @Published var pendingLocation: SIMD3<Float>? = nil
-    
-    
     let container: NSPersistentContainer
     
     init(){

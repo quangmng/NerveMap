@@ -13,7 +13,7 @@ import RealityKitContent
 struct AddAnnotationVIew: View {
     
     @Environment(\.dismissWindow) private var dismissWindow
-    @StateObject private var noteVM: NoteViewModel
+    @EnvironmentObject var noteVM: NoteViewModel
     @State private var title = ""
     @State private var content = ""
     
@@ -40,3 +40,4 @@ struct AddAnnotationVIew: View {
             noteVM.fetchCoreData()
         }
     }
+}
