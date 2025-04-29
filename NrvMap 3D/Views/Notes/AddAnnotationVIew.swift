@@ -12,39 +12,31 @@ import RealityKitContent
 
 struct AddAnnotationVIew: View {
     
-        @Environment(\.dismissWindow) private var dismissWindow
-        @StateObject private var noteVM = NoteViewModel()
-        @State private var title = ""
-        @State private var content = ""
-
-        var body: some View {
-            VStack(spacing: 16) {
-                Text("Add Note").font(.headline)
-                TextField("Title", text: $title)
-                TextField("Description", text: $content)
-                Button("Save") {
-                    if let position = noteVM.pendingLocation {
-                        noteVM.addNote(title: title, content: content, position: position, date: Date())
-                        noteVM.pendingLocation = nil
-                    }
-                    dismissWindow(id: "AnnotationWindow")
+    @Environment(\.dismissWindow) private var dismissWindow
+    @StateObject private var noteVM: NoteViewModel
+    @State private var title = ""
+    @State private var content = ""
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Add Note").font(.headline)
+            TextField("Title", text: $title)
+            TextField("Description", text: $content)
+            Button("Save") {
+                if let position = noteVM.pendingLocation {
+                    noteVM.addNote(title: title, content: content, position: position, date: Date())
+                    noteVM.pendingLocation = nil
                 }
-                
-                Button("Cancel") {
-                    dismissWindow(id: "AnnotationWindow")
-                }
-                
-                List(noteVM.notes){ note in
-                    Text("\(note.title ?? "No Title")")
-                        .font(.extraLargeTitle)
-                        .bold()
-                }
-                
+                dismissWindow(id: "AnnotationWindow")
             }
-            .frame(width: 300)
-            .padding()
-            .onAppear {
-                noteVM.fetchCoreData()
+            
+            Button("Cancel") {
+                dismissWindow(id: "AnnotationWindow")
             }
+        }
+        .frame(width: 300)
+        .padding()
+        .onAppear {
+            noteVM.fetchCoreData()
         }
     }

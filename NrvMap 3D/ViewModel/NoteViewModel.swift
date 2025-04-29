@@ -9,6 +9,17 @@ import SwiftUI
 import CoreData
 import simd
 
+extension NoteEntity {
+    var simdPosition: SIMD3<Float>? {
+        guard let data = position as? Data else { return nil }
+        let decoder = JSONDecoder()
+        if let codable = try? decoder.decode(NoteModel.CodableSIMD.self, from: data) {
+            return codable.codedSIMD
+        }
+        return nil
+    }
+}
+
 class NoteViewModel: ObservableObject {
     @Published var notes: [NoteEntity] = []
     @Published var pendingLocation: SIMD3<Float>? = nil
@@ -72,6 +83,11 @@ class NoteViewModel: ObservableObject {
         
         do{
             notes = try container.viewContext.fetch(request)
+            for note in notes {
+                // Access the decoded position via the new property
+                let vector = note.simdPosition
+                // Handle the vector as needed, e.g., assign to pendingLocation or store elsewhere
+            }
         }
         catch let error{
             print("ERROR: Fetch fail \(error)")
