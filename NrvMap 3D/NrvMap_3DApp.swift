@@ -86,7 +86,7 @@ struct NrvMap_3DApp: App {
         WindowGroup(id: "AnnotationWindow") {
             AddAnnotationVIew()
                 .environmentObject(noteVM)
-        }
+        }.defaultSize(width: 400, height: 600)
         
         WindowGroup(id: "KnowledgeList") {
             KnowledgeList()

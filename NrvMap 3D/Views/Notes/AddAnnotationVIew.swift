@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 import RealityKit
 import RealityKitContent
 
@@ -32,6 +33,13 @@ struct AddAnnotationVIew: View {
                 Button("Cancel") {
                     dismissWindow(id: "AnnotationWindow")
                 }
+                
+                List(noteVM.notes){ note in
+                    Text("\(note.title ?? "No Title")")
+                        .font(.extraLargeTitle)
+                        .bold()
+                }
+                
             }
             .frame(width: 300)
             .padding()

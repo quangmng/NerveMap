@@ -10,8 +10,16 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
+//enum ModelGesture {
+//    case sitting
+//    case walking
+//    case standing
+//}
+
 struct ImmersiveView: View {
     
+    // Default as walking
+//    @State private var pose: ModelGesture = .walking
     @State private var angle = Angle(degrees: 1.0)
     @State var modelEntity: Entity?
     @State private var selectedEntity: Entity?
@@ -20,6 +28,14 @@ struct ImmersiveView: View {
     @State var initialScale: SIMD3<Float>? = nil
     @StateObject var noteVM = NoteViewModel()
     @EnvironmentObject var fvm: FunctionViewModel
+    @State private var standToSit: Entity? = nil
+    @State private var sitToStand: Entity? = nil
+    @State private var walk: Entity? = nil
+    @State var currentModel: Entity? = nil
+    
+    @State var showStand: Bool = false
+    @State var showSit: Bool = false
+    @State var showWalk: Bool = true
     
     var tap: some Gesture {
         TapGesture()
@@ -80,18 +96,55 @@ struct ImmersiveView: View {
                 return
             }
             
-            let model = await fvm.createWalkingModel()
+            let walkModel = await fvm.createWalkingModel()
+            walk = walkModel
             
-            worldAnchor.addChild(model)
+            let sitToStandModel = await fvm.createSitToStandModel()
+            sitToStand = sitToStandModel
+            
+            let standToSitModel = await fvm.createStandToSitModel()
+            standToSit = standToSitModel
+            
+            worldAnchor.addChild(walkModel)
             
             content.add(skyboxEntity)
-            content.add(model)
+            content.add(walkModel)
             
-            fvm.modelEntity = model
-           
+            if showWalk == true{
+                fvm.modelEntity = walkModel
+            }else if showStand == true{
+                fvm.modelEntity = standToSitModel
+            }else if showSit == true{
+                fvm.modelEntity = sitToStandModel
+            }
+            
             
         }update:{ content, attachments in
             
+            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit
+            else{return}
+            
+            if showSit == true {
+                
+                
+                content.remove(walkModel)
+                content.remove(standModel)
+                content.add(sitModel)
+                
+            }else if showWalk == true{
+                
+                content.remove(sitModel)
+                content.remove(standModel)
+                content.add(walkModel)
+                
+            }else if showStand == true{
+                
+               
+                content.remove(sitModel)
+                content.remove(walkModel)
+                content.add(standModel)
+                
+            }
             
             
             for list in noteVM.notes {
@@ -99,28 +152,47 @@ struct ImmersiveView: View {
                     content.add(listEntity)
                 }
             }
-            if let entity = content.entities.first(where: { $0.name == "MainModel" }) {
+            if let entity = content.entities.first(where: { $0.name == "modelEntity" }) {
                 entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
             }
             
         }attachments:{
-         
+            
             ForEach(noteVM.notes) { list in
                 Attachment(id: list.id) {
-                    Text("\(list.title)")
+                    Text("\(list.title ?? "No title")")
                         .font(.headline)
                         .bold()
                 }
             }
-
+            
             
         }
         .simultaneousGesture(rotation)
         .simultaneousGesture(scaleGesture)
         .simultaneousGesture(drag)
         .simultaneousGesture(tap)
+        
+        
+        Button("Sit"){
+            showWalk = false
+            showStand = false
+            showSit = true
+        }
+        
+        Button("walk"){
+            showWalk = true
+            showStand = false
+            showSit = false
+        }
+        
+        Button("stand"){
+            showWalk = false
+            showStand = true
+            showSit = false
+        }
+        
     }
-    
 }
 
 

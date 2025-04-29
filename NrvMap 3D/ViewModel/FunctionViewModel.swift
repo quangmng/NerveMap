@@ -43,7 +43,7 @@ class FunctionViewModel: ObservableObject {
     
     func createFemaleModel() async -> Entity{
             
-           guard let modelEntity = try? await Entity(named: "Scene", in: realityKitContentBundle) else {
+           guard let modelEntity = try? await Entity(named: "FemaleDermaModel", in: realityKitContentBundle) else {
                
                fatalError("Fail to load entity")
                
@@ -57,7 +57,7 @@ class FunctionViewModel: ObservableObject {
     
     func createMaleModel() async -> Entity{
             
-           guard let modelEntity = try? await Entity(named: "WalkFemale", in: realityKitContentBundle) else {
+           guard let modelEntity = try? await Entity(named: "SliceModel", in: realityKitContentBundle) else {
                
                fatalError("Fail to load entity")
                
@@ -83,6 +83,31 @@ class FunctionViewModel: ObservableObject {
             
         }
     
+    func createSitToStandModel() async -> Entity{
+        
+        guard let modelEntity = try? await Entity(named: "SitToStand", in: realityKitContentBundle) else {
+            
+            fatalError("Fail to load entity")
+           
+        }
+        enableInteraction(for: modelEntity)
+        
+        return modelEntity
+    }
+    
+    func createStandToSitModel() async -> Entity{
+        
+        guard let modelEntity = try? await Entity(named: "StandToSit", in: realityKitContentBundle) else {
+            
+            fatalError("Fail to load entity")
+           
+        }
+        enableInteraction(for: modelEntity)
+        
+        return modelEntity
+    }
+
+    
     func createSkybox() -> Entity?{
             
             let largeSphere = MeshResource.generateSphere(radius: 1000.0)
@@ -105,7 +130,7 @@ class FunctionViewModel: ObservableObject {
             
         }
 
-    func playWalkingAnimation() {
+    func playAnimation() {
         if let entity = modelEntity, !isMoving {
             entity.playAnimation(named: "default subtree animation", transitionDuration: 0.5, startsPaused: false)
             isMoving = true

@@ -105,12 +105,21 @@ struct MaleModelView: View {
                     
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
+                    
+                    maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
+                    maleEntity.position = SIMD3<Float>(0, -0.5, 0)
+                    
                     AnnotationAnchor.position = [0, -0.9, 0]
                     femaleEntity.addChild(AnnotationAnchor)
+                    
                     fvm.enableInteraction(for: femaleEntity)
+                    fvm.enableInteraction(for: maleEntity)
+                    
                     content.add(femaleEntity)
+                    
                     femaleModel = femaleEntity
                     maleModel = maleEntity
+                    
                     originalTransform = femaleEntity.transform
                     
                     
@@ -169,24 +178,6 @@ struct MaleModelView: View {
                 .simultaneousGesture(scaleGesture)
                 .simultaneousGesture(drag)
                 .simultaneousGesture(tap)
-                
-                /*
-                VStack {
-                    Spacer().frame(width: 600)
-                    HStack {
-                        
-                        // TODO: swiching gender - Motion - Simulation - Note taking - Info
-                        
-                        
-                        ExpendButton(id: 0, systemImage: "figure.stand", action: {}, extraButtons: [("figure.stand", {genderSelect = false}),("figure.stand.dress", {genderSelect = true})], expendButton: $expendButton)
-                        
-                        ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()})], expendButton: $expendButton)
-                        
-                        ExpendButton(id: 2, systemImage: "house", action: {}, extraButtons: [("note.text", {openWindow(id: "Control")})], expendButton: $expendButton)
-                    }
-                    .background(Color.gray.cornerRadius(30))
-                }
-                 */
             }
         }
         .background{
@@ -200,17 +191,23 @@ struct MaleModelView: View {
                 ExpendButton(id: 0, systemImage: genderSelect ? "figure.stand" : "figure.stand.dress", action: {genderSelect.toggle()}, extraButtons: [], expendButton: $expendButton)
                     .background(genderSelect ? Color.maleBule : Color.femalePink)
                     .cornerRadius(25)
+                    .help("Gender")
                 
                 // i should ask...
                 ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
                      // action, label
                 ], expendButton: $expendButton)
+                .help("Animation")
                 
+                // TODO: merge this button with poses (enum)
                 ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $expendButton)
+                    .help("Immersive")
                 
                 ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $expendButton)
+                    .help("Notes")
                 
                 ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $expendButton)
+                    .help("Info")
             }
         }
     }
