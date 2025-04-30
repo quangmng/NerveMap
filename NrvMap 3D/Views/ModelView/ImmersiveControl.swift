@@ -10,16 +10,17 @@ import SwiftUI
 
 struct ImmersiveControl: View {
     
-    // Default as walking
-//    @State private var pose: ModelGesture = .walking    
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @State private var isImmersive: Bool = false
+    
+    @State var im = ImmersiveView()
     @EnvironmentObject var fvm: FunctionViewModel
     
     var body: some View {
+        
         
         Button{
             Task {
@@ -43,28 +44,6 @@ struct ImmersiveControl: View {
                     .font(.extraLargeTitle)
             }
         }
-        
-        Button{
-            fvm.playAnimation()
-        }label:{
-            Text("Start Animation")
-                .font(.extraLargeTitle)
-        }
-        
-        Button{
-            fvm.stopAnimation()
-        }label:{
-            Text("Stop Animation")
-                .font(.extraLargeTitle)
-        }
-        
-        Button {
-            
-        } label: {
-            
-        }
-
-        
         
     }
 }

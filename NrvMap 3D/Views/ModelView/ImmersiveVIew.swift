@@ -10,32 +10,22 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-//enum ModelGesture {
-//    case sitting
-//    case walking
-//    case standing
-//}
-
 struct ImmersiveView: View {
     
-    // Default as walking
-//    @State private var pose: ModelGesture = .walking
     @State private var angle = Angle(degrees: 1.0)
-    @State var modelEntity: Entity?
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State private var isAnnotationMode = false
     @State var initialScale: SIMD3<Float>? = nil
+    
     @StateObject var noteVM = NoteViewModel()
     @EnvironmentObject var fvm: FunctionViewModel
-    @State private var standToSit: Entity? = nil
-    @State private var sitToStand: Entity? = nil
-    @State private var walk: Entity? = nil
-    @State var currentModel: Entity? = nil
     
-    @State var showStand: Bool = false
-    @State var showSit: Bool = false
-    @State var showWalk: Bool = true
+    @State var modelEntity: Entity?
+    @State var standToSit: Entity?
+    @State var sitToStand: Entity?
+    @State var walk: Entity?
+    
     
     var tap: some Gesture {
         TapGesture()
@@ -97,12 +87,15 @@ struct ImmersiveView: View {
             }
             
             let walkModel = await fvm.createWalkingModel()
+            fvm.walkModel = walkModel
             walk = walkModel
             
             let sitToStandModel = await fvm.createSitToStandModel()
+            fvm.sitModel = sitToStandModel
             sitToStand = sitToStandModel
             
             let standToSitModel = await fvm.createStandToSitModel()
+            fvm.standModel = standToSitModel
             standToSit = standToSitModel
             
             worldAnchor.addChild(walkModel)
@@ -110,36 +103,27 @@ struct ImmersiveView: View {
             content.add(skyboxEntity)
             content.add(walkModel)
             
-            if showWalk == true{
-                fvm.modelEntity = walkModel
-            }else if showStand == true{
-                fvm.modelEntity = standToSitModel
-            }else if showSit == true{
-                fvm.modelEntity = sitToStandModel
-            }
-            
+            fvm.modelEntity = walkModel
             
         }update:{ content, attachments in
             
             guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit
             else{return}
             
-            if showSit == true {
-                
-                
+            if fvm.showSit == true {
+    
                 content.remove(walkModel)
                 content.remove(standModel)
                 content.add(sitModel)
                 
-            }else if showWalk == true{
+            }else if fvm.showWalk == true{
                 
                 content.remove(sitModel)
                 content.remove(standModel)
                 content.add(walkModel)
                 
-            }else if showStand == true{
+            }else if fvm.showStand == true{
                 
-               
                 content.remove(sitModel)
                 content.remove(walkModel)
                 content.add(standModel)
@@ -172,25 +156,6 @@ struct ImmersiveView: View {
         .simultaneousGesture(scaleGesture)
         .simultaneousGesture(drag)
         .simultaneousGesture(tap)
-        
-        
-        Button("Sit"){
-            showWalk = false
-            showStand = false
-            showSit = true
-        }
-        
-        Button("walk"){
-            showWalk = true
-            showStand = false
-            showSit = false
-        }
-        
-        Button("stand"){
-            showWalk = false
-            showStand = true
-            showSit = false
-        }
         
     }
 }

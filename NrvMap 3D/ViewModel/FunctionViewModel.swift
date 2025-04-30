@@ -13,7 +13,14 @@ import RealityKitContent
 class FunctionViewModel: ObservableObject {
     
     @Published var isMoving: Bool = false
+    @Published var showStand: Bool = false
+    @Published var showSit: Bool = false
+    @Published var showWalk: Bool = true
+    
     @Published var modelEntity: Entity?
+    @Published var sitModel: Entity?
+    @Published var standModel: Entity?
+    @Published var walkModel: Entity?
     
     func enableInteraction(for entity: Entity) {
         entity.components.set(InputTargetComponent()) // Enable interaction
@@ -77,7 +84,6 @@ class FunctionViewModel: ObservableObject {
                
             }
             enableInteraction(for: modelEntity)
-            
             
             return modelEntity
             

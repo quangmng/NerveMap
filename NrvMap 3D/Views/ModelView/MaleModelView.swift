@@ -16,7 +16,6 @@ struct MaleModelView: View {
     
     @State var femaleModel: Entity? = nil
     @State var maleModel: Entity?
-    @State var currentModel: Entity? = nil
     
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
@@ -100,8 +99,7 @@ struct MaleModelView: View {
                 RealityView{ content, attachments in
                     
                     let femaleEntity = await fvm.createFemaleModel()
-                    let maleEntity = await fvm.createMaleModel()
-                    currentModel = femaleEntity
+                    let maleEntity = await fvm.createWalkingModel()
                     
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
@@ -109,7 +107,7 @@ struct MaleModelView: View {
                     maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     maleEntity.position = SIMD3<Float>(0, -0.5, 0)
                     
-                    AnnotationAnchor.position = [0, -0.9, 0]
+                    AnnotationAnchor.position = femaleEntity.position + SIMD3<Float>(-0.5, 0.5, 0)
                     femaleEntity.addChild(AnnotationAnchor)
                     
                     fvm.enableInteraction(for: femaleEntity)
@@ -130,12 +128,12 @@ struct MaleModelView: View {
                     else{return}
                     
                     if !genderSelect{
-                        currentModel == female
+                       
                         content.remove(male)
                         content.add(female)
                         
                     }else if genderSelect {
-                        currentModel == male
+                        
                         content.remove(female)
                         content.add(male)
                         

@@ -11,7 +11,6 @@ import RealityFoundation
 struct MotionTextView: View {
     
     @State private var mmv = MaleModelView()
-    @State private var isMoving: Bool = true
     @State private var modelEntity: Entity?
     @EnvironmentObject var fvm: FunctionViewModel
     
@@ -20,35 +19,62 @@ struct MotionTextView: View {
             VStack{
                 Text("🚶🏼Walking")
                 
-                Button(isMoving ? "Start" : "Stop"){
-                    modelEntity = mmv.currentModel
-                    if let entity = modelEntity{if !isMoving{entity.playAnimation(named: "default subtree animation" ,  transitionDuration: 0.5, startsPaused: false)}
-                        isMoving = true
-                    }else if let entity = modelEntity{ if isMoving{entity.stopAllAnimations()
-                    isMoving = false}}
+                Button(fvm.isMoving ? "Stop" : "Start"){
+                    if fvm.isMoving == false{
+                        fvm.playAnimation()
+                        fvm.isMoving = true
+                    }else{
+                        fvm.stopAnimation()
+                        fvm.isMoving = false
+                    }
                 }
+            }.onAppear{
+                fvm.showWalk = true
+                fvm.showSit = false
+                fvm.showStand = false
+                fvm.modelEntity = fvm.walkModel
             }.tag(0)
-            
+                
                 VStack{
                     Text("🧍🏻Stand Up")
                     
-                    Button(isMoving ? "Start" : "Stop"){
-                       
+                    Button(fvm.isMoving ? "Stop" : "Start"){
+                        if fvm.isMoving == false{
+                            fvm.playAnimation()
+                            fvm.isMoving = true
+                        }else{
+                            fvm.stopAnimation()
+                            fvm.isMoving = false
+                        }
                     }
+                }.onAppear{
+                    fvm.showWalk = false
+                    fvm.showSit = true
+                    fvm.showStand = false
+                    fvm.modelEntity = fvm.sitModel
                 }.tag(1)
-            
+                
                 VStack{
                     Text("🪑Sitting")
                     
-                    Button(isMoving ? "Start" : "Stop"){
-                       
+                    Button(fvm.isMoving ? "Stop" : "Start"){
+                        if fvm.isMoving == false{
+                            fvm.playAnimation()
+                            fvm.isMoving = true
+                        }else{
+                            fvm.stopAnimation()
+                            fvm.isMoving = false
+                        }
                     }
+                }.onAppear{
+                    fvm.showWalk = false
+                    fvm.showSit = false
+                    fvm.showStand = true
+                    fvm.modelEntity = fvm.standModel
                 }.tag(2)
+            
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
-//        .frame(width: 100, height: 50)
-//        .background(.ultraThickMaterial)
-//        .clipShape(Capsule())
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
 }
 
