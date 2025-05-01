@@ -12,6 +12,9 @@ import RealityKitContent
 
 class FunctionViewModel: ObservableObject {
     
+    @Published var style: ImmersionStyle = .mixed
+    @Published var isMix: Bool = false
+    
     @Published var isMoving: Bool = false
     @Published var showStand: Bool = false
     @Published var showSit: Bool = false

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct NrvMap_3DApp: App {
-    @State private var currentStyle: ImmersionStyle = .progressive
+    
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
@@ -64,14 +64,13 @@ struct NrvMap_3DApp: App {
             ImmersiveControl()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
-                .environmentObject(fvm)
-        }
+        }.defaultSize(width: 500, height: 650)
         
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
-        }
+        }.immersionStyle(selection: $fvm.style, in: .mixed, .full, .progressive)
         
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {

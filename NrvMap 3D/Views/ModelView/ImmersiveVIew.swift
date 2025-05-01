@@ -100,7 +100,9 @@ struct ImmersiveView: View {
             
             worldAnchor.addChild(walkModel)
             
-            content.add(skyboxEntity)
+            if fvm.isMix == false{
+                content.add(skyboxEntity)
+            }
             content.add(walkModel)
             
             fvm.modelEntity = walkModel
