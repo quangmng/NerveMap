@@ -19,14 +19,9 @@ struct MaleModelView: View {
     
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
-    @State private var isAnnotationMode = false
     @StateObject var noteVM = NoteViewModel()
     @State var initialScale: SIMD3<Float>? = nil
     @State private var AnnotationAnchor = AnchorEntity()
-    @State private var genderSelect: Bool = false
-    @State private var expendButton: Int? = nil
-    @State private var activeID: Int?
-    @State private var showingMotion: Bool = false
     
     @EnvironmentObject var fvm: FunctionViewModel
     
@@ -34,7 +29,7 @@ struct MaleModelView: View {
         TapGesture()
             .targetedToAnyEntity()
             .onEnded { event in
-                if isAnnotationMode {
+                if fvm.isAnnotationMode {
                     print("gesture blocked")
                 }else{
                     selectedEntity = event.entity
@@ -47,7 +42,7 @@ struct MaleModelView: View {
         DragGesture()
             .targetedToAnyEntity()
             .onChanged { event in
-                if isAnnotationMode {
+                if fvm.isAnnotationMode {
                     print("gesture blocked")
                 }else{
                     if let entity = selectedEntity {
@@ -63,7 +58,7 @@ struct MaleModelView: View {
         MagnifyGesture()
             .targetedToAnyEntity()
             .onChanged { value in
-                if isAnnotationMode {
+                if fvm.isAnnotationMode {
                     print("gesture blocked")
                 }else{
                     let rootEntity = value.entity
@@ -82,7 +77,7 @@ struct MaleModelView: View {
     var rotation: some Gesture {
         RotateGesture()
             .onChanged { value in
-                if isAnnotationMode {
+                if fvm.isAnnotationMode {
                     print("gesture blocked")
                 }else{
                     angle = value.rotation
@@ -107,7 +102,7 @@ struct MaleModelView: View {
                     maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     maleEntity.position = SIMD3<Float>(0, -0.4, 0.4)
                     if let note = attachments.entity(for: "note"){
-                        note.position = femaleEntity.position + SIMD3<Float>(-0.5, 0.5, 0)
+                        note.position = femaleEntity.position
                         femaleEntity.addChild(note)
                     }
                     
@@ -125,12 +120,12 @@ struct MaleModelView: View {
                     guard let male = maleModel, let female = femaleModel
                     else{return}
                     
-                    if !genderSelect{
+                    if !fvm.genderSelect{
                        
                         content.remove(male)
                         content.add(female)
                         
-                    }else if genderSelect {
+                    }else if fvm.genderSelect {
                         
                         content.remove(female)
                         content.add(male)
@@ -142,7 +137,7 @@ struct MaleModelView: View {
                             content.add(listEntity)
                         }
                     }
-                    if let entity = content.entities.first(where: { $0.name == "MainModel" }) {
+                    if let entity = content.entities.first(where: { $0.name == "modelEntity" }) {
                         entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
                     }
                     
@@ -150,7 +145,7 @@ struct MaleModelView: View {
                 attachments: {
                     ForEach(noteVM.notes) { list in
                         Attachment(id: list.id) {
-                            
+                            Text("\(list.title ?? "No title")")
                             
                         }
                     }
@@ -161,7 +156,7 @@ struct MaleModelView: View {
                 .gesture(SpatialTapGesture()
                     .targetedToAnyEntity()
                     .onEnded{value in
-                        if isAnnotationMode == false{
+                        if fvm.isAnnotationMode == false{
                             print("gesture blocked")
                         }else{
                             let location = value.location3D
@@ -177,32 +172,32 @@ struct MaleModelView: View {
             }
         }
         .background{
-            if isAnnotationMode == true {
+            if fvm.isAnnotationMode == true {
                 Color.black.opacity(0.5)
             }
         }
         .ornament(attachmentAnchor: .scene(.bottomFront)) {
             HStack(spacing: 10) {                
                 
-                ExpendButton(id: 0, systemImage: genderSelect ? "figure.stand" : "figure.stand.dress", action: {genderSelect.toggle()}, extraButtons: [], expendButton: $expendButton)
-                    .background(genderSelect ? Color.maleBule : Color.femalePink)
+                ExpendButton(id: 0, systemImage: fvm.genderSelect ? "figure.stand" : "figure.stand.dress", action: {fvm.genderSelect.toggle()}, extraButtons: [], expendButton: $fvm.expendButton)
+                    .background(fvm.genderSelect ? Color.maleBule : Color.femalePink)
                     .cornerRadius(25)
                     .help("Gender")
                 
                 // i should ask...
                 ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
                      // action, label
-                ], expendButton: $expendButton)
+                ], expendButton: $fvm.expendButton)
                 .help("Animation")
                 
                 // TODO: merge this button with poses (enum)
-                ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $expendButton)
+                ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
                     .help("Immersive")
                 
-                ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $expendButton)
+                ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {fvm.isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
                     .help("Notes")
                 
-                ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $expendButton)
+                ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
                     .help("Info")
             }
         }

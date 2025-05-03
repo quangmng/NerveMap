@@ -14,11 +14,17 @@ class FunctionViewModel: ObservableObject {
     
     @Published var style: ImmersionStyle = .mixed
     @Published var isMix: Bool = false
+    @Published var isFull: Bool = false
     
+    @Published var expendButton: Int? = nil
+    
+    @Published var isImmersive: Bool = false
     @Published var isMoving: Bool = false
     @Published var showStand: Bool = false
     @Published var showSit: Bool = false
     @Published var showWalk: Bool = true
+    @Published var genderSelect: Bool = false
+    @Published var isAnnotationMode = false
     
     @Published var modelEntity: Entity?
     @Published var sitModel: Entity?

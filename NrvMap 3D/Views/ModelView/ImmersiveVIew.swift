@@ -12,11 +12,10 @@ import RealityKitContent
 
 struct ImmersiveView: View {
     
-    @State private var expendButton: Int? = nil
+    @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
-    @State private var isAnnotationMode = false
     @State var initialScale: SIMD3<Float>? = nil
     
     @StateObject var noteVM = NoteViewModel()
@@ -41,7 +40,7 @@ struct ImmersiveView: View {
         DragGesture()
             .targetedToAnyEntity()
             .onChanged { event in
-                if isAnnotationMode {
+                if fvm.isAnnotationMode {
                     print("gesture blocked")
                 }else{
                     if let entity = selectedEntity {
@@ -97,28 +96,18 @@ struct ImmersiveView: View {
             fvm.standModel = standToSitModel
             standToSit = standToSitModel
             
-            if let button = attachments.entity(for: "button") {
-                button.position = SIMD3<Float> (0,0,0)
-                walkModel.addChild(button)
+            if let buttonAttachment = attachments.entity(for: "button") {
+                buttonAttachment.position = [0, -0.1, 0.3]
+                walkModel.addChild(buttonAttachment)
             }
             
-            if let note = attachments.entity(for: "note"){
-                note.position = walkModel.position
-                walkModel.addChild(note)
-            }
-            
-            fvm.worldAnchor.addChild(walkModel)
-    
             if fvm.isMix == false{
                 content.add(skyboxEntity)
             }
-            content.add(walkModel)
-            
-            fvm.modelEntity = walkModel
             
         }update:{ content, attachments in
             
-            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit
+            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit, let buttonAttachment = attachments.entity(for: "button")
             else{return}
             
             if fvm.showSit == true {
@@ -126,6 +115,8 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.addChild(sitModel)
                 fvm.worldAnchor.removeChild(walkModel)
                 fvm.worldAnchor.removeChild(standModel)
+                
+                sitModel.addChild(buttonAttachment)
                 
                 content.remove(walkModel)
                 content.remove(standModel)
@@ -137,6 +128,8 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.removeChild(sitModel)
                 fvm.worldAnchor.removeChild(standModel)
                 
+                walkModel.addChild(buttonAttachment)
+                
                 content.remove(sitModel)
                 content.remove(standModel)
                 content.add(walkModel)
@@ -146,6 +139,8 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.addChild(standModel)
                 fvm.worldAnchor.removeChild(walkModel)
                 fvm.worldAnchor.removeChild(sitModel)
+                
+                standModel.addChild(buttonAttachment)
                 
                 content.remove(sitModel)
                 content.remove(walkModel)
@@ -173,16 +168,32 @@ struct ImmersiveView: View {
                 }
             }
             
-            Attachment(id: "Button"){
-                Button{
+            Attachment(id: "button"){
+                
+                HStack(spacing: 10) {
                     
-                }label: {
-                    Image(systemName: "plus")
-                        .background(Color.blue)
+                    ExpendButton(id: 0, systemImage: fvm.genderSelect ? "figure.stand" : "figure.stand.dress", action: {fvm.genderSelect.toggle()}, extraButtons: [], expendButton: $fvm.expendButton)
+                        .background(fvm.genderSelect ? Color.maleBule : Color.femalePink)
+                        .cornerRadius(25)
+                        .help("Gender")
+                    
+                    // i should ask...
+                    ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
+                         // action, label
+                    ], expendButton: $fvm.expendButton)
+                    .help("Animation")
+                    
+                    // TODO: merge this button with poses (enum)
+                    ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
+                        .help("Immersive")
+                    
+                    ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {fvm.isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
+                        .help("Notes")
+                    
+                    ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
+                        .help("Info")
                 }
             }
-            
-            
         }
         .simultaneousGesture(rotation)
         .simultaneousGesture(scaleGesture)

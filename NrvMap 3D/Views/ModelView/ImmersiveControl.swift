@@ -14,65 +14,65 @@ struct ImmersiveControl: View {
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
-    @State private var isImmersive: Bool = false
-    
-    @State var im = ImmersiveView()
     @EnvironmentObject var fvm: FunctionViewModel
+    
+    @State private var fullImmersive: Bool = false
+    @State private var mixImmersive: Bool = false
     
     var body: some View {
         
         HStack{
             Button{
                 Task {
-                    if isImmersive == false {
+                    if fvm.isImmersive == false {
                         fvm.style = .mixed
                         fvm.isMix = true
-                        await dismissImmersiveSpace()
                         await openImmersiveSpace(id: "Immersive")
-                        isImmersive = true
+                        fvm.isImmersive = true
                         dismissWindow(id: "WelcomeView")
                         
                     } else {
                         await dismissImmersiveSpace()
-                        isImmersive = false
+                        fvm.isImmersive = false
                         openWindow(id: "WelcomeView")
+                        fvm.isMix = false
                     }
                 }
             }label:{
-                if isImmersive == false{
+                if fvm.isImmersive == false{
                     Text("Enter Mix Reality")
                         .font(.extraLargeTitle)
                 }else{
                     Text("Exit Immsersive Space")
                         .font(.extraLargeTitle)
                 }
-            }
+            }.disabled(fvm.isFull == true)
             
             Button{
                 Task {
-                    if isImmersive == false {
+                    if fvm.isImmersive == false {
                         fvm.style = .full
-                        fvm.isMix = false
-                        await dismissImmersiveSpace()
+                        fvm.isFull = true
                         await openImmersiveSpace(id: "Immersive")
-                        isImmersive = true
+                        fvm.isImmersive = true
                         dismissWindow(id: "WelcomeView")
                         
                     } else {
                         await dismissImmersiveSpace()
-                        isImmersive = false
+                        fvm.isImmersive = false
                         openWindow(id: "WelcomeView")
+                        fvm.isFull = false
                     }
                 }
             }label:{
-                if isImmersive == false{
+                if fvm.isImmersive == false{
                     Text("Enter Full Reality")
                         .font(.extraLargeTitle)
                 }else{
                     Text("Exit Immsersive Space")
                         .font(.extraLargeTitle)
                 }
-            }
+            }.disabled(fvm.isMix == true)
             
         }
     }
