@@ -24,6 +24,7 @@ class FunctionViewModel: ObservableObject {
     @Published var sitModel: Entity?
     @Published var standModel: Entity?
     @Published var walkModel: Entity?
+    @Published var worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
     
     func enableInteraction(for entity: Entity) {
         entity.components.set(InputTargetComponent()) // Enable interaction
@@ -67,7 +68,7 @@ class FunctionViewModel: ObservableObject {
     
     func createMaleModel() async -> Entity{
             
-           guard let modelEntity = try? await Entity(named: "SliceModel", in: realityKitContentBundle) else {
+           guard let modelEntity = try? await Entity(named: "MaleDermaModel", in: realityKitContentBundle) else {
                
                fatalError("Fail to load entity")
                

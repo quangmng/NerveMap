@@ -12,6 +12,7 @@ import RealityKitContent
 
 struct ImmersiveView: View {
     
+    @State private var expendButton: Int? = nil
     @State private var angle = Angle(degrees: 1.0)
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
@@ -79,8 +80,6 @@ struct ImmersiveView: View {
         
         RealityView{content, attachments in
             
-            let worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
-            
             guard let skyboxEntity = fvm.createSkybox() else {
                 print("Error loading entity")
                 return
@@ -98,8 +97,18 @@ struct ImmersiveView: View {
             fvm.standModel = standToSitModel
             standToSit = standToSitModel
             
-            worldAnchor.addChild(walkModel)
+            if let button = attachments.entity(for: "button") {
+                button.position = SIMD3<Float> (0,0,0)
+                walkModel.addChild(button)
+            }
             
+            if let note = attachments.entity(for: "note"){
+                note.position = walkModel.position
+                walkModel.addChild(note)
+            }
+            
+            fvm.worldAnchor.addChild(walkModel)
+    
             if fvm.isMix == false{
                 content.add(skyboxEntity)
             }
@@ -114,17 +123,29 @@ struct ImmersiveView: View {
             
             if fvm.showSit == true {
     
+                fvm.worldAnchor.addChild(sitModel)
+                fvm.worldAnchor.removeChild(walkModel)
+                fvm.worldAnchor.removeChild(standModel)
+                
                 content.remove(walkModel)
                 content.remove(standModel)
                 content.add(sitModel)
                 
             }else if fvm.showWalk == true{
                 
+                fvm.worldAnchor.addChild(walkModel)
+                fvm.worldAnchor.removeChild(sitModel)
+                fvm.worldAnchor.removeChild(standModel)
+                
                 content.remove(sitModel)
                 content.remove(standModel)
                 content.add(walkModel)
                 
             }else if fvm.showStand == true{
+                
+                fvm.worldAnchor.addChild(standModel)
+                fvm.worldAnchor.removeChild(walkModel)
+                fvm.worldAnchor.removeChild(sitModel)
                 
                 content.remove(sitModel)
                 content.remove(walkModel)
@@ -145,10 +166,19 @@ struct ImmersiveView: View {
         }attachments:{
             
             ForEach(noteVM.notes) { list in
-                Attachment(id: list.id) {
+                Attachment(id: "note") {
                     Text("\(list.title ?? "No title")")
                         .font(.headline)
                         .bold()
+                }
+            }
+            
+            Attachment(id: "Button"){
+                Button{
+                    
+                }label: {
+                    Image(systemName: "plus")
+                        .background(Color.blue)
                 }
             }
             

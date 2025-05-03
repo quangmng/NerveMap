@@ -99,19 +99,17 @@ struct MaleModelView: View {
                 RealityView{ content, attachments in
                     
                     let femaleEntity = await fvm.createFemaleModel()
-                    let maleEntity = await fvm.createWalkingModel()
+                    let maleEntity = await fvm.createMaleModel()
                     
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.5, 0)
                     
                     maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                    maleEntity.position = SIMD3<Float>(0, -0.5, 0)
-                    
-                    AnnotationAnchor.position = femaleEntity.position + SIMD3<Float>(-0.5, 0.5, 0)
-                    femaleEntity.addChild(AnnotationAnchor)
-                    
-                    fvm.enableInteraction(for: femaleEntity)
-                    fvm.enableInteraction(for: maleEntity)
+                    maleEntity.position = SIMD3<Float>(0, -0.4, 0.4)
+                    if let note = attachments.entity(for: "note"){
+                        note.position = femaleEntity.position + SIMD3<Float>(-0.5, 0.5, 0)
+                        femaleEntity.addChild(note)
+                    }
                     
                     content.add(femaleEntity)
                     
