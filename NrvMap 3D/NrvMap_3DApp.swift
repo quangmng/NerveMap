@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct NrvMap_3DApp: App {
@@ -48,7 +49,8 @@ struct NrvMap_3DApp: App {
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
         }
-        
+        .modelContainer(for: NoteData.self)
+
         // Volumetric view for female model
         WindowGroup(id: "ModelDF") {
             FemaleModelView()

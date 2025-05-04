@@ -11,6 +11,7 @@
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
+		FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7602DC722CC0047B141 /* NoteData.swift */; };
 		FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358B2DBA013900ECC559 /* AnnotationModel.swift */; };
 		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
 		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
@@ -53,6 +54,7 @@
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		C5477C9B2D7F092A00C09342 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
+		FD09D7602DC722CC0047B141 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		FD90358B2DBA013900ECC559 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD09D75F2DC722B60047B141 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				FD09D7602DC722CC0047B141 /* NoteData.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
 		FD9035932DBA013900ECC559 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,12 +226,13 @@
 		FD9035B42DBA013900ECC559 /* NrvMap 3D */ = {
 			isa = PBXGroup;
 			children = (
+				FD09D75F2DC722B60047B141 /* SwiftData */,
 				FD9035932DBA013900ECC559 /* Models */,
-				FD9035962DBA013900ECC559 /* Preview Content */,
 				FD9035992DBA013900ECC559 /* ViewModel */,
 				FD9035AF2DBA013900ECC559 /* Views */,
 				FD9035B02DBA013900ECC559 /* Assets.xcassets */,
 				FD9035B12DBA013900ECC559 /* Info.plist */,
+				FD9035962DBA013900ECC559 /* Preview Content */,
 				FD9035B22DBA013900ECC559 /* NrvMap_3DApp.swift */,
 				FD9035B32DBA013900ECC559 /* PersistenceController.swift */,
 			);
@@ -307,6 +318,7 @@
 			files = (
 				C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */,
 				FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */,
+				FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */,
 				FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */,
 				FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */,
 				FD9035B82DBA013900ECC559 /* ModelMesh.swift in Sources */,
