@@ -101,5 +101,11 @@ struct NrvMap_3DApp: App {
         }
         .defaultSize(width: 100, height: 50)
 
+        WindowGroup(id: "BtnBoard") {
+            ButtonBoard()
+                .environmentObject(fvm)
+        }
+        .defaultSize(width: 50, height: 200)
+
     }
 }

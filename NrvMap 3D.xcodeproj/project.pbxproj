@@ -12,6 +12,7 @@
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
 		FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7602DC722CC0047B141 /* NoteData.swift */; };
+		FD09D7CF2DC86A8A0047B141 /* ButtonBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */; };
 		FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358B2DBA013900ECC559 /* AnnotationModel.swift */; };
 		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
 		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
@@ -55,6 +56,7 @@
 		C5477C9B2D7F092A00C09342 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
 		FD09D7602DC722CC0047B141 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
+		FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBoard.swift; sourceTree = "<group>"; };
 		FD90358B2DBA013900ECC559 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		FD9035A02DBA013900ECC559 /* ModelView */ = {
 			isa = PBXGroup;
 			children = (
+				FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */,
 				FD9035D82DBA654400ECC559 /* MotionTextView.swift */,
 				FD90359A2DBA013900ECC559 /* ChooseModelView.swift */,
 				FD90359B2DBA013900ECC559 /* FemaleModelView.swift */,
@@ -327,6 +330,7 @@
 				FD9035BA2DBA013900ECC559 /* NoteModel.swift in Sources */,
 				FD9035BB2DBA013900ECC559 /* SIMD3.swift in Sources */,
 				FD9035BC2DBA013900ECC559 /* UIExtension.swift in Sources */,
+				FD09D7CF2DC86A8A0047B141 /* ButtonBoard.swift in Sources */,
 				FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */,
 				FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */,
 				FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */,

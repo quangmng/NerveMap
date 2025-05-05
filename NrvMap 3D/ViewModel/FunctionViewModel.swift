@@ -33,7 +33,10 @@ class FunctionViewModel: ObservableObject {
     @Published var worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
     
     func enableInteraction(for entity: Entity) {
-        entity.components.set(InputTargetComponent()) // Enable interaction
+        entity.components
+            .set(
+                [InputTargetComponent(), HoverEffectComponent()]
+            ) // Enable interaction
         entity.generateCollisionShapes(recursive: true) // Ensure all children have collision
         for child in entity.children {
             enableInteraction(for: child)

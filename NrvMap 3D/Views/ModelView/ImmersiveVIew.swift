@@ -104,7 +104,12 @@ struct ImmersiveView: View {
             if fvm.isMix == false{
                 content.add(skyboxEntity)
             }
-            
+
+            walkModel.position = [0,0,-1]
+            sitToStandModel.position = [0,0,-1]
+            standToSitModel.position = [0,0,-1]
+            content.add(walkModel)
+
         }update:{ content, attachments in
             
             guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit, let buttonAttachment = attachments.entity(for: "button")
