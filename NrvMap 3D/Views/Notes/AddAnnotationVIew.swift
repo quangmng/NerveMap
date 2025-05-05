@@ -16,10 +16,8 @@ struct AddAnnotationVIew: View {
     @State private var title = ""
     @State private var content = ""
 
-    @Environment(\.modelContext) private var context
-//    @Query private var notes: [NoteData]
-
-    var position: SIMD3<Float>
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \NoteData.dateCreated, order: .forward) private var notes: [NoteData]
 
     var body: some View {
         VStack(spacing: 16) {
@@ -44,12 +42,11 @@ struct AddAnnotationVIew: View {
             id: UUID().uuidString,
             title: title,
             details: content,
-            position: position,
             dateCreated: Date()
         )
-        context.insert(newNote)
+        modelContext.insert(newNote)
         do {
-            try context.save()
+            try modelContext.save()
         } catch {
             print("Error saving note: \(error)")
         }

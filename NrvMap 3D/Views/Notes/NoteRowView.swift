@@ -21,6 +21,7 @@ struct NoteRowView: View {
     var body: some View {
         VStack {
             Text(note.title)
+            Text(note.details)
             Text(Self.dateFormatter.string(from: note.dateCreated))
                 .font(.subheadline)
                 .foregroundColor(.gray)

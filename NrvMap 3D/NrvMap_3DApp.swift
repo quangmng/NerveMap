@@ -10,23 +10,23 @@ import SwiftData
 
 @main
 struct NrvMap_3DApp: App {
-    
+
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
     @StateObject var fvm = FunctionViewModel()
-    
+
     let persistenceController = PersistenceController.shared
-    
+
     var body: some Scene {
-        
+
         // Main window
         WindowGroup(id: "launch"){
             InitialLauncherView()
                 .environment(appModel)
         }
         .windowStyle(.plain)
-        
+
         WindowGroup(id: "WelcomeView"){
             if hasSeenWelcomeScreen == false {
                 HelpView()
@@ -38,11 +38,11 @@ struct NrvMap_3DApp: App {
             }
         }
         .windowStyle(.volumetric)
-        
+
         WindowGroup(id: "HelpWindow"){
             HelpView()
         }
-        
+
         // Notes window
         WindowGroup(id: "NotesWindow") {
             NoteListView()
@@ -60,20 +60,20 @@ struct NrvMap_3DApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
-        
-        
+
+
         WindowGroup(id: "Control") {
             ImmersiveControl()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
         }.defaultSize(width: 500, height: 650)
-        
+
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
         }.immersionStyle(selection: $fvm.style, in: .mixed, .full, .progressive)
-        
+
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()
@@ -83,22 +83,23 @@ struct NrvMap_3DApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 600, height: 1600)
-        
+
         WindowGroup(id: "AnnotationWindow") {
             AddAnnotationVIew()
-                .environmentObject(noteVM)
-        }.defaultSize(width: 400, height: 600)
-        
+        }
+        .modelContainer(for: [NoteData.self])
+        .defaultSize(width: 400, height: 600)
+
         WindowGroup(id: "KnowledgeList") {
             KnowledgeList()
         }
-        
+
         WindowGroup(id: "MotionWindow") {
             MotionTextView()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
         }
         .defaultSize(width: 100, height: 50)
-        
+
     }
 }
