@@ -6,101 +6,18 @@
 //
 
 import SwiftUI
-import CoreData
-import simd
-
-extension NoteEntity {
-    var simdPosition: SIMD3<Float>? {
-        guard let data = position as? Data else { return nil }
-        let decoder = JSONDecoder()
-        if let codable = try? decoder.decode(NoteModel.CodableSIMD.self, from: data) {
-            return codable.codedSIMD
-        }
-        return nil
-    }
-}
+import SwiftData
 
 class NoteViewModel: ObservableObject {
     
-    @Published var notes: [NoteEntity] = []
-    @Published var pendingLocation: SIMD3<Float>? = nil
-    let container: NSPersistentContainer
+    @Published var notes: [NoteData] = []
     
-    init(){
-        container = NSPersistentContainer(name: "NoteCoreData")
-        container.loadPersistentStores{(description, error) in
-            if let error = error {
-                print("ERROR: \(error)")
-            }
-        }
-        fetchCoreData()
-    }
-
-    func addNote(title: String, content: String, position: SIMD3<Float>, date: Date) {
-        guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-
-        let newNote = NoteEntity(context: container.viewContext)
-        newNote.title = title
-        newNote.details = content
-        newNote.dateCreated = date
-        newNote.id = UUID()
-        
-        let codablePosition = NoteModel.CodableSIMD(pendingLocation ?? SIMD3<Float>(0,0,0))
-            let encoder = JSONEncoder()
-            if let encodedPosition = try? encoder.encode(codablePosition) {
-                newNote.position = encodedPosition as NSObject
-            }
-        
-        saveData()
-        
+    func addNote(_ note: NoteData) {
+        notes.append(note)
     }
     
-    func saveData(){
-        
-        do{
-            try container.viewContext.save()
-            fetchCoreData()
-        }
-        catch let error{
-            
-            print("ERROR: \(error)")
-            
-        }
+    func removeNote(){
         
     }
-    
-    func deleteData(indexSet: IndexSet){
-        guard let index = indexSet.first else{return}
-        let entity = notes[index]
-        container.viewContext.delete(entity)
-        saveData()
-    }
-    
-    func fetchCoreData(){
-        
-        let request = NSFetchRequest<NoteEntity>(entityName: "NoteEntity")
-        
-        do{
-            notes = try container.viewContext.fetch(request)
-            for note in notes {
-                // Access the decoded position via the new property
-                let vector = note.simdPosition
-                // Handle the vector as needed, e.g., assign to pendingLocation or store elsewhere
-            }
-        }
-        catch let error{
-            print("ERROR: Fetch fail \(error)")
-        }
-    }
-    
-    func decodePosition(from note: NoteEntity) -> SIMD3<Float>? {
-        guard let data = note.position as? Data else { return nil }
-        let decoder = JSONDecoder()
-        if let codable = try? decoder.decode(NoteModel.CodableSIMD.self, from: data) {
-            return codable.codedSIMD
-        }
-        return nil
-    }
-
     
 }

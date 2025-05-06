@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftData
 
 struct ImmersiveView: View {
     
@@ -26,6 +27,7 @@ struct ImmersiveView: View {
     @State var sitToStand: Entity?
     @State var walk: Entity?
     
+    @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     
     var tap: some Gesture {
         TapGesture()
@@ -96,15 +98,15 @@ struct ImmersiveView: View {
             fvm.standModel = standToSitModel
             standToSit = standToSitModel
             
-            if let buttonAttachment = attachments.entity(for: "button") {
-                buttonAttachment.position = [0, -0.1, 0.3]
-                walkModel.addChild(buttonAttachment)
-            }
-            
             if fvm.isMix == false{
                 content.add(skyboxEntity)
             }
 
+            if let note = attachments.entity(for: "note"){
+                note.position = SIMD3<Float>(0,0.5,0.5)
+                walkModel.addChild(note)
+            }
+            
             walkModel.position = [0,0,-1]
             sitToStandModel.position = [0,0,-1]
             standToSitModel.position = [0,0,-1]
@@ -112,7 +114,7 @@ struct ImmersiveView: View {
 
         }update:{ content, attachments in
             
-            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit, let buttonAttachment = attachments.entity(for: "button")
+            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit
             else{return}
             
             if fvm.showSit == true {
@@ -120,8 +122,6 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.addChild(sitModel)
                 fvm.worldAnchor.removeChild(walkModel)
                 fvm.worldAnchor.removeChild(standModel)
-                
-                sitModel.addChild(buttonAttachment)
                 
                 content.remove(walkModel)
                 content.remove(standModel)
@@ -132,9 +132,7 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.addChild(walkModel)
                 fvm.worldAnchor.removeChild(sitModel)
                 fvm.worldAnchor.removeChild(standModel)
-                
-                walkModel.addChild(buttonAttachment)
-                
+        
                 content.remove(sitModel)
                 content.remove(standModel)
                 content.add(walkModel)
@@ -145,58 +143,24 @@ struct ImmersiveView: View {
                 fvm.worldAnchor.removeChild(walkModel)
                 fvm.worldAnchor.removeChild(sitModel)
                 
-                standModel.addChild(buttonAttachment)
-                
                 content.remove(sitModel)
                 content.remove(walkModel)
                 content.add(standModel)
                 
             }
             
-            
-            for list in noteVM.notes {
-                if let listEntity = attachments.entity(for: list.id){
+            for list in notes {
+                if let listEntity = attachments.entity(for: "note"){
                     content.add(listEntity)
                 }
             }
-            if let entity = content.entities.first(where: { $0.name == "modelEntity" }) {
-                entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
-            }
-            
         }attachments:{
             
-            ForEach(noteVM.notes) { list in
+            ForEach(notes) { list in
                 Attachment(id: "note") {
-                    Text("\(list.title ?? "No title")")
+                    Text("\(list.title)")
                         .font(.headline)
                         .bold()
-                }
-            }
-            
-            Attachment(id: "button"){
-                
-                HStack(spacing: 10) {
-                    
-                    ExpendButton(id: 0, systemImage: fvm.genderSelect ? "figure.stand" : "figure.stand.dress", action: {fvm.genderSelect.toggle()}, extraButtons: [], expendButton: $fvm.expendButton)
-                        .background(fvm.genderSelect ? Color.maleBule : Color.femalePink)
-                        .cornerRadius(25)
-                        .help("Gender")
-                    
-                    // i should ask...
-                    ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
-                         // action, label
-                    ], expendButton: $fvm.expendButton)
-                    .help("Animation")
-                    
-                    // TODO: merge this button with poses (enum)
-                    ExpendButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
-                        .help("Immersive")
-                    
-                    ExpendButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("note.text", {fvm.isAnnotationMode.toggle()}), ("list.clipboard", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
-                        .help("Notes")
-                    
-                    ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
-                        .help("Info")
                 }
             }
         }

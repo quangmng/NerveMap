@@ -8,9 +8,13 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftData
 
 struct MaleModelView: View {
     
+    @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
+    
+    @StateObject var nvm = NoteViewModel()
     @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
     
@@ -30,10 +34,15 @@ struct MaleModelView: View {
             .targetedToAnyEntity()
             .onEnded { event in
                 if fvm.isAnnotationMode {
-                    print("gesture blocked")
-                }else{
-                    selectedEntity = event.entity
+                    fvm.selectedEntity = event.entity
                     fvm.highlightEntity(event.entity)
+                    fvm.position = event.entity.name
+                    openWindow(id: "AnnotationWindow")
+                }else{
+                    fvm.selectedEntity = event.entity
+                    fvm.position = event.entity.name
+                    fvm.highlightEntity(event.entity)
+                    print("\(event.entity.name)")
                 }
             }
     }
@@ -84,6 +93,7 @@ struct MaleModelView: View {
                 }
             }
     }
+
     
     var body: some View {
         
@@ -99,21 +109,22 @@ struct MaleModelView: View {
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.4, 0)
                     
-                    maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                    maleEntity.position = SIMD3<Float>(0, -0.4, 0.4)
-                    if let note = attachments.entity(for: "note"){
-                        note.position = femaleEntity.position
+                    if let note = attachments.entity(for: notes.first?.id){
+                        note.position = SIMD3<Float>(0,0.5,0.5)
                         femaleEntity.addChild(note)
                     }
                     
-                    content.add(femaleEntity)
+//                    for note in notes {
+//                        
+//                        let noteAttachment
+//                    }
                     
                     femaleModel = femaleEntity
                     maleModel = maleEntity
                     
-                    originalTransform = femaleEntity.transform
+                    nvm.notes = notes
                     
-                    
+                    content.add(femaleEntity)
                     
                 }update:{content, attachments in
                     
@@ -127,44 +138,32 @@ struct MaleModelView: View {
                         
                     }else if fvm.genderSelect {
                         
+                       
                         content.remove(female)
                         content.add(male)
                         
                     }
                     
-                    for list in noteVM.notes {
-                        if let listEntity = attachments.entity(for: list.id){
+                    for note in notes {
+                        if let listEntity = attachments.entity(for: note.id){
                             content.add(listEntity)
                         }
                     }
-                    if let entity = content.entities.first(where: { $0.name == "modelEntity" }) {
-                        entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
-                    }
-                    
                 }
                 attachments: {
-                    ForEach(noteVM.notes) { list in
-                        Attachment(id: list.id) {
-                            Text("\(list.title ?? "No title")")
+                    ForEach(notes) { note in
+                        Attachment(id: note.id) {
+                            Text("\(note.title)")
+                                .font(.extraLargeTitle)
+                                .background(Color.black)
                             
                         }
                     }
                 }
+
                 
                 //Gesture
                 
-                .gesture(SpatialTapGesture()
-                    .targetedToAnyEntity()
-                    .onEnded{value in
-                        if fvm.isAnnotationMode == false{
-                            print("gesture blocked")
-                        }else{
-                            let location = value.location3D
-                            let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
-                            noteVM.pendingLocation = convertedLocaiton
-                            openWindow(id: "AnnotationWindow")
-                        }
-                    })
                 .simultaneousGesture(rotation)
                 .simultaneousGesture(scaleGesture)
                 .simultaneousGesture(drag)

@@ -27,10 +27,13 @@ class FunctionViewModel: ObservableObject {
     @Published var isAnnotationMode = false
     
     @Published var modelEntity: Entity?
+    @Published var selectedEntity: Entity?
     @Published var sitModel: Entity?
     @Published var standModel: Entity?
     @Published var walkModel: Entity?
     @Published var worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
+    
+    @Published var position: String = ""
     
     func enableInteraction(for entity: Entity) {
         entity.components
@@ -43,7 +46,6 @@ class FunctionViewModel: ObservableObject {
         }
     }
     
-    // Highlight tapped entity
     func highlightEntity(_ entity: Entity) {
         guard var modelComponent = entity.components[ModelComponent.self] else { return }
         let originalMaterials = modelComponent.materials // Save materials
@@ -52,7 +54,6 @@ class FunctionViewModel: ObservableObject {
         modelComponent.materials = [highlightMaterial]
         entity.components[ModelComponent.self] = modelComponent
         
-        // Reset after 1 second
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             if var updatedComponent = entity.components[ModelComponent.self] {
                 updatedComponent.materials = originalMaterials

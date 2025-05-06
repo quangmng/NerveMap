@@ -86,6 +86,7 @@ struct NrvMap_3DApp: App {
 
         WindowGroup(id: "AnnotationWindow") {
             AddAnnotationVIew()
+                .environmentObject(fvm)
         }
         .modelContainer(for: [NoteData.self])
         .defaultSize(width: 400, height: 600)
@@ -105,7 +106,7 @@ struct NrvMap_3DApp: App {
             ButtonBoard()
                 .environmentObject(fvm)
         }
-        .defaultSize(width: 50, height: 200)
+        .defaultSize(width: 500, height: 200)
 
     }
 }
