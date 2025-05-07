@@ -18,16 +18,9 @@ struct AddAnnotationVIew: View {
     @EnvironmentObject var fvm: FunctionViewModel
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \NoteData.dateCreated, order: .forward) private var notes: [NoteData]
-    
-//    @State private var selectedEntityName: String {
-//        fvm.selectedEntity?.name ?? "Unnamed Entity"
-//    }
-    
+
     var body: some View {
         VStack(spacing: 16) {
-            
-           
-                    
             Text("Add Note").font(.headline)
             Text("Currenly in \(fvm.position) ")
             TextField("Title", text: $title)
@@ -52,6 +45,7 @@ struct AddAnnotationVIew: View {
             details: content,
             dateCreated: Date(),
             // TODO: solve the position info in the array or swiftdata
+            // MARK: - Codes added
             position: fvm.position
         )
         modelContext.insert(newNote)

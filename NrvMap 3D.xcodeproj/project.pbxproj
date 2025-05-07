@@ -13,6 +13,7 @@
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
 		FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7602DC722CC0047B141 /* NoteData.swift */; };
 		FD09D7CF2DC86A8A0047B141 /* ButtonBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */; };
+		FD09D7D32DC9D62E0047B141 /* ModelGestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */; };
 		FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358B2DBA013900ECC559 /* AnnotationModel.swift */; };
 		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
 		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
@@ -57,6 +58,7 @@
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
 		FD09D7602DC722CC0047B141 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBoard.swift; sourceTree = "<group>"; };
+		FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelGestureFactory.swift; sourceTree = "<group>"; };
 		FD90358B2DBA013900ECC559 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		FD9035932DBA013900ECC559 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */,
 				FD90358F2DBA013900ECC559 /* NoteEntity+SIMD.swift */,
 				FD90358C2DBA013900ECC559 /* AppModel.swift */,
 				FD90358B2DBA013900ECC559 /* AnnotationModel.swift */,
@@ -319,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD09D7D32DC9D62E0047B141 /* ModelGestureFactory.swift in Sources */,
 				C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */,
 				FD9035B52DBA013900ECC559 /* AnnotationModel.swift in Sources */,
 				FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */,

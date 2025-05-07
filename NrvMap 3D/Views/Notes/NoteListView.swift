@@ -11,6 +11,7 @@ import SwiftData
 struct NoteListView: View {
 
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         NavigationStack {

@@ -11,24 +11,30 @@ import RealityKitContent
 import SwiftData
 
 struct MaleModelView: View {
+<<<<<<< Updated upstream
     
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     
     @StateObject var nvm = NoteViewModel()
+=======
+
+>>>>>>> Stashed changes
     @Environment(\.openWindow) public var openWindow
-    @State private var angle = Angle(degrees: 1.0)
-    
+    @EnvironmentObject var fvm: FunctionViewModel
+
     @State var femaleModel: Entity? = nil
     @State var maleModel: Entity?
-    
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
-    @StateObject var noteVM = NoteViewModel()
-    @State var initialScale: SIMD3<Float>? = nil
     @State private var AnnotationAnchor = AnchorEntity()
-    
-    @EnvironmentObject var fvm: FunctionViewModel
-    
+
+    // MARK: - May 6th parameter upgrade
+    //    @State var initialScale: SIMD3<Float>? = nil
+    @State private var initialScale: SIMD3<Float>?
+    //    @State private var angle = Angle(degrees: 1.0)
+    @State private var angle: Angle = .zero
+
+    /*
     var tap: some Gesture {
         TapGesture()
             .targetedToAnyEntity()
@@ -46,7 +52,7 @@ struct MaleModelView: View {
                 }
             }
     }
-    
+
     var drag: some Gesture {
         DragGesture()
             .targetedToAnyEntity()
@@ -62,7 +68,7 @@ struct MaleModelView: View {
             }
             .onEnded { _ in print("Drag ended") }
     }
-    
+
     var scaleGesture: some Gesture {
         MagnifyGesture()
             .targetedToAnyEntity()
@@ -82,7 +88,7 @@ struct MaleModelView: View {
                 initialScale = nil
             }
     }
-    
+
     var rotation: some Gesture {
         RotateGesture()
             .onChanged { value in
@@ -93,21 +99,27 @@ struct MaleModelView: View {
                 }
             }
     }
+<<<<<<< Updated upstream
 
     
+=======
+     */
+
+>>>>>>> Stashed changes
     var body: some View {
-        
+
         HStack {
             ZStack {
-                
+
                 //3D model generation
                 RealityView{ content, attachments in
-                    
+
                     let femaleEntity = await fvm.createFemaleModel()
                     let maleEntity = await fvm.createMaleModel()
-                    
+
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.4, 0)
+<<<<<<< Updated upstream
                     
                     if let note = attachments.entity(for: notes.first?.id){
                         note.position = SIMD3<Float>(0,0.5,0.5)
@@ -126,17 +138,37 @@ struct MaleModelView: View {
                     
                     content.add(femaleEntity)
                     
+=======
+
+                    maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
+                    maleEntity.position = SIMD3<Float>(0, -0.4, 0.4)
+                    if let note = attachments.entity(for: "note"){
+                        note.position = femaleEntity.position
+                        femaleEntity.addChild(note)
+                    }
+
+                    content.add(femaleEntity)
+
+                    femaleModel = femaleEntity
+                    maleModel = maleEntity
+
+                    originalTransform = femaleEntity.transform
+
+
+
+>>>>>>> Stashed changes
                 }update:{content, attachments in
-                    
+
                     guard let male = maleModel, let female = femaleModel
                     else{return}
-                    
+
                     if !fvm.genderSelect{
-                       
+
                         content.remove(male)
                         content.add(female)
-                        
+
                     }else if fvm.genderSelect {
+<<<<<<< Updated upstream
                         
                        
                         content.remove(female)
@@ -168,6 +200,67 @@ struct MaleModelView: View {
                 .simultaneousGesture(scaleGesture)
                 .simultaneousGesture(drag)
                 .simultaneousGesture(tap)
+=======
+
+                        content.remove(female)
+                        content.add(male)
+
+                    }
+
+                    if let entity = content.entities.first(where: { $0.name == "modelEntity" }) {
+                        entity.move(to: Transform(translation: [0, 0.3, -1.2]), relativeTo: nil, duration: 5.0)
+                    }
+
+                }
+                attachments: {
+
+                }
+
+                /*
+                 .gesture(SpatialTapGesture()
+                     .targetedToAnyEntity()
+                     .onEnded{value in
+                         if fvm.isAnnotationMode == false{
+                             print("gesture blocked")
+                         }else{
+                             let location = value.location3D
+                             let convertedLocaiton = 1.1 * value.convert(location , from: .local, to: .scene)
+                             noteVM.pendingLocation = convertedLocaiton
+                             openWindow(id: "AnnotationWindow")
+                         }
+                     })
+                 .simultaneousGesture(rotation)
+                 .simultaneousGesture(scaleGesture)
+                 .simultaneousGesture(drag)
+                 .simultaneousGesture(tap)
+                 */
+                // MARK: - Updeted gesture
+                .simultaneousGesture(
+                    ModelGestureFactory.tapGesture(
+                        fvm: fvm,
+                        selectedEntity: $selectedEntity
+                    )
+                )
+                .simultaneousGesture(
+                    ModelGestureFactory.dragGesture(
+                        fvm: fvm,
+                        selectedEntity: $selectedEntity
+                    )
+                )
+                .simultaneousGesture(
+                    ModelGestureFactory.scaleGesture(
+                        fvm: fvm,
+                        initialScale: $initialScale
+                    )
+                )
+                .simultaneousGesture(
+                    ModelGestureFactory.rotationGesture(
+                        fvm: fvm,
+                        angle: $angle
+                    )
+                )
+
+>>>>>>> Stashed changes
             }
         }
         .background{
@@ -185,7 +278,7 @@ struct MaleModelView: View {
 
                 // i should ask...
                 ExpendButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
-                     // action, label
+                    // action, label
                 ], expendButton: $fvm.expendButton)
                 .help("Animation")
 

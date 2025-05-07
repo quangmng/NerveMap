@@ -5,7 +5,6 @@
 //  Created by Wendy Zhou on 10/4/2025.
 //
 
-
 import SwiftUI
 
 /// A model representing a single dermatome.

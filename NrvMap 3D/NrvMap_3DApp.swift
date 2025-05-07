@@ -90,6 +90,7 @@ struct NrvMap_3DApp: App {
         }
         .modelContainer(for: [NoteData.self])
         .defaultSize(width: 400, height: 600)
+//        let container = ModelContainer(for: [NoteData.self])
 
         WindowGroup(id: "KnowledgeList") {
             KnowledgeList()
