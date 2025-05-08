@@ -80,4 +80,5 @@ struct MotionTextView: View {
 
 #Preview {
     MotionTextView()
+        .environmentObject(FunctionViewModel())
 }

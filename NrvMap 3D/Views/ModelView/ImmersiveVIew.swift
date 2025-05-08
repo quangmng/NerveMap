@@ -29,54 +29,6 @@ struct ImmersiveView: View {
     
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     
-    var tap: some Gesture {
-        TapGesture()
-            .targetedToAnyEntity()
-            .onEnded { event in
-                selectedEntity = event.entity
-                fvm.highlightEntity(event.entity)
-            }
-    }
-    
-    var drag: some Gesture {
-        DragGesture()
-            .targetedToAnyEntity()
-            .onChanged { event in
-                if fvm.isAnnotationMode {
-                    print("gesture blocked")
-                }else{
-                    if let entity = selectedEntity {
-                        let delta = SIMD3<Float>(Float(event.translation.width) * 0.0001, 0, Float(event.translation.height) * -0.0001)
-                        entity.transform.translation += delta
-                    }
-                }
-            }
-            .onEnded { _ in print("Drag ended") }
-    }
-    
-    var scaleGesture: some Gesture {
-        MagnifyGesture()
-            .targetedToAnyEntity()
-            .onChanged { value in
-                let rootEntity = value.entity
-                if initialScale == nil {
-                    initialScale = rootEntity.scale
-                }
-                let scaleRate: Float = 1.0
-                rootEntity.scale = (initialScale ?? .init(repeating: scaleRate)) * Float(value.gestureValue.magnification)
-            }
-            .onEnded { _ in
-                initialScale = nil
-            }
-    }
-    
-    var rotation: some Gesture {
-           RotateGesture()
-               .onChanged { value in
-                   angle = value.rotation
-               }
-       }
-    
     var body: some View {
         
         RealityView{content, attachments in
@@ -149,25 +101,35 @@ struct ImmersiveView: View {
                 
             }
             
-            for list in notes {
-                if let listEntity = attachments.entity(for: "note"){
-                    content.add(listEntity)
-                }
-            }
+            
         }attachments:{
             
-            ForEach(notes) { list in
-                Attachment(id: "note") {
-                    Text("\(list.title)")
-                        .font(.headline)
-                        .bold()
-                }
-            }
+            
         }
-        .simultaneousGesture(rotation)
-        .simultaneousGesture(scaleGesture)
-        .simultaneousGesture(drag)
-        .simultaneousGesture(tap)
+        .simultaneousGesture(
+            ModelGestureFactory.tapGesture(
+                fvm: fvm,
+                selectedEntity: $selectedEntity
+            )
+        )
+        .simultaneousGesture(
+            ModelGestureFactory.dragGesture(
+                fvm: fvm,
+                selectedEntity: $selectedEntity
+            )
+        )
+        .simultaneousGesture(
+            ModelGestureFactory.scaleGesture(
+                fvm: fvm,
+                initialScale: $initialScale
+            )
+        )
+        .simultaneousGesture(
+            ModelGestureFactory.rotationGesture(
+                fvm: fvm,
+                angle: $angle
+            )
+        )
         
     }
 }
@@ -177,4 +139,5 @@ struct ImmersiveView: View {
 
 #Preview{
     ImmersiveView()
+        .environmentObject(FunctionViewModel())
 }

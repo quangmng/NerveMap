@@ -66,7 +66,7 @@ struct NrvMap_3DApp: App {
             ImmersiveControl()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
-        }.defaultSize(width: 500, height: 650)
+        }.defaultSize(width: 550, height: 500)
 
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()

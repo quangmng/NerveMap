@@ -35,6 +35,13 @@ struct ButtonBoard: View {
 
             ExpendButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
                 .help("Info")
-        }
+        }.toggleStyle(.button)
+            .buttonStyle(.borderless)
+            .labelStyle(.iconOnly)
+            .padding(12)
+            .glassBackgroundEffect(in: .rect(cornerRadius: 50))
+            .onDisappear{if fvm.isMix || fvm.isFull {
+                openWindow(id: "BtnBoard")
+            }}
     }
 }
