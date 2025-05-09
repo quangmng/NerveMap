@@ -54,10 +54,6 @@ struct ImmersiveView: View {
                 content.add(skyboxEntity)
             }
 
-            if let note = attachments.entity(for: "note"){
-                note.position = SIMD3<Float>(0,0.5,0.5)
-                walkModel.addChild(note)
-            }
             
             walkModel.position = [0,0,-1]
             sitToStandModel.position = [0,0,-1]

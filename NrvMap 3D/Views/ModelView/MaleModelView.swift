@@ -19,7 +19,7 @@ struct MaleModelView: View {
     @Environment(\.openWindow) public var openWindow
     @State private var angle = Angle(degrees: 1.0)
 
-    @State var femaleModel: Entity? = nil
+    @State var femaleModel: Entity?
     @State var maleModel: Entity?
 
     @State private var selectedEntity: Entity?
@@ -27,6 +27,7 @@ struct MaleModelView: View {
     @StateObject var noteVM = NoteViewModel()
     @State var initialScale: SIMD3<Float>? = nil
     @State private var AnnotationAnchor = AnchorEntity()
+    let meshName: [ModelMesh] = [ModelMesh(name: "C1"), ModelMesh(name: "C2")]
 
     @EnvironmentObject var fvm: FunctionViewModel
 
@@ -98,10 +99,6 @@ struct MaleModelView: View {
      */
 
     var body: some View {
-
-        HStack {
-            ZStack {
-
                 //3D model generation
                 RealityView{ content, attachments in
 
@@ -111,15 +108,8 @@ struct MaleModelView: View {
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                     femaleEntity.position = SIMD3<Float>(0, -0.4, 0)
 
-                    if let note = attachments.entity(for: notes.first?.id){
-                        note.position = SIMD3<Float>(0,0.5,0.5)
-                        femaleEntity.addChild(note)
-                    }
-
                     femaleModel = femaleEntity
                     maleModel = maleEntity
-
-                    nvm.notes = notes
 
                     content.add(femaleEntity)
 
@@ -140,22 +130,10 @@ struct MaleModelView: View {
                         content.add(male)
 
                     }
-
-                    for note in notes {
-                        if let listEntity = attachments.entity(for: note.id){
-                            content.add(listEntity)
-                        }
-                    }
                 }
                 attachments: {
-                    ForEach(notes) { note in
-                        Attachment(id: note.id) {
-                            Text("\(note.title)")
-                                .font(.extraLargeTitle)
-                                .background(Color.black)
-
-                        }
-                    }
+                    
+                    
                 }
 
                 // MARK: -Gestures for model
@@ -183,8 +161,6 @@ struct MaleModelView: View {
                         angle: $angle
                     )
                 )
-            }
-        }
         .background{
             if fvm.isAnnotationMode == true {
                 Color.black.opacity(0.5)

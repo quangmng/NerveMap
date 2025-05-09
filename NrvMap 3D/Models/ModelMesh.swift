@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct ModelMesh: Identifiable {
-    var name: String
-    var id: Int
-    var location: SIMD3<Float>
+struct ModelMesh: Identifiable, Hashable {
+    let id = UUID()
+    let name: String
 }

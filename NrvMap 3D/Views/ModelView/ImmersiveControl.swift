@@ -64,7 +64,6 @@ struct ImmersiveControl: View {
                     .background(Color.gray)
                     .cornerRadius(25)
                     .buttonStyle(.plain)
-                    .disabled(fvm.isMix == true)
                 .disabled(fvm.isFull == true)
                 
                 Button{
