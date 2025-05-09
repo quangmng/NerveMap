@@ -9,16 +9,16 @@ import RealityKit
 import SwiftUI
 
 struct ImmersiveControl: View {
-    
+
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @EnvironmentObject var fvm: FunctionViewModel
-    
+
     @State private var fullImmersive: Bool = false
     @State private var mixImmersive: Bool = false
-    
+
     var body: some View {
         VStack{
             Text("Environment")
@@ -27,17 +27,18 @@ struct ImmersiveControl: View {
                 .padding()
                 .leading()
             HStack{
-                Button{
+
+                Button {
                     Task {
                         if fvm.isImmersive == false {
                             fvm.style = .mixed
                             fvm.isMix = true
                             await openImmersiveSpace(id: "Immersive")
-                            
+
                             fvm.isImmersive = true
                             dismissWindow(id: "WelcomeView")
-                            
-                            
+
+
                         } else {
                             await dismissImmersiveSpace()
                             fvm.isImmersive = false
@@ -47,35 +48,38 @@ struct ImmersiveControl: View {
                             fvm.isMix = false
                         }
                     }
-                }label:{
+                } label: {
                     if fvm.isImmersive == false{
-                        VStack{
-                            Text("👁️")
-                                .center()
-                            Text("Real-Life")
-                                .font(.title)
-                                .center()
-                        }
-                    }else{
-                        Text("Exit Immsersive Space")
-                            .font(.extraLargeTitle)
+                        Rectangle()
+                            .foregroundStyle(Color.clear)
+                            .frame(width: 225, height: 100)
+                            .overlay {
+                                VStack{
+                                    Text("👁️")
+                                        .center()
+                                    Text("Real-Life")
+                                        .font(.title)
+                                        .center()
+                                }
+                            }
+                    } else {
+                        Text("Exit")
+                            .font(.title)
+                            .foregroundStyle(Color.red.secondary)
                     }
-                }.frame(width: 225, height: 100)
-                    .background(Color.gray)
-                    .cornerRadius(25)
-                    .buttonStyle(.plain)
+                }
                 .disabled(fvm.isFull == true)
-                
-                Button{
+
+                Button {
                     Task {
                         if fvm.isImmersive == false {
                             fvm.style = .full
                             fvm.isFull = true
                             await openImmersiveSpace(id: "Immersive")
-                            
+
                             fvm.isImmersive = true
                             dismissWindow(id: "WelcomeView")
-                            
+
                         } else {
                             await dismissImmersiveSpace()
                             fvm.isImmersive = false
@@ -85,48 +89,51 @@ struct ImmersiveControl: View {
                             fvm.isFull = false
                         }
                     }
-                }label:{
+                } label: {
                     if fvm.isImmersive == false{
-                        VStack{
-                            Text("🏥")
-                                .center()
-                            Text("Hospital")
-                                .font(.title)
-                                .center()
-                        }
-                    }else{
-                        Text("Exit Immsersive Space")
-                            .font(.extraLargeTitle)
+                        Rectangle()
+                            .foregroundStyle(Color.clear)
+                            .frame(width: 225, height: 100)
+                            .overlay {
+                                VStack{
+                                    Text("🏥")
+                                        .center()
+                                    Text("Hospital")
+                                        .font(.title)
+                                        .center()
+                                }
+                            }
+                    } else {
+                        Text("Dismiss Immsersive Space")
+                            .font(.title)
+                            .foregroundStyle(Color.red.secondary)
                     }
-                }.frame(width: 225, height: 100)
-                .background(Color.gray)
-                .cornerRadius(25)
-                .buttonStyle(.plain)
+                }
                 .disabled(fvm.isMix == true)
             }
-            
+
             Text("Condition")
                 .font(.extraLargeTitle)
                 .bold()
                 .leading()
                 .padding()
-            
+
             TabView{
                 VStack{
-                   Text("Normal")
+                    Text("Normal")
                         .font(.title)
                 }
-                    .tag(0)
-                
+                .tag(0)
+
                 VStack{
                     Text("Herinated Disc")
                         .font(.title)
                 }.tag(1)
             }.padding()
-                .background(Color.gray)
-                .cornerRadius(100)
-                .frame(width: 450, height: 110)
-            .tabViewStyle(.page)
+                .background(Color.white.opacity(0.09))
+                .cornerRadius(20)
+                .frame(width: 500, height: 150)
+                .tabViewStyle(.page)
         }
     }
 }

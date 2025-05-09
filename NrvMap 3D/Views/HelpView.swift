@@ -20,7 +20,7 @@ struct HelpView: View {
                 
                 // Page 1
                 HStack {
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 20) {
                         Text("NrvMap 3D")
                             .font(.system(size: 60, weight: .bold))
                             .opacity(isVisible ? 1 : 0)
@@ -65,7 +65,6 @@ struct HelpView: View {
                                 
                                 // Zoom In
                                 Image("zoomInIcon")
-                                    
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX-25, y: spacingY * 1.8)
@@ -73,7 +72,6 @@ struct HelpView: View {
                                 
                                 // Zoom Out
                                 Image("zoomOutIcon")
-                                    
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 80 , y: spacingY * 3)
@@ -81,7 +79,6 @@ struct HelpView: View {
                                 
                                 // Move Icon
                                 Image("moveIcon")
-
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 170, y: spacingY * 4.4)
@@ -89,7 +86,6 @@ struct HelpView: View {
                                 
                                 // Hand Gesture
                                 Image("handGesture")
-                                    
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 250)
