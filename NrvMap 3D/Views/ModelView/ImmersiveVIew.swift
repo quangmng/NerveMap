@@ -105,7 +105,8 @@ struct ImmersiveView: View {
         .simultaneousGesture(
             ModelGestureFactory.tapGesture(
                 fvm: fvm,
-                selectedEntity: $selectedEntity
+                selectedEntity: $selectedEntity,
+                openWindow: {id in openWindow(id: id)}
             )
         )
         .simultaneousGesture(

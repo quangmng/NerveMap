@@ -16,8 +16,7 @@ struct ImmersiveControl: View {
     @Environment(\.dismissWindow) private var dismissWindow
     @EnvironmentObject var fvm: FunctionViewModel
 
-    @State private var fullImmersive: Bool = false
-    @State private var mixImmersive: Bool = false
+    @State private var showAlert: Bool = false
 
     var body: some View {
         VStack{
@@ -27,7 +26,7 @@ struct ImmersiveControl: View {
                 .padding()
                 .leading()
             HStack{
-
+// Mix Immersive
                 Button {
                     Task {
                         if fvm.isImmersive == false {
@@ -70,15 +69,11 @@ struct ImmersiveControl: View {
                 }
                 .disabled(fvm.isFull == true)
 
+//Full Immersive
                 Button {
                     Task {
                         if fvm.isImmersive == false {
-                            fvm.style = .full
-                            fvm.isFull = true
-                            await openImmersiveSpace(id: "Immersive")
-
-                            fvm.isImmersive = true
-                            dismissWindow(id: "WelcomeView")
+                            showAlert = true
 
                         } else {
                             await dismissImmersiveSpace()
@@ -108,6 +103,21 @@ struct ImmersiveControl: View {
                             .font(.title)
                             .foregroundStyle(Color.red.secondary)
                     }
+                }
+                .alert("⚠️ Entering Immersive Mode" ,isPresented: $showAlert){
+                    Button("Cancel", role:.cancel, action:{showAlert = false})
+                    Button("Continue", action:{
+                        Task{
+                            fvm.style = .full
+                            fvm.isFull = true
+                            await openImmersiveSpace(id: "Immersive")
+                            fvm.isImmersive = true
+                            dismissWindow(id: "WelcomeView")
+                            self.showAlert = false
+                        }
+                    })
+                }message: {
+                    Text("Please ensure you have a safe and clear space around you before continuing.")
                 }
                 .disabled(fvm.isMix == true)
             }

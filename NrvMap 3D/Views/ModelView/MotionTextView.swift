@@ -38,7 +38,6 @@ struct MotionTextView: View {
             })
             .tag(2)
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
 
     @ViewBuilder

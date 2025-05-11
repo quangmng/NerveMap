@@ -17,13 +17,15 @@ enum ModelGestureFactory {
   
   static func tapGesture(
     fvm: FunctionViewModel,
-    selectedEntity: Binding<Entity?>
+    selectedEntity: Binding<Entity?>,
+    openWindow: @escaping (String) -> Void
   ) -> some Gesture {
     TapGesture()
       .targetedToAnyEntity()
       .onEnded { event in
         guard !fvm.isAnnotationMode else {
-          print("gesture blocked")
+          openWindow("AnnotationWindow")
+            fvm.position = event.entity.name
           return
         }
         selectedEntity.wrappedValue = event.entity
