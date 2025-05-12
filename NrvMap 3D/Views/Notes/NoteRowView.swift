@@ -19,13 +19,53 @@ struct NoteRowView: View {
     }()
 
     var body: some View {
-        VStack {
-            Text(note.title)
+
+        HStack(spacing: 0) {
+            noteComponent
+
+            RoundedRectangle(cornerRadius: 16)
+                .foregroundStyle(Color.gray)
+                .frame(width: 260, height: 100)
+                .overlay {
+                    Text(Self.dateFormatter.string(from: note.dateCreated))
+                        .font(.system(size: 40))
+                }
+                .traling()
+        }
+    }
+}
+
+#Preview {
+    NoteRowView(note: NoteData(
+        id: UUID().uuidString,
+        title: "Sample Note",
+        details: "This is a preview of a note with position info.",
+        dateCreated: Date(),
+        position: "T1"
+    ))
+}
+
+extension NoteRowView {
+    private var noteComponent: some View {
+        VStack(alignment: .leading, spacing: 25) {
+            HStack(spacing: 20) {
+                RoundedRectangle(cornerRadius: 16)
+                    .foregroundStyle(Color.gray)
+                    .frame(width: 100, height: 100)
+                    .overlay {
+                        Text(note.position)
+                            .font(.system(size: 60, weight: .heavy))
+                    }
+
+
+                Text(note.title)
+                    .font(.system(size: 50))
+                    .underline()
+//                    .lineLimit(5)
+            }
+
             Text(note.details)
-            Text(note.position)
-            Text(Self.dateFormatter.string(from: note.dateCreated))
-                .font(.subheadline)
-                .foregroundColor(.gray)
+                .font(.system(size: 40))
         }
     }
 }

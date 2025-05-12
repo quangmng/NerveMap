@@ -29,7 +29,8 @@ struct InitialLauncherView: View {
             .task {
                 Task {
                     try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
-                    await open(id: "WelcomeView")
+//                    await open(id: "WelcomeView")
+                    open(id: "WelcomeView")
                     dismiss(id: "launch")
                     isVisable = false
                 }

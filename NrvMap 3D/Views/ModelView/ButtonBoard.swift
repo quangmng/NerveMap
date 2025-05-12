@@ -40,8 +40,10 @@ struct ButtonBoard: View {
             .labelStyle(.iconOnly)
             .padding(12)
             .glassBackgroundEffect(in: .rect(cornerRadius: 50))
-            .onDisappear{if fvm.isMix || fvm.isFull {
-                openWindow(id: "BtnBoard")
-            }}
+            .onDisappear {
+                if fvm.isMix || fvm.isFull {
+                    openWindow(id: "BtnBoard")
+                }
+            }
     }
 }
