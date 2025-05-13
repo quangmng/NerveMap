@@ -34,6 +34,7 @@ class FunctionViewModel: ObservableObject {
     @Published var worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
     
     @Published var position: String = ""
+    @Published var simdPosition: SIMD3<Float> = [0,0,0]
     
     func enableInteraction(for entity: Entity) {
         entity.components

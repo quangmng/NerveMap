@@ -19,6 +19,7 @@ struct MaleModelView: View {
     @Environment(\.openWindow) public var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @State private var angle = Angle(degrees: 1.0)
+    @State private var currentGenderIsMale: Bool? = nil
 
     @State var femaleModel: Entity?
     @State var maleModel: Entity?
@@ -42,46 +43,62 @@ struct MaleModelView: View {
                 let maleEntity = await fvm.createMaleModel()
                 
                 femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                femaleEntity.position = SIMD3<Float>(0, -0.4, 0)
+                femaleEntity.position = SIMD3<Float>(0, -0.4, 0.3)
+                
+                maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
+                maleEntity.position = SIMD3<Float>(0, -0.4, 0.5)
                 
                 femaleModel = femaleEntity
                 maleModel = maleEntity
-                
-                if let buttonAttachments = attachments.entity(for: "button") {
-                    buttonAttachments.position = [0, -0.4, 0.2]
-                    femaleEntity.addChild(buttonAttachments)
-                    maleEntity.addChild(buttonAttachments)
-                }
                 
                 content.add(femaleEntity)
                 
             }update:{content, attachments in
                 
-                guard let male = maleModel, let female = femaleModel
+                guard let male = maleModel, let female = femaleModel, let button = attachments.entity(for: "button")
                 else{return}
+            
+                let selectedModel = fvm.genderSelect ? male : female
+                let otherModel = fvm.genderSelect ? female : male
                 
-                if !fvm.genderSelect{
-                    
-                    content.remove(male)
-                    content.add(female)
-                    
-                }else if fvm.genderSelect {
-                    
-                    
-                    content.remove(female)
-                    content.add(male)
-                    
-                }
+                if currentGenderIsMale != fvm.genderSelect {
+                       content.remove(otherModel)
+                       content.add(selectedModel)
+                   }
+                
+                button.position = fvm.simdPosition
+                button.components.set([BillboardComponent(),HoverEffectComponent()])
+                
+                if let target = selectedModel.findEntity(named: fvm.position) {
+                       target.addChild(button)
+                    let bounds = target.visualBounds(relativeTo: selectedModel)
+                        
+                        // Position the button above the mesh
+                        button.position = SIMD3<Float>(
+                            bounds.center.x,
+                            bounds.max.y + 0.2, // 2cm above top of mesh
+                            bounds.center.z
+                        )
+
+                       
+                       button.components.set([BillboardComponent(), HoverEffectComponent()])
+                       print("Button added to \(target.name)")
+                   }
                 
             }
             attachments: {
                 
                 Attachment(id: "button"){
                     Button{
-                        openWindow(id: "Control")
+                        
                     }label:{
-                        Text("Testing")
-                    }.background(Color.red)
+                        Text(fvm.position)
+                    }
+                        .toggleStyle(.button)
+                        .buttonStyle(.borderless)
+                        .labelStyle(.iconOnly)
+                        .padding(12)
+                        .glassBackgroundEffect(in: .rect(cornerRadius: 50))
                 }
                 
             }
@@ -129,32 +146,6 @@ struct MaleModelView: View {
                 openWindow(id: "WelcomeView")
             }
         }
-    }
-    
-    func addButton(in root: Entity){
-        if root.components[ModelComponent.self] != nil {
-            attachButton(to: root)
-        }
-        
-        for child in root.children {
-            addButton(in: child)
-        }
-    }
-
-    func attachButton(to entity: Entity){
-        
-        let buttonSize: Float = 0.03
-        let mesh = MeshResource.generateSphere(radius: buttonSize)
-        let material = SimpleMaterial(color: .red, isMetallic: false)
-        let buttonEntity = ModelEntity(mesh: mesh, materials: [material])
-        
-        buttonEntity.position = entity.position + [0,0,0.2]
-        buttonEntity.components.set(InputTargetComponent())
-        buttonEntity.components.set(CollisionComponent(shapes: [ShapeResource.generateSphere(radius: buttonSize)]))
-        
-        entity.addChild(buttonEntity)
-        buttonEntities.append(buttonEntity)
-        
     }
     
 }

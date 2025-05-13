@@ -48,10 +48,11 @@ struct MotionTextView: View {
             Button(fvm.isMoving ? "Stop" : "Start") {
                 if fvm.isMoving {
                     fvm.stopAnimation()
+                    fvm.isMoving = false
                 } else {
                     fvm.playAnimation()
+                    fvm.isMoving = true
                 }
-                fvm.isMoving.toggle()
             }
         }
         .onAppear(perform: setModel)

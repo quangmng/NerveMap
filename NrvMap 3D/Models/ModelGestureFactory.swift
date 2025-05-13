@@ -30,6 +30,8 @@ enum ModelGestureFactory {
         }
         selectedEntity.wrappedValue = event.entity
         fvm.highlightEntity(event.entity)
+        fvm.position = event.entity.name
+        fvm.simdPosition = event.entity.position
       }
   }
 
