@@ -44,8 +44,10 @@ struct MotionTextView: View {
     private func tabContent(title: String, setModel: @escaping () -> Void) -> some View {
         VStack {
             Text(title)
+                .font(.system(size: 30))
+                .fontWeight(.semibold)
 
-            Button(fvm.isMoving ? "Stop" : "Start") {
+            Button(action: {
                 if fvm.isMoving {
                     fvm.stopAnimation()
                     fvm.isMoving = false
@@ -53,6 +55,11 @@ struct MotionTextView: View {
                     fvm.playAnimation()
                     fvm.isMoving = true
                 }
+            }) {
+                Text(fvm.isMoving ? "Stop" : "Start")
+                    .font(.system(size: 26, weight: .bold))
+                    .padding()
+                    .cornerRadius(3)
             }
         }
         .onAppear(perform: setModel)

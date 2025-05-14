@@ -21,8 +21,8 @@ struct ImmersiveControl: View {
     var body: some View {
         VStack{
             Text("Environment")
-                .font(.extraLargeTitle)
-                .bold()
+                .font(.system(size:40))
+                .fontWeight(.heavy)
                 .padding()
                 .leading()
             HStack{
@@ -55,9 +55,11 @@ struct ImmersiveControl: View {
                             .overlay {
                                 VStack{
                                     Text("👁️")
+                                        .font(.system(size:32))
                                         .center()
                                     Text("Real-Life")
-                                        .font(.title)
+                                        .font(.system(size:26))
+                                        .fontWeight(.semibold)
                                         .center()
                                 }
                             }
@@ -92,9 +94,11 @@ struct ImmersiveControl: View {
                             .overlay {
                                 VStack{
                                     Text("🏥")
+                                        .font(.system(size:32))
                                         .center()
                                     Text("Hospital")
-                                        .font(.title)
+                                        .font(.system(size:26))
+                                        .fontWeight(.semibold)
                                         .center()
                                 }
                             }
@@ -123,32 +127,37 @@ struct ImmersiveControl: View {
             }
 
             Text("Condition")
-                .font(.extraLargeTitle)
-                .bold()
+                .font(.system(size:40))
+                .fontWeight(.heavy)
                 .leading()
                 .padding()
 
             TabView{
                 VStack{
                     Text("Normal")
-                        .font(.title)
+                        .font(.system(size:32))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 20)
                 }
                 .tag(0)
 
                 VStack{
                     Text("Herinated Disc")
-                        .font(.title)
+                        .font(.system(size:32))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 20)
                 }.tag(1)
             }.padding()
                 .background(Color.white.opacity(0.09))
-                .cornerRadius(20)
-                .frame(width: 500, height: 150)
+                .cornerRadius(30)
+                .frame(width: 500, height: 130)
                 .tabViewStyle(.page)
         }
+        .padding(25)
     }
 }
 #Preview(windowStyle: .automatic){
     ImmersiveControl()
-        .frame(width: 550, height: 500)
+        .frame(width: 550, height: 470)
         .environmentObject(FunctionViewModel())
 }
