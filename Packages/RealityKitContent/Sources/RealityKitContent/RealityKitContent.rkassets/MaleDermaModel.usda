@@ -10,17 +10,15 @@
 
 def Xform "Root"
 {
-    def "maledermabod" (
+    def "herniatedMale_derma_with_blend_base" (
         active = true
         customData = {
             float3 rotationEulerHint = (4.7123885, 0, 0)
         }
-        prepend references = @maledermabod.usdz@
+        prepend references = @herniatedMale-derma-with-blend-base.usdz@
     )
     {
         quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-1.3170323, 0.12211788, -2.2523844e-7)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

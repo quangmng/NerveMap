@@ -12,26 +12,15 @@ def Xform "Root"
         bindMaterialAs = "weakerThanDescendants"
     )
 
-    def "FemaleDModel" (
-        active = false
-        prepend references = @FemaleDModel.usdz@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "Male_derma_with_blend_base" (
+    def "herniatedMale_derma_with_blend_base" (
         active = true
         customData = {
             float3 rotationEulerHint = (4.7123885, 0, 0)
         }
-        prepend references = @Male-derma-with-blend-base.usdz@
+        prepend references = @herniatedMale-derma-with-blend-base.usdz@
     )
     {
         quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (1.7963119, 0.045837134, 8.9242846e-8)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

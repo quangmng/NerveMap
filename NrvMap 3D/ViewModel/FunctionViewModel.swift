@@ -93,7 +93,7 @@ class FunctionViewModel: ObservableObject {
     
     func createWalkingModel() async -> Entity{
             
-           guard let modelEntity = try? await Entity(named: "WalkFemale", in: realityKitContentBundle) else {
+           guard let modelEntity = try? await Entity(named: "MaleWalk", in: realityKitContentBundle) else {
                
                fatalError("Fail to load entity")
                
@@ -106,7 +106,7 @@ class FunctionViewModel: ObservableObject {
     
     func createSitToStandModel() async -> Entity{
         
-        guard let modelEntity = try? await Entity(named: "SitToStand", in: realityKitContentBundle) else {
+        guard let modelEntity = try? await Entity(named: "MaleSit", in: realityKitContentBundle) else {
             
             fatalError("Fail to load entity")
            
@@ -118,7 +118,7 @@ class FunctionViewModel: ObservableObject {
     
     func createStandToSitModel() async -> Entity{
         
-        guard let modelEntity = try? await Entity(named: "StandToSit", in: realityKitContentBundle) else {
+        guard let modelEntity = try? await Entity(named: "MaleStand", in: realityKitContentBundle) else {
             
             fatalError("Fail to load entity")
            

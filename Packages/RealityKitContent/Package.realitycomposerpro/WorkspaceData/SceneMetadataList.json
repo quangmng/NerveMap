@@ -23,10 +23,34 @@
       }
     ]
   },
+  "1C3235B9-477C-411A-ACDC-9E35702D4FA4" : {
+    "objectMetadataList" : [
+      [
+        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "21AD76A0-0900-4704-B9A1-6B2D243FDD97" : {
     "objectMetadataList" : [
       [
         "21AD76A0-0900-4704-B9A1-6B2D243FDD97",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "3257B7B5-371D-413A-A1C7-C953BD54415F" : {
+    "objectMetadataList" : [
+      [
+        "3257B7B5-371D-413A-A1C7-C953BD54415F",
         "Root"
       ],
       {
@@ -87,20 +111,20 @@
     "objectMetadataList" : [
       [
         "89B737BD-F55B-4C03-B97B-496F72FC5643",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "89B737BD-F55B-4C03-B97B-496F72FC5643",
         "Root",
         "SkySphere"
       ],
       {
         "disallowsFraming" : true,
         "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "89B737BD-F55B-4C03-B97B-496F72FC5643",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
         "isLocked" : false
       }
     ]
@@ -145,8 +169,7 @@
     "objectMetadataList" : [
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "Sphere_Right"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -154,7 +177,8 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "Sphere_Right"
       ],
       {
         "isExpanded" : true,
@@ -225,7 +249,9 @@
     "objectMetadataList" : [
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root"
+        "Root",
+        "GridMaterial",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -233,9 +259,19 @@
       },
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root",
-        "GridMaterial",
-        "GridMaterial"
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "FD359081-4AB5-42E3-995B-02002136E525" : {
+    "objectMetadataList" : [
+      [
+        "FD359081-4AB5-42E3-995B-02002136E525",
+        "Root"
       ],
       {
         "isExpanded" : true,
