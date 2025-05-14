@@ -24,11 +24,11 @@ struct NoteRowView: View {
             noteComponent
 
             RoundedRectangle(cornerRadius: 16)
-                .foregroundStyle(Color.gray)
+                .foregroundStyle(Color.orange )
                 .frame(width: 260, height: 100)
                 .overlay {
                     Text(Self.dateFormatter.string(from: note.dateCreated))
-                        .font(.system(size: 40))
+                        .font(.system(size: 40, weight: .bold))
                 }
                 .traling()
         }
@@ -50,7 +50,7 @@ extension NoteRowView {
         VStack(alignment: .leading, spacing: 25) {
             HStack(spacing: 20) {
                 RoundedRectangle(cornerRadius: 16)
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color.green)
                     .frame(width: 100, height: 100)
                     .overlay {
                         Text(note.position)
