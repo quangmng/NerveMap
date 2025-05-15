@@ -33,7 +33,7 @@
 		FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A22DBA013900ECC559 /* NoteListView.swift */; };
 		FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A32DBA013900ECC559 /* NoteRowView.swift */; };
 		FD9035C82DBA013900ECC559 /* CustomNavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A52DBA013900ECC559 /* CustomNavLink.swift */; };
-		FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A62DBA013900ECC559 /* ExpendButton.swift */; };
+		FD9035C92DBA013900ECC559 /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A62DBA013900ECC559 /* ExpandButton.swift */; };
 		FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A72DBA013900ECC559 /* HelpView.swift */; };
 		FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035A82DBA013900ECC559 /* HomeView.swift */; };
 		FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */; };
@@ -79,7 +79,7 @@
 		FD9035A22DBA013900ECC559 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		FD9035A32DBA013900ECC559 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
 		FD9035A52DBA013900ECC559 /* CustomNavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavLink.swift; sourceTree = "<group>"; };
-		FD9035A62DBA013900ECC559 /* ExpendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendButton.swift; sourceTree = "<group>"; };
+		FD9035A62DBA013900ECC559 /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		FD9035A72DBA013900ECC559 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		FD9035A82DBA013900ECC559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImmersiveView.swift; sourceTree = "<group>"; };
@@ -204,6 +204,7 @@
 				FD9035A12DBA013900ECC559 /* AddAnnotationVIew.swift */,
 				FD9035A22DBA013900ECC559 /* NoteListView.swift */,
 				FD9035A32DBA013900ECC559 /* NoteRowView.swift */,
+				FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -214,11 +215,10 @@
 				FD9035A02DBA013900ECC559 /* ModelView */,
 				FD9035A42DBA013900ECC559 /* Notes */,
 				FD9035A52DBA013900ECC559 /* CustomNavLink.swift */,
-				FD9035A62DBA013900ECC559 /* ExpendButton.swift */,
+				FD9035A62DBA013900ECC559 /* ExpandButton.swift */,
 				FD9035A72DBA013900ECC559 /* HelpView.swift */,
 				FD9035A82DBA013900ECC559 /* HomeView.swift */,
 				FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */,
-				FD9035AB2DBA013900ECC559 /* KnowledgeList.swift */,
 				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
 				FD9035AD2DBA013900ECC559 /* SearchView.swift */,
 				FD9035AE2DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift */,
@@ -343,7 +343,7 @@
 				FD9035C62DBA013900ECC559 /* NoteListView.swift in Sources */,
 				FD9035C72DBA013900ECC559 /* NoteRowView.swift in Sources */,
 				FD9035C82DBA013900ECC559 /* CustomNavLink.swift in Sources */,
-				FD9035C92DBA013900ECC559 /* ExpendButton.swift in Sources */,
+				FD9035C92DBA013900ECC559 /* ExpandButton.swift in Sources */,
 				FD9035CA2DBA013900ECC559 /* HelpView.swift in Sources */,
 				FD9035CB2DBA013900ECC559 /* HomeView.swift in Sources */,
 				FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */,

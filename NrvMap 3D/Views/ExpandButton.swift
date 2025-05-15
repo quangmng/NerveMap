@@ -1,5 +1,5 @@
 //
-//  HoverButton.swift
+//  ExpandButton.swift
 //  NrvMap 3D
 //
 //  Created by Ian So on 21/4/2025.
@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct ExpendButton: View {
+// a view with action and label -> button
+
+struct ExpandButton: View {
     let id: Int
     let systemImage: String
     let action: () -> Void
@@ -18,6 +20,19 @@ struct ExpendButton: View {
 
     var body: some View {
         HStack(spacing: 8) {
+//            Button {
+//                if expendButton == id {
+//                    expendButton = nil
+//                } else {
+//                    expendButton = id
+//                }
+//                action()
+//            } label: {
+//                Image(systemName: systemImage)
+//                    .font(.largeTitle)
+//                    .frame(width: 50, height: 50)
+//            }
+
             Button(action: {
                 if expendButton == id {
                     expendButton = nil
@@ -28,13 +43,18 @@ struct ExpendButton: View {
             }) {
                 Image(systemName: systemImage)
                     .font(.largeTitle)
+                    .frame(width: 50, height: 50)
+            }
+            .background {
+                Circle()
             }
 
             if expendButton == id {
                 ForEach(0..<extraButtons.count, id: \.self) { index in
                     Button(action: extraButtons[index].1) {
                         Image(systemName: extraButtons[index].0)
-                            .font(.title2)
+                            .font(.largeTitle)
+                            .frame(width: 50, height: 50)
                     }
                     .transition(.opacity)
                 }

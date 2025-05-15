@@ -51,6 +51,10 @@ struct NrvMap_3DApp: App {
         }
         .modelContainer(for: NoteData.self)
 
+        WindowGroup(id: "KnowledgeList") {
+            KnowledgeList()
+        }
+
         // Volumetric view for female model
         WindowGroup(id: "ModelDF") {
             FemaleModelView()
