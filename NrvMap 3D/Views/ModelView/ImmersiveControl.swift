@@ -54,9 +54,6 @@ struct ImmersiveControl: View {
                             .frame(width: 225, height: 100)
                             .overlay {
                                 VStack{
-                                    Text("👁️")
-                                        .font(.system(size:32))
-                                        .center()
                                     Text("Real-Life")
                                         .font(.system(size:26))
                                         .fontWeight(.semibold)
@@ -93,9 +90,6 @@ struct ImmersiveControl: View {
                             .frame(width: 225, height: 100)
                             .overlay {
                                 VStack{
-                                    Text("🏥")
-                                        .font(.system(size:32))
-                                        .center()
                                     Text("Hospital")
                                         .font(.system(size:26))
                                         .fontWeight(.semibold)
