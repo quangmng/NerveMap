@@ -45,9 +45,7 @@ struct ExpandButton: View {
                     .font(.largeTitle)
                     .frame(width: 50, height: 50)
             }
-            .background {
-                Circle()
-            }
+            
 
             if expendButton == id {
                 ForEach(0..<extraButtons.count, id: \.self) { index in

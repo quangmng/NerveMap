@@ -16,9 +16,18 @@ struct ButtonBoard: View {
     var body: some View {
         HStack(spacing: 10) {
             
+            Button {
+                
+            } label: {
+                Image(systemName: "book.fill")
+                    .font(.largeTitle)
+            }
+            
+
+            
             ExpandButton(id: 0, systemImage: fvm.genderSelect ? "figure.stand" : "figure.stand.dress", action: {fvm.genderSelect.toggle()}, extraButtons: [], expendButton: $fvm.expendButton)
-                .background(fvm.genderSelect ? Color.maleBule : Color.femalePink)
-                .cornerRadius(25)
+//                .background(fvm.genderSelect ? Color.maleBule : Color.femalePink)
+//                .cornerRadius(25)
                 .help("Gender")
             
             ExpandButton(id: 1, systemImage: "figure.walk.motion", action: {openWindow(id:"MotionWindow")}, extraButtons: [
