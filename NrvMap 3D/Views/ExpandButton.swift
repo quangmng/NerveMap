@@ -42,8 +42,13 @@ struct ExpandButton: View {
                 action()
             }) {
                 Image(systemName: systemImage)
-                    .font(.largeTitle)
-                    .frame(width: 50, height: 50)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .padding()
+                    .background {
+                        Circle().fill(Color.gray.opacity(0.6))
+                    }
             }
             
 
@@ -51,8 +56,13 @@ struct ExpandButton: View {
                 ForEach(0..<extraButtons.count, id: \.self) { index in
                     Button(action: extraButtons[index].1) {
                         Image(systemName: extraButtons[index].0)
-                            .font(.largeTitle)
-                            .frame(width: 50, height: 50)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .padding()
+                            .background {
+                                Circle().fill(Color.gray.opacity(0.6))
+                            }
                     }
                     .transition(.opacity)
                 }
