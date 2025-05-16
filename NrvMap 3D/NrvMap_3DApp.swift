@@ -38,6 +38,7 @@ struct NrvMap_3DApp: App {
             }
         }
         .windowStyle(.volumetric)
+        .defaultSize(width: 3000, height: 1600)
 
         WindowGroup(id: "HelpWindow"){
             HelpView()

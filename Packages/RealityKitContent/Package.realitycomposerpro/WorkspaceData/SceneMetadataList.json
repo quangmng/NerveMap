@@ -27,7 +27,47 @@
     "objectMetadataList" : [
       [
         "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
+        "Root",
+        "healthyMale_derma_with_blend_base",
+        "l2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
+        "Root",
+        "healthyMale_derma_with_blend_base"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "1EB2273C-70E8-4D19-9B71-445B3530F9A7" : {
+    "objectMetadataList" : [
+      [
+        "1EB2273C-70E8-4D19-9B71-445B3530F9A7",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1EB2273C-70E8-4D19-9B71-445B3530F9A7",
+        "Root",
+        "healthyDermaFemale_StandardWalk"
       ],
       {
         "isExpanded" : true,
@@ -51,6 +91,30 @@
     "objectMetadataList" : [
       [
         "3257B7B5-371D-413A-A1C7-C953BD54415F",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "47BADB08-B5BA-45D5-86DD-06A8969C2618" : {
+    "objectMetadataList" : [
+      [
+        "47BADB08-B5BA-45D5-86DD-06A8969C2618",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "60F2425F-43A2-4CFF-9788-0B7B504B905F" : {
+    "objectMetadataList" : [
+      [
+        "60F2425F-43A2-4CFF-9788-0B7B504B905F",
         "Root"
       ],
       {
@@ -178,7 +242,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "Sphere_Right"
+        "Sphere_Left"
       ],
       {
         "isExpanded" : true,
@@ -187,7 +251,7 @@
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
         "Root",
-        "Sphere_Left"
+        "Sphere_Right"
       ],
       {
         "isExpanded" : true,
@@ -197,6 +261,25 @@
   },
   "B8F43334-695F-418F-8B24-188D6B6AAA27" : {
     "objectMetadataList" : [
+      [
+        "B8F43334-695F-418F-8B24-188D6B6AAA27",
+        "Root",
+        "HealthyFemale_derma_with_blend_base"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B8F43334-695F-418F-8B24-188D6B6AAA27",
+        "Root",
+        "HealthyFemale_derma_with_blend_base",
+        "L5"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
       [
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root"

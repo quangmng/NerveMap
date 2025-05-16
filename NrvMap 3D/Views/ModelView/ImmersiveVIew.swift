@@ -38,15 +38,15 @@ struct ImmersiveView: View {
                 return
             }
             
-            let walkModel = await fvm.createWalkingModel()
+            let walkModel = await fvm.createModel(modelName: "MaleWalk")
             fvm.walkModel = walkModel
             walk = walkModel
             
-            let sitToStandModel = await fvm.createSitToStandModel()
+            let sitToStandModel = await fvm.createModel(modelName: "MaleSit")
             fvm.sitModel = sitToStandModel
             sitToStand = sitToStandModel
             
-            let standToSitModel = await fvm.createStandToSitModel()
+            let standToSitModel = await fvm.createModel(modelName: "MaleStand")
             fvm.standModel = standToSitModel
             standToSit = standToSitModel
             

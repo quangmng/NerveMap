@@ -41,7 +41,7 @@ class FunctionViewModel: ObservableObject {
             .set(
                 [InputTargetComponent(), HoverEffectComponent()]
             ) // Enable interaction
-        entity.generateCollisionShapes(recursive: true) // Ensure all children have collision
+        entity.generateCollisionShapes(recursive: true)
         for child in entity.children {
             enableInteraction(for: child)
         }
@@ -49,8 +49,8 @@ class FunctionViewModel: ObservableObject {
     
     func highlightEntity(_ entity: Entity) {
         guard var modelComponent = entity.components[ModelComponent.self] else { return }
-        let originalMaterials = modelComponent.materials // Save materials
-        let highlightMaterial = SimpleMaterial(color: .yellow, isMetallic: false) // Highlight effect
+        let originalMaterials = modelComponent.materials
+        let highlightMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
         
         modelComponent.materials = [highlightMaterial]
         entity.components[ModelComponent.self] = modelComponent
@@ -63,71 +63,32 @@ class FunctionViewModel: ObservableObject {
         }
     }
     
-    func createFemaleModel() async -> Entity{
-            
-           guard let modelEntity = try? await Entity(named: "FemaleDermaModel", in: realityKitContentBundle) else {
-               
-               fatalError("Fail to load entity")
-               
-            }
-            enableInteraction(for: modelEntity)
-            
-            
-            return modelEntity
-            
+    func createModel(modelName: String) async -> Entity {
+        guard let loadedEntity = try? await Entity(named: modelName, in: realityKitContentBundle) else {
+            fatalError("Failed to load entity")
         }
-    
-    func createMaleModel() async -> Entity{
-            
-           guard let modelEntity = try? await Entity(named: "MaleDermaModel", in: realityKitContentBundle) else {
-               
-               fatalError("Fail to load entity")
-               
-            }
-            enableInteraction(for: modelEntity)
-            
-            
-            return modelEntity
-            
-        }
-    
-    func createWalkingModel() async -> Entity{
-            
-           guard let modelEntity = try? await Entity(named: "MaleWalk", in: realityKitContentBundle) else {
-               
-               fatalError("Fail to load entity")
-               
-            }
-            enableInteraction(for: modelEntity)
-            
-            return modelEntity
-            
-        }
-    
-    func createSitToStandModel() async -> Entity{
-        
-        guard let modelEntity = try? await Entity(named: "MaleSit", in: realityKitContentBundle) else {
-            
-            fatalError("Fail to load entity")
-           
-        }
-        enableInteraction(for: modelEntity)
-        
-        return modelEntity
-    }
-    
-    func createStandToSitModel() async -> Entity{
-        
-        guard let modelEntity = try? await Entity(named: "MaleStand", in: realityKitContentBundle) else {
-            
-            fatalError("Fail to load entity")
-           
-        }
-        enableInteraction(for: modelEntity)
-        
-        return modelEntity
-    }
 
+        let parentEntity = Entity()
+
+        // Compute model's bounds
+        let bounds = loadedEntity.visualBounds(relativeTo: nil)
+        let center = bounds.center
+
+        // Shift children so center becomes pivot
+        for child in loadedEntity.children {
+            child.removeFromParent()
+            child.position -= center  // recenters around midpoint
+            parentEntity.addChild(child)
+        }
+
+        // Position the parent where the center used to be
+        parentEntity.position = center
+        let modelHeight = bounds.extents.y
+        parentEntity.position.y += modelHeight / 2
+        
+        enableInteraction(for: parentEntity)
+        return parentEntity
+    }
     
     func createSkybox() -> Entity?{
             
