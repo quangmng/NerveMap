@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		976420A32DD838F40070CF9D /* NerveAreas.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 976420A22DD838F40070CF9D /* NerveAreas.xcstrings */; };
 		C500A7212D983D18008734CA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C500A7202D983D18008734CA /* README.md */; };
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		976420A22DD838F40070CF9D /* NerveAreas.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = NerveAreas.xcstrings; sourceTree = "<group>"; };
 		C500A7202D983D18008734CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C5477C7E2D7F080100C09342 /* NrvMap 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NrvMap 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				FD9035962DBA013900ECC559 /* Preview Content */,
 				FD9035B22DBA013900ECC559 /* NrvMap_3DApp.swift */,
 				FD9035B32DBA013900ECC559 /* PersistenceController.swift */,
+				976420A22DD838F40070CF9D /* NerveAreas.xcstrings */,
 			);
 			path = "NrvMap 3D";
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				C500A7212D983D18008734CA /* README.md in Resources */,
 				C5477C9C2D7F093100C09342 /* .gitignore in Resources */,
 				FD9035D42DBA013900ECC559 /* FemaleDModel.usdz in Resources */,
+				976420A32DD838F40070CF9D /* NerveAreas.xcstrings in Resources */,
 				FD9035D52DBA013900ECC559 /* Preview Assets.xcassets in Resources */,
 				FD9035D62DBA013900ECC559 /* Assets.xcassets in Resources */,
 			);
@@ -473,6 +477,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = xros;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				XROS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -529,6 +534,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = xros;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 				XROS_DEPLOYMENT_TARGET = 2.2;
 			};

@@ -1,0 +1,365 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "C2" : {
+      "comment" : "Neck flexion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back of head and upper neck (occipital region)"
+          }
+        }
+      }
+    },
+    "C3" : {
+      "comment" : "Neck lateral flexion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lateral neck"
+          }
+        }
+      }
+    },
+    "C4" : {
+      "comment" : "Shoulder elevation (trapezius)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supraclavicular area, shoulder tip"
+          }
+        }
+      }
+    },
+    "C5" : {
+      "comment" : "Shoulder abduction",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lateral upper arm (deltoid area)"
+          }
+        }
+      }
+    },
+    "C6" : {
+      "comment" : "Elbow flexion, wrist extension",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lateral forearm and thumb"
+          }
+        }
+      }
+    },
+    "C7" : {
+      "comment" : "Elbow flexion, wrist extension",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Middle finger"
+          }
+        }
+      }
+    },
+    "C8" : {
+      "comment" : "Finger flexion/grip",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medial hand, small finger, and ring finger"
+          }
+        }
+      }
+    },
+    "L1" : {
+      "comment" : "Hip flexion (with L2)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groin"
+          }
+        }
+      }
+    },
+    "L2" : {
+      "comment" : "Hip flexion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anterior thigh"
+          }
+        }
+      }
+    },
+    "L3" : {
+      "comment" : "Knee extension (quadriceps)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medial thigh and knee"
+          }
+        }
+      }
+    },
+    "L4" : {
+      "comment" : "Ankle dorsiflexion (tibialis anterior)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medial leg, ankle, big toe"
+          }
+        }
+      }
+    },
+    "L5" : {
+      "comment" : "Toe extension, hip abduction",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lateral leg, dorsum of foot, toes 2–4"
+          }
+        }
+      }
+    },
+    "S1" : {
+      "comment" : "Plantarflexion, hip extension",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lateral foot, heel, little toe"
+          }
+        }
+      }
+    },
+    "S2" : {
+      "comment" : "Knee flexion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posterior thigh, upper calf"
+          }
+        }
+      }
+    },
+    "S3" : {
+      "comment" : "Sensory changes can reflect sacral nerve issues",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buttock area, genitals"
+          }
+        }
+      }
+    },
+    "S4" : {
+      "comment" : "Crucial for bowel/bladder innervation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perianal region"
+          }
+        }
+      }
+    },
+    "S5" : {
+      "comment" : "Lowest dermatome, important for sacral cord function",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perianal region (nearest the anus)"
+          }
+        }
+      }
+    },
+    "T1" : {
+      "comment" : "Finger abduction (interossei)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medial upper arm"
+          }
+        }
+      }
+    },
+    "T2" : {
+      "comment" : "No major myotome (intercostals, trunk muscles)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper inner arm and axilla"
+          }
+        }
+      }
+    },
+    "T3" : {
+      "comment" : "Trunk muscles (intercostals)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper chest"
+          }
+        }
+      }
+    },
+    "T4" : {
+      "comment" : "Trunk muscles (intercostals)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nipple line"
+          }
+        }
+      }
+    },
+    "T5" : {
+      "comment" : "Trunk muscles (intercostals)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chest just inferior to nipple line (5th intercostal space)"
+          }
+        }
+      }
+    },
+    "T6" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mid-chest"
+          }
+        }
+      }
+    },
+    "T7" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper abdomen"
+          }
+        }
+      }
+    },
+    "T8" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper abdomen"
+          }
+        }
+      }
+    },
+    "T9" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper abdomen"
+          }
+        }
+      }
+    },
+    "T10" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umbilicus"
+          }
+        }
+      }
+    },
+    "T11" : {
+      "comment" : "Trunk/abdominal muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lower abdomen (between umbilicus and groin)"
+          }
+        }
+      }
+    },
+    "T12" : {
+      "comment" : "Trunk muscles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper groin, suprapubic region"
+          }
+        }
+      }
+    },
+    "V" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face areas"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
