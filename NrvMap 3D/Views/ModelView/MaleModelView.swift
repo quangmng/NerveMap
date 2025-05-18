@@ -92,7 +92,10 @@ struct MaleModelView: View {
                     
                 }
                 attachments: {
-                    
+
+                    // MARK: - try this:
+//                    LearnMoreView()
+
                     Attachment(id: "button"){
                         Button{
                             

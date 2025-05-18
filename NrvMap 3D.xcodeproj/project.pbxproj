@@ -219,12 +219,12 @@
 			children = (
 				FD9035A02DBA013900ECC559 /* ModelView */,
 				FD9035A42DBA013900ECC559 /* Notes */,
+				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
 				FD9035A52DBA013900ECC559 /* CustomNavLink.swift */,
 				FD9035A62DBA013900ECC559 /* ExpandButton.swift */,
 				FD9035A72DBA013900ECC559 /* HelpView.swift */,
 				FD9035A82DBA013900ECC559 /* HomeView.swift */,
 				FD9035AA2DBA013900ECC559 /* DefaultImmersiveView.swift */,
-				FD9035AC2DBA013900ECC559 /* LaunchScreen.swift */,
 				FD9035AD2DBA013900ECC559 /* SearchView.swift */,
 				FD9035AE2DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift */,
 			);
