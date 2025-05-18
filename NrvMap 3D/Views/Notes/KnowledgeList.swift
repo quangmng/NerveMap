@@ -9,34 +9,36 @@ import SwiftUI
 
 struct KnowledgeList: View {
     var body: some View {
-        ScrollView{
-            List(allDermatomes) { derm in
-                HStack(alignment: .center) {
-                    Text(derm.nerveLevel)
-                        .font(.system(size: 30, weight: .bold))
+        List(allDermatomes) { derm in
+            HStack(spacing: 10) {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 100, height: 100)
+                    .overlay {
+                        Text(derm.nerveLevel)
+                            .font(.system(size: 45, weight: .bold))
+                            .foregroundColor(.black)
+                    }
+                
+                Spacer().frame(width: 20)
+                
+                VStack(alignment: .leading) {
+                    Text(derm.area)
+                        .font(.system(size: 35, weight: .semibold))
                         .foregroundColor(.primary)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20)
-                                .frame(width: 200, height: 200)
-                        }
-                    VStack {
-                        Text(derm.area)
-                            .font(.system(size: 25, weight: .semibold))
-                            .foregroundColor(.primary)
-                        Text(derm.clinicalNote)
-                            .font(.system(size: 20, weight: .regular))
-                            .foregroundColor(.primary)
-                    }
-                    .background {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 500, height: 600) // try
-                    }
+//                                .padding(.bottom, 10)
+                    Text(derm.clinicalNote)
+                        .font(.system(size: 30, weight: .regular))
+                        .foregroundColor(.primary)
+                        .lineLimit(3)  // Limit the clinical note lines to make it cleaner
+                        .truncationMode(.tail)  // Truncate long text
                 }
             }
         }
+        //        .listStyle(PlainListStyle())
     }
 }
 
 #Preview {
     KnowledgeList()
 }
+

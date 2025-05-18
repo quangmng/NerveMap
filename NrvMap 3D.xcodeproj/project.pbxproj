@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		976420A32DD838F40070CF9D /* NerveAreas.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 976420A22DD838F40070CF9D /* NerveAreas.xcstrings */; };
+		97D86B3E2DD9A3B800D03E7B /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D86B3D2DD9A3B800D03E7B /* LearnMoreView.swift */; };
 		C500A7212D983D18008734CA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C500A7202D983D18008734CA /* README.md */; };
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		976420A22DD838F40070CF9D /* NerveAreas.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = NerveAreas.xcstrings; sourceTree = "<group>"; };
+		97D86B3D2DD9A3B800D03E7B /* LearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreView.swift; sourceTree = "<group>"; };
 		C500A7202D983D18008734CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C5477C7E2D7F080100C09342 /* NrvMap 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NrvMap 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				FD90359D2DBA013900ECC559 /* ImmersiveControl.swift */,
 				FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */,
 				FD09D7D42DCB1A4C0047B141 /* MaleModelView.swift */,
+				97D86B3D2DD9A3B800D03E7B /* LearnMoreView.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				FD9035CD2DBA013900ECC559 /* DefaultImmersiveView.swift in Sources */,
 				FD9035CE2DBA013900ECC559 /* KnowledgeList.swift in Sources */,
 				FD9035CF2DBA013900ECC559 /* LaunchScreen.swift in Sources */,
+				97D86B3E2DD9A3B800D03E7B /* LearnMoreView.swift in Sources */,
 				FD9035D02DBA013900ECC559 /* SearchView.swift in Sources */,
 				FD9035D12DBA013900ECC559 /* ToggleImmersiveSpaceButton.swift in Sources */,
 				FD9035D22DBA013900ECC559 /* NrvMap_3DApp.swift in Sources */,
