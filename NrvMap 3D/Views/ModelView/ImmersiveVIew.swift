@@ -18,14 +18,17 @@ struct ImmersiveView: View {
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
     @State var initialScale: SIMD3<Float>? = nil
+    @State private var currentGenderIsMale: Bool? = nil
     
     @StateObject var noteVM = NoteViewModel()
     @EnvironmentObject var fvm: FunctionViewModel
     
-    @State var modelEntity: Entity?
-    @State var standToSit: Entity?
-    @State var sitToStand: Entity?
-    @State var walk: Entity?
+    @State private var currentRotation = simd_quatf(angle: 0, axis: [0, 1, 0])
+    @State private var currentScale: Float = 1.0
+    @State private var currentPosition = SIMD3<Float>(0, 0, -1)
+    
+    @State var femaleModel: Entity?
+    @State var maleModel: Entity?
     
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     
@@ -38,63 +41,29 @@ struct ImmersiveView: View {
                 return
             }
             
-            let walkModel = await fvm.createModel(modelName: "MaleWalk")
-            fvm.walkModel = walkModel
-            walk = walkModel
+            let femaleEntity = await fvm.createModel(modelName: "FemaleDermaModel")
+            let maleEntity = await fvm.createModel(modelName: "MaleDermaModel")
             
-            let sitToStandModel = await fvm.createModel(modelName: "MaleSit")
-            fvm.sitModel = sitToStandModel
-            sitToStand = sitToStandModel
+            femaleModel = femaleEntity
+            maleModel = maleEntity
             
-            let standToSitModel = await fvm.createModel(modelName: "MaleStand")
-            fvm.standModel = standToSitModel
-            standToSit = standToSitModel
+            content.add(femaleEntity)
             
             if fvm.isMix == false{
                 content.add(skyboxEntity)
             }
 
-            
-            walkModel.position = [0,0,-1]
-            sitToStandModel.position = [0,0,-1]
-            standToSitModel.position = [0,0,-1]
-            content.add(walkModel)
-
         }update:{ content, attachments in
             
-            guard let walkModel = walk, let sitModel = sitToStand, let standModel = standToSit
+            guard let male = maleModel, let female = femaleModel, let button = attachments.entity(for: "button")
             else{return}
             
-            if fvm.showSit == true {
-    
-                fvm.worldAnchor.addChild(sitModel)
-                fvm.worldAnchor.removeChild(walkModel)
-                fvm.worldAnchor.removeChild(standModel)
-                
-                content.remove(walkModel)
-                content.remove(standModel)
-                content.add(sitModel)
-                
-            }else if fvm.showWalk == true{
-                
-                fvm.worldAnchor.addChild(walkModel)
-                fvm.worldAnchor.removeChild(sitModel)
-                fvm.worldAnchor.removeChild(standModel)
-        
-                content.remove(sitModel)
-                content.remove(standModel)
-                content.add(walkModel)
-                
-            }else if fvm.showStand == true{
-                
-                fvm.worldAnchor.addChild(standModel)
-                fvm.worldAnchor.removeChild(walkModel)
-                fvm.worldAnchor.removeChild(sitModel)
-                
-                content.remove(sitModel)
-                content.remove(walkModel)
-                content.add(standModel)
-                
+            let selectedModel = fvm.genderSelect ? male : female
+            let otherModel = fvm.genderSelect ? female : male
+            
+            if currentGenderIsMale != fvm.genderSelect {
+                content.remove(otherModel)
+                content.add(selectedModel)
             }
             
             
@@ -102,6 +71,48 @@ struct ImmersiveView: View {
             
             
         }
+        .gesture(
+                   DragGesture()
+                    .targetedToAnyEntity()
+                       .onChanged { value in
+                           guard let entityF = femaleModel, let entityM = maleModel else { return }
+
+                           // Convert drag delta into radians
+                           let xRotation = Float(value.translation.height) * 0.005
+                           let yRotation = Float(value.translation.width) * 0.005
+
+                           // Create new quaternions for each axis
+                           let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
+                           let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
+
+                           // Combine with previous rotation
+                           entityF.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
+                           
+                           entityM.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
+                       }
+                       .onEnded { value in
+                           // Save final rotation for continuous spinning
+                           let xRotation = Float(value.translation.height) * 0.005
+                           let yRotation = Float(value.translation.width) * 0.005
+
+                           let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
+                           let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
+
+                           currentRotation = simd_normalize(yQuat * xQuat * currentRotation)
+                       }
+               )
+        .simultaneousGesture(
+                   MagnificationGesture()
+                       .onChanged { value in
+                           guard let entityF = femaleModel, let entityM = maleModel else { return }
+                           let scale = Float(value)
+                           entityF.transform.scale = [scale, scale, scale]
+                           entityM.transform.scale = [scale, scale, scale]
+                       }
+                       .onEnded { value in
+                           currentScale = Float(value)
+                       }
+               )
         .simultaneousGesture(
             ModelGestureFactory.tapGesture(
                 fvm: fvm,
@@ -109,25 +120,6 @@ struct ImmersiveView: View {
                 openWindow: {id in openWindow(id: id)}
             )
         )
-        .simultaneousGesture(
-            ModelGestureFactory.dragGesture(
-                fvm: fvm,
-                selectedEntity: $selectedEntity
-            )
-        )
-        .simultaneousGesture(
-            ModelGestureFactory.scaleGesture(
-                fvm: fvm,
-                initialScale: $initialScale
-            )
-        )
-        .simultaneousGesture(
-            ModelGestureFactory.rotationGesture(
-                fvm: fvm,
-                angle: $angle
-            )
-        )
-        
     }
 }
 

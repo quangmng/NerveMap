@@ -27,16 +27,6 @@
     "objectMetadataList" : [
       [
         "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
-        "Root",
-        "healthyMale_derma_with_blend_base",
-        "l2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
         "Root"
       ],
       {
@@ -46,7 +36,7 @@
       [
         "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
         "Root",
-        "healthyMale_derma_with_blend_base"
+        "Male_derma_with_blend_base"
       ],
       {
         "isExpanded" : true,
@@ -175,20 +165,20 @@
     "objectMetadataList" : [
       [
         "89B737BD-F55B-4C03-B97B-496F72FC5643",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "89B737BD-F55B-4C03-B97B-496F72FC5643",
         "Root",
         "SkySphere"
       ],
       {
         "disallowsFraming" : true,
         "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "89B737BD-F55B-4C03-B97B-496F72FC5643",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
         "isLocked" : false
       }
     ]
@@ -233,7 +223,8 @@
     "objectMetadataList" : [
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "Sphere_Right"
       ],
       {
         "isExpanded" : true,
@@ -250,8 +241,7 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "Sphere_Right"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -264,17 +254,7 @@
       [
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root",
-        "HealthyFemale_derma_with_blend_base"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "B8F43334-695F-418F-8B24-188D6B6AAA27",
-        "Root",
-        "HealthyFemale_derma_with_blend_base",
-        "L5"
+        "HealthyFemale_derma_with_blend_baseFix"
       ],
       {
         "isExpanded" : true,
@@ -332,9 +312,7 @@
     "objectMetadataList" : [
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root",
-        "GridMaterial",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -342,7 +320,9 @@
       },
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root"
+        "Root",
+        "GridMaterial",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,

@@ -18,19 +18,13 @@ struct MaleModelView: View {
     @StateObject var nvm = NoteViewModel()
     @Environment(\.openWindow) public var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
-    @State private var angle = Angle(degrees: 1.0)
     @State private var currentGenderIsMale: Bool? = nil
 
     @State var femaleModel: Entity?
     @State var maleModel: Entity?
 
     @State private var selectedEntity: Entity?
-    @State private var originalTransform: Transform?
     @StateObject var noteVM = NoteViewModel()
-    @State var initialScale: SIMD3<Float>? = nil
-    @State private var AnnotationAnchor = AnchorEntity()
-    let meshName: [ModelMesh] = [ModelMesh(name: "C1"), ModelMesh(name: "C2")]
-    @State private var buttonEntities: [Entity] = []
     
     @State private var currentRotation = simd_quatf(angle: 0, axis: [0, 1, 0])
     @State private var currentScale: Float = 1.0
@@ -41,7 +35,7 @@ struct MaleModelView: View {
     var body: some View {
                 //3D model generation
         HStack{
-            GeometryReader3D { geometry in
+           
                 RealityView{ content, attachments in
                     
                     let femaleEntity = await fvm.createModel(modelName: "FemaleDermaModel")
@@ -71,23 +65,14 @@ struct MaleModelView: View {
                         content.add(selectedModel)
                     }
                     
-                    button.position = fvm.simdPosition
-                    button.components.set([BillboardComponent(),HoverEffectComponent()])
-                    
                     if let target = selectedModel.findEntity(named: fvm.position) {
-                        target.addChild(button)
                         let bounds = target.visualBounds(relativeTo: selectedModel)
-                        
-                        // Position the button above the mesh
-                        button.position = SIMD3<Float>(
-                            bounds.center.x,
-                            bounds.max.y + 0.2, // 2cm above top of mesh
-                            bounds.center.z
-                        )
-                        
                         
                         button.components.set([BillboardComponent(), HoverEffectComponent()])
                         print("Button added to \(target.name)")
+                        
+                        button.position = SIMD3<Float>(x: -0.5, y: -0.5, z: -0.1)
+                        target.addChild(button)
                     }
                     
                 }
@@ -97,20 +82,8 @@ struct MaleModelView: View {
 //                    LearnMoreView()
 
                     Attachment(id: "button"){
-                        Button{
-                            
-                        }label:{
-                            Text(fvm.position)
-                        }
-                        .toggleStyle(.button)
-                        .buttonStyle(.borderless)
-                        .labelStyle(.iconOnly)
-                        .padding(12)
-                        .glassBackgroundEffect(in: .rect(cornerRadius: 50))
+                        LearnMoreView()
                     }
-                    
-                }
-                
             }
             
             // MARK: -Gestures for model
@@ -165,24 +138,6 @@ struct MaleModelView: View {
                 )
             )
             
-//            .simultaneousGesture(
-//                ModelGestureFactory.dragGesture(
-//                    fvm: fvm,
-//                    selectedEntity: $selectedEntity
-//                )
-//            )
-//            .simultaneousGesture(
-//                ModelGestureFactory.scaleGesture(
-//                    fvm: fvm,
-//                    initialScale: $initialScale
-//                )
-//            )
-//            .simultaneousGesture(
-//                ModelGestureFactory.rotationGesture(
-//                    fvm: fvm,
-//                    angle: $angle
-//                )
-//            )
             .background{
                 if fvm.isAnnotationMode == true {
                     Color.black.opacity(0.5)
