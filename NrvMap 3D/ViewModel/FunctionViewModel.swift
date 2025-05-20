@@ -20,12 +20,17 @@ class FunctionViewModel: ObservableObject {
     
     @Published var isImmersive: Bool = false
     @Published var isMoving: Bool = false
-    @Published var showStand: Bool = false
+    @Published var showBox: Bool = false
+    
     @Published var showSit: Bool = false
     @Published var showWalk: Bool = true
     @Published var genderSelect: Bool = false
     @Published var isAnnotationMode = false
-    
+    @Published var isMale: Bool = false
+    @Published var currentGenderIsMale: Bool? = nil
+
+    @Published var femaleModel: Entity?
+    @Published var maleModel: Entity?
     @Published var modelEntity: Entity?
     @Published var selectedEntity: Entity?
     @Published var sitModel: Entity?
@@ -35,6 +40,10 @@ class FunctionViewModel: ObservableObject {
     
     @Published var position: String = ""
     @Published var simdPosition: SIMD3<Float> = [0,0,0]
+    
+    var blinkingTimers: [Entity: Timer] = [:]
+    var originalMaterials: [Entity: [RealityKit.Material]] = [:]
+
     
     func enableInteraction(for entity: Entity) {
         entity.components
@@ -111,6 +120,45 @@ class FunctionViewModel: ObservableObject {
             return skyBoxEntity
             
         }
+    
+    func startBlinkingHighlight(for entity: Entity, interval: TimeInterval = 0.5) {
+        guard blinkingTimers[entity] == nil,
+              var modelComponent = entity.components[ModelComponent.self] else { return }
+
+        // Save original materials if not already saved
+        if originalMaterials[entity] == nil {
+            originalMaterials[entity] = modelComponent.materials
+        }
+
+        let highlightMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
+
+        var isOn = false
+
+        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak entity] _ in
+            guard let entity = entity,
+                  var model = entity.components[ModelComponent.self],
+                  let original = self.originalMaterials[entity] else { return }
+
+            model.materials = isOn ? original : [highlightMaterial]
+            entity.components[ModelComponent.self] = model
+            isOn.toggle()
+        }
+
+        blinkingTimers[entity] = timer
+    }
+
+    func stopBlinkingHighlight(for entity: Entity) {
+        guard let timer = blinkingTimers[entity],
+              var modelComponent = entity.components[ModelComponent.self],
+              let original = originalMaterials[entity] else { return }
+
+        timer.invalidate()
+        blinkingTimers.removeValue(forKey: entity)
+        originalMaterials.removeValue(forKey: entity)
+
+        modelComponent.materials = original
+        entity.components[ModelComponent.self] = modelComponent
+    }
 
     func playAnimation() {
         if let entity = modelEntity, !isMoving {

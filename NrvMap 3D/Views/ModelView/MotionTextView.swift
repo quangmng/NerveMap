@@ -17,7 +17,7 @@ struct MotionTextView: View {
             tabContent(title: "🚶🏼Walking", setModel: {
                 fvm.showWalk = true
                 fvm.showSit = false
-                fvm.showStand = false
+                
                 fvm.modelEntity = fvm.walkModel
             })
             .tag(0)
@@ -25,7 +25,7 @@ struct MotionTextView: View {
             tabContent(title: "🧍🏻Stand Up", setModel: {
                 fvm.showWalk = false
                 fvm.showSit = true
-                fvm.showStand = false
+                
                 fvm.modelEntity = fvm.sitModel
             })
             .tag(1)
@@ -33,7 +33,7 @@ struct MotionTextView: View {
             tabContent(title: "🪑Sitting", setModel: {
                 fvm.showWalk = false
                 fvm.showSit = false
-                fvm.showStand = true
+                
                 fvm.modelEntity = fvm.standModel
             })
             .tag(2)

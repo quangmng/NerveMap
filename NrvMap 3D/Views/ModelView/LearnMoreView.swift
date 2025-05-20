@@ -11,6 +11,7 @@ struct LearnMoreView: View {
     
     @State private var selectedNerveLevel: String? = nil
     @State private var selectedArea: String? = nil
+    @EnvironmentObject var fvm: FunctionViewModel
 
     // Compute unique first-letter categories (e.g., V, C, T, L, S)
     private var nerveLevelPrefixes: [String] {
@@ -69,6 +70,21 @@ struct LearnMoreView: View {
                                 Button {
                                     withAnimation {
                                         selectedArea = dermatome.nerveLevel
+                                        
+                                        if fvm.selectedEntity != nil {
+                                            fvm.stopBlinkingHighlight(for: fvm.selectedEntity!)
+                                        }
+                                        
+                                        if fvm.isMale == false {
+                                            fvm.selectedEntity = fvm.femaleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
+                                            fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
+                                            
+                                        }
+                                        else if fvm.isMale == true{
+                                            fvm.selectedEntity = fvm.maleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
+                                            fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
+                                        }
+                                        print(fvm.selectedEntity?.name)
                                     }
                                 } label: {
                                     Text(dermatome.nerveLevel)
@@ -123,12 +139,14 @@ struct LearnMoreView: View {
                     .transition(.opacity)
                 }
             }
-        }
+        }.onDisappear{if fvm.selectedEntity != nil {
+            fvm.stopBlinkingHighlight(for: fvm.selectedEntity!)
+        }}
         .padding()
     }
 }
 
-#Preview {
-    LearnMoreView()
-}
+//#Preview {
+//    LearnMoreView()
+//}
 

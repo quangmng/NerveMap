@@ -13,6 +13,7 @@
 		C5477C842D7F080100C09342 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = C5477C832D7F080100C09342 /* RealityKitContent */; };
 		C5477C9C2D7F093100C09342 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C5477C9B2D7F092A00C09342 /* .gitignore */; };
 		C5B2812D2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5B2812B2DA78C1B004CC23D /* NoteCoreData.xcdatamodeld */; };
+		D566D6692DDC48F100531A46 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D566D6682DDC48EB00531A46 /* InfoView.swift */; };
 		FD09D7612DC722CC0047B141 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7602DC722CC0047B141 /* NoteData.swift */; };
 		FD09D7CF2DC86A8A0047B141 /* ButtonBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */; };
 		FD09D7D32DC9D62E0047B141 /* ModelGestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */; };
@@ -59,6 +60,7 @@
 		C5477C822D7F080100C09342 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		C5477C9B2D7F092A00C09342 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C5B2812C2DA78C1B004CC23D /* NoteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteCoreData.xcdatamodel; sourceTree = "<group>"; };
+		D566D6682DDC48EB00531A46 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FD09D7602DC722CC0047B141 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		FD09D7CE2DC86A8A0047B141 /* ButtonBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBoard.swift; sourceTree = "<group>"; };
 		FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelGestureFactory.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				FD90359F2DBA013900ECC559 /* ImmersiveVIew.swift */,
 				FD09D7D42DCB1A4C0047B141 /* MaleModelView.swift */,
 				97D86B3D2DD9A3B800D03E7B /* LearnMoreView.swift */,
+				D566D6682DDC48EB00531A46 /* InfoView.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */,
 				FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */,
 				FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */,
+				D566D6692DDC48F100531A46 /* InfoView.swift in Sources */,
 				FD9035C02DBA013900ECC559 /* FemaleModelView.swift in Sources */,
 				FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */,
 				FD9035C22DBA013900ECC559 /* ImmersiveControl.swift in Sources */,

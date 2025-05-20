@@ -15,6 +15,7 @@ struct NrvMap_3DApp: App {
     @State private var appModel = AppModel()
     @StateObject private var noteVM = NoteViewModel()
     @StateObject var fvm = FunctionViewModel()
+    @State private var name: String = ""
 
     let persistenceController = PersistenceController.shared
 
@@ -97,8 +98,9 @@ struct NrvMap_3DApp: App {
         .defaultSize(width: 400, height: 600)
 //        let container = ModelContainer(for: [NoteData.self])
 
-        WindowGroup(id: "KnowledgeList") {
-            KnowledgeList()
+        WindowGroup(id: "LearnMore") {
+            LearnMoreView()
+                .environmentObject(fvm)
         }
 
         WindowGroup(id: "MotionWindow") {
@@ -113,6 +115,11 @@ struct NrvMap_3DApp: App {
                 .environmentObject(fvm)
         }
         .defaultSize(width: 500, height: 200)
+        
+        WindowGroup (id: "InfoWindow"){
+            InfoView(name: fvm.selectedEntity?.name ?? "")
+                .environmentObject(fvm)
+        }.defaultSize(width: 600, height: 700)
 
     }
 }
