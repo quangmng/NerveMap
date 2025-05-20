@@ -27,37 +27,17 @@
     "objectMetadataList" : [
       [
         "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
-        "Root",
-        "Male_derma_with_blend_base",
-        "t1",
-        "t1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
-        "Root",
-        "Male_derma_with_blend_base",
-        "t1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
-        "Root",
-        "Male_derma_with_blend_base"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1C3235B9-477C-411A-ACDC-9E35702D4FA4",
+        "Root",
+        "Male_derma_with_blend_base",
+        "face"
       ],
       {
         "isExpanded" : true,
@@ -196,20 +176,20 @@
     "objectMetadataList" : [
       [
         "89B737BD-F55B-4C03-B97B-496F72FC5643",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "89B737BD-F55B-4C03-B97B-496F72FC5643",
         "Root",
         "SkySphere"
       ],
       {
         "disallowsFraming" : true,
         "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "89B737BD-F55B-4C03-B97B-496F72FC5643",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
         "isLocked" : false
       }
     ]
@@ -263,8 +243,7 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "Sphere_Left"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -272,7 +251,8 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "Sphere_Left"
       ],
       {
         "isExpanded" : true,
@@ -286,8 +266,15 @@
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root",
         "HealthyFemale_derma_with_blend_baseFix",
-        "S1",
-        "s1"
+        "Face"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B8F43334-695F-418F-8B24-188D6B6AAA27",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -297,7 +284,7 @@
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root",
         "HealthyFemale_derma_with_blend_baseFix",
-        "T1"
+        "C3"
       ],
       {
         "isExpanded" : true,
@@ -311,35 +298,6 @@
       {
         "isExpanded" : true,
         "isLocked" : false
-      },
-      [
-        "B8F43334-695F-418F-8B24-188D6B6AAA27",
-        "Root",
-        "HealthyFemale_derma_with_blend_baseFix",
-        "T1",
-        "t1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "B8F43334-695F-418F-8B24-188D6B6AAA27",
-        "Root",
-        "HealthyFemale_derma_with_blend_baseFix",
-        "S1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "B8F43334-695F-418F-8B24-188D6B6AAA27",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
       }
     ]
   },
@@ -347,8 +305,7 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -356,7 +313,8 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,

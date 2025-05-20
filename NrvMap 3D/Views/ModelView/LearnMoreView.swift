@@ -75,20 +75,20 @@ struct LearnMoreView: View {
                                         withAnimation {
                                             selectedArea = dermatome.nerveLevel
                                             
-                                            //                                        if fvm.selectedEntity != nil {
-                                            //                                            fvm.stopBlinkingHighlight(for: fvm.selectedEntity!)
-                                            //                                        }
-                                            //
-                                            //                                        if fvm.isMale == false {
-                                            //                                            fvm.selectedEntity = fvm.femaleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
-                                            //                                            fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
-                                            //
-                                            //                                        }
-                                            //                                        else if fvm.isMale == true{
-                                            //                                            fvm.selectedEntity = fvm.maleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
-                                            //                                            fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
-                                            //                                        }
-                                            //                                        print(fvm.selectedEntity?.name)
+                                                                                    if fvm.selectedEntity != nil {
+                                                                                        fvm.stopBlinkingHighlight(for: fvm.selectedEntity!)
+                                                                                    }
+                                            
+                                                                                    if fvm.isMale == false {
+                                                                                        fvm.selectedEntity = fvm.femaleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
+                                                                                        fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
+                                            
+                                                                                    }
+                                                                                    else if fvm.isMale == true{
+                                                                                        fvm.selectedEntity = fvm.maleModel?.findEntity(named: dermatome.nerveLevel.lowercased())
+                                                                                        fvm.startBlinkingHighlight(for: fvm.selectedEntity!)
+                                                                                    }
+                                                                                    print(fvm.selectedEntity?.name)
                                         }
                                     } label: {
                                         Text(dermatome.nerveLevel)

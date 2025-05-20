@@ -21,8 +21,10 @@ struct InfoView: View {
                         .leading()
                         .padding()
                     
-                    Text("Location: Outer hip → lateral thigh → front of shin → top of the foot → big toe, Function: Sensory input, ankle dorsiflexion, and big toe movement, Associated Nerve: L5 spinal nerve")
-                        .font(.title)
+                    Text("\(selectedArea.area)")
+                        .font(.largeTitle)
+                        .leading()
+                        .padding()
                     
                     Text("In Case of Herniated Disc (L4-L5)")
                         .font(.extraLargeTitle)
@@ -31,8 +33,10 @@ struct InfoView: View {
                     
                     Image("")
                     
-                    Text("Location: Outer hip → lateral thigh → front of shin → top of the foot → big toe, Function: Sensory input, ankle dorsiflexion, and big toe movement, Associated Nerve: L5 spinal nerve")
-                        .font(.title)
+                    Text("\(selectedArea.clinicalNote)")
+                        .font(.largeTitle)
+                        .leading()
+                        .padding()
                     
                 }.navigationTitle("Dermatome Level")
                 
