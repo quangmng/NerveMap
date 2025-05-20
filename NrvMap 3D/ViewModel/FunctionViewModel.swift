@@ -43,7 +43,7 @@ class FunctionViewModel: ObservableObject {
     
     var blinkingTimers: [Entity: Timer] = [:]
     var originalMaterials: [Entity: [RealityKit.Material]] = [:]
-
+    var cachedOriginalMaterials: [ObjectIdentifier: [RealityKit.Material]] = [:]
     
     func enableInteraction(for entity: Entity) {
         entity.components
@@ -56,19 +56,28 @@ class FunctionViewModel: ObservableObject {
         }
     }
     
-    func highlightEntity(_ entity: Entity) {
+    func highlightEntity(_ entity: Entity, duration: TimeInterval = 1.0) {
         guard var modelComponent = entity.components[ModelComponent.self] else { return }
-        let originalMaterials = modelComponent.materials
+        let id = ObjectIdentifier(entity)
+
+        // Cache original materials only if not already cached
+        if cachedOriginalMaterials[id] == nil {
+            cachedOriginalMaterials[id] = modelComponent.materials
+        }
+
+        // Apply highlight material
         let highlightMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
-        
         modelComponent.materials = [highlightMaterial]
         entity.components[ModelComponent.self] = modelComponent
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            if var updatedComponent = entity.components[ModelComponent.self] {
-                updatedComponent.materials = originalMaterials
-                entity.components[ModelComponent.self] = updatedComponent
-            }
+
+        // Schedule return to original materials
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [self] in
+            guard var updatedComponent = entity.components[ModelComponent.self],
+                  let original = cachedOriginalMaterials[id] else { return }
+
+            updatedComponent.materials = original
+            entity.components[ModelComponent.self] = updatedComponent
+            cachedOriginalMaterials.removeValue(forKey: id)
         }
     }
     
