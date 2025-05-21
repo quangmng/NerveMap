@@ -14,6 +14,7 @@ import SwiftData
 struct ImmersiveView: View {
     
     @Environment(\.openWindow) public var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     @State private var angle = Angle(degrees: 1.0)
     @State private var selectedEntity: Entity?
     @State private var originalTransform: Transform?
@@ -47,10 +48,6 @@ struct ImmersiveView: View {
             maleEntity.position = SIMD3<Float>(x: -0.7, y: 0.7, z: -1)
             maleEntity.scale = [1,1,1]
             
-            let box = ModelEntity(mesh: .generateSphere(radius: 0.1), materials: [SimpleMaterial(color: .white, isMetallic: true)])
-            box.components.set(InputTargetComponent())
-            box.components.set(CollisionComponent(shapes: [.generateSphere(radius: 0.2)]))
-            
             fvm.femaleModel = femaleEntity
             fvm.maleModel = maleEntity
             
@@ -73,21 +70,6 @@ struct ImmersiveView: View {
                 content.add(selectedModel)
             }
             
-            let box = ModelEntity(mesh: .generateSphere(radius: 0.1), materials: [SimpleMaterial(color: .white, isMetallic: true)])
-            box.components.set(InputTargetComponent())
-            box.components.set(CollisionComponent(shapes: [.generateSphere(radius: 0.2)]))
-            box.position.x = 0.7
-            box.position.y = 0.5
-            
-            if fvm.showBox == true{
-                content.add(box)
-                selectedModel.addChild(box)
-            }else if fvm.showBox == false{
-                content.remove(box)
-                selectedModel.removeChild(box)
-            }
-            
-            
         }attachments:{
             
             
@@ -97,31 +79,35 @@ struct ImmersiveView: View {
                 .targetedToAnyEntity()
                 .onChanged { value in
                     guard let entityF = fvm.femaleModel, let entityM = fvm.maleModel else { return }
-
+                    
                     // Convert drag delta into radians
-                    let xRotation = Float(value.translation.height) * 0.005
-                    let yRotation = Float(value.translation.width) * 0.005
-
-                    // Create new quaternions for each axis
-                    let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
-                    let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
-
-                    // Combine with previous rotation
-                    entityF.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
-                    entityM.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
+                    if fvm.showBox == true {}else{
+                        let xRotation = Float(value.translation.height) * 0.005
+                        let yRotation = Float(value.translation.width) * 0.005
+                        
+                        // Create new quaternions for each axis
+                        let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
+                        let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
+                        
+                        // Combine with previous rotation
+                        entityF.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
+                        entityM.transform.rotation = simd_normalize(yQuat * xQuat * currentRotation)
+                    }
                 }
                 .onEnded { value in
-                    // Save final rotation for continuous spinning
-                    let xRotation = Float(value.translation.height) * 0.005
-                    let yRotation = Float(value.translation.width) * 0.005
-
-                    let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
-                    let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
-
-                    currentRotation = simd_normalize(yQuat * xQuat * currentRotation)
+                    if fvm.showBox == true {}else{
+                        
+                        // Save final rotation for continuous spinning
+                        let xRotation = Float(value.translation.height) * 0.005
+                        let yRotation = Float(value.translation.width) * 0.005
+                        
+                        let xQuat = simd_quatf(angle: xRotation, axis: [1, 0, 0])
+                        let yQuat = simd_quatf(angle: yRotation, axis: [0, 1, 0])
+                        
+                        currentRotation = simd_normalize(yQuat * xQuat * currentRotation)
+                    }
                 }
         )
-
         .simultaneousGesture(
                    MagnificationGesture()
                        .onChanged { value in
@@ -140,6 +126,33 @@ struct ImmersiveView: View {
                 selectedEntity: $selectedEntity,
                 openWindow: {id in openWindow(id: id)}
             )
+        )
+        .simultaneousGesture(
+            TapGesture(count:2).targetedToAnyEntity()
+                .onEnded{value in
+                    fvm.selectedEntity = value.entity
+                    openWindow(id: "InfoWindow")
+                    print("Double Tap \(fvm.selectedEntity?.name ?? "No Entity")")
+                }
+        )
+        .simultaneousGesture(
+            DragGesture()
+                .targetedToAnyEntity()
+                .onChanged { value in
+                    if fvm.showBox == false{} else{
+                        let delta = value.translation
+                        let dx = Float(delta.width) * 0.0003
+                        let dy = Float(delta.height) * -0.0003
+                        
+                        // Free movement in 3D space
+                        if let modelF = fvm.femaleModel {
+                            modelF.position += SIMD3<Float>(dx, dy, 0)
+                        }
+                        if let modelM = fvm.maleModel {
+                            modelM.position += SIMD3<Float>(dx, dy, 0)
+                        }
+                    }
+                }
         )
     }
 }

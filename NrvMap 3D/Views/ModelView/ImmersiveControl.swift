@@ -41,13 +41,11 @@ struct ImmersiveControl: View {
                                 
                                 fvm.isImmersive = true
                                 dismissWindow(id: "WelcomeView")
-                                
-                                
                             } else {
                                 await dismissImmersiveSpace()
                                 fvm.isImmersive = false
-                                openWindow(id: "WelcomeView")
                                 dismissWindow(id: "Control")
+                                openWindow(id: "WelcomeView")
                                 fvm.isMix = false
                             }
                         }
@@ -78,8 +76,8 @@ struct ImmersiveControl: View {
                             } else {
                                 await dismissImmersiveSpace()
                                 fvm.isImmersive = false
-                                openWindow(id: "WelcomeView")
                                 dismissWindow(id: "Control")
+                                openWindow(id: "WelcomeView")
                                 fvm.isFull = false
                             }
                         }

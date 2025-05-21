@@ -266,7 +266,7 @@
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root",
         "HealthyFemale_derma_with_blend_baseFix",
-        "Face"
+        "C3"
       ],
       {
         "isExpanded" : true,
@@ -284,7 +284,7 @@
         "B8F43334-695F-418F-8B24-188D6B6AAA27",
         "Root",
         "HealthyFemale_derma_with_blend_baseFix",
-        "C3"
+        "Face"
       ],
       {
         "isExpanded" : true,
@@ -305,7 +305,8 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -313,8 +314,7 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -343,14 +343,6 @@
     "objectMetadataList" : [
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "D66134B1-3681-4A8E-AFE5-29F257229F3B",
         "Root",
         "GridMaterial",
         "GridMaterial"
@@ -358,7 +350,20 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "D66134B1-3681-4A8E-AFE5-29F257229F3B",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
+    ]
+  },
+  "E63091B9-9F5C-4031-8E6B-C078CFB94FA9" : {
+    "objectMetadataList" : [
+
     ]
   },
   "FD359081-4AB5-42E3-995B-02002136E525" : {
