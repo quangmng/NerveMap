@@ -121,7 +121,7 @@ struct NrvMap_3DApp: App {
         WindowGroup (id: "InfoWindow"){
             InfoView(name: fvm.selectedEntity?.name ?? "")
                 .environmentObject(fvm)
-        }.defaultSize(width: 600, height: 700)
+        }.defaultSize(width: 800, height: 500)
             .defaultWindowPlacement { _, _ in
                 WindowPlacement(.utilityPanel)
             }

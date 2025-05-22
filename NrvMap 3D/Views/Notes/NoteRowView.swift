@@ -43,6 +43,7 @@ struct NoteRowView: View {
 
                 HStack(spacing: 20) {
                     RoundedRectangle(cornerRadius: 20)
+                    
                         .fill(colorForFirstCharacter(of: note.position))
                         .frame(width: 180, height: 180)
                         .overlay {
