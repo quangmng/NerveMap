@@ -67,6 +67,7 @@ struct InfoView: View {
                                 )
                         }
                     }
+                    .padding()
                     .navigationTitle("Dermatome Level")
 
 //                        Text("In Case of Herniated Disc (L4-L5)")
