@@ -31,7 +31,8 @@ struct ButtonBoard: View {
             // TODO: merge this button with poses (enum)
             ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
                 .help("Immersive")
-            
+                .disabled(fvm.isImmersive)
+
             ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("character.cursor.ibeam", {fvm.isAnnotationMode.toggle()}), ("books.vertical", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
                 .help("Notes")
 
