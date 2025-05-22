@@ -42,12 +42,18 @@ struct ButtonBoard: View {
                     .disabled(fvm.isImmersive)
             }
 
-            ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("character.cursor.ibeam", {fvm.isAnnotationMode.toggle()}), ("books.vertical", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
+            ExpandButton(id: 3, systemImage: fvm.isAnnotationMode ? "character.cursor.ibeam" : "note.text", action: {if fvm.isAnnotationMode == true {fvm.isAnnotationMode.toggle() ; fvm.expendButton = nil}}, extraButtons: [("character.cursor.ibeam", {fvm.isAnnotationMode.toggle(); fvm.expendButton = nil}), ("books.vertical", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
+                .foregroundStyle(fvm.isAnnotationMode ? Color.black : Color.white)
+                .background {
+                    Circle()
+                        .fill(fvm.isAnnotationMode ? Color.white : Color.clear)
+                }
                 .help("Notes")
 
             RoundedRectangle(cornerRadius: 20).frame(width: 3, height: 50)
 
             ExpandButton(id: 4, systemImage: "graduationcap.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expendButton: $fvm.expendButton)
+                .help("learn")
 
             ExpandButton(id: 5, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
                 .help("Info")

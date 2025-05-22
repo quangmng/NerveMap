@@ -17,6 +17,7 @@ struct ImmersiveControl: View {
     @EnvironmentObject var fvm: FunctionViewModel
 
     @State private var showAlert: Bool = false
+    let defaultPosition = SIMD3<Float>(x: -0.7, y: 0.9, z: -1)
 
     var body: some View {
         VStack(spacing: 30) {
@@ -126,6 +127,24 @@ struct ImmersiveControl: View {
                         Text("Please ensure you have a safe and clear space around you before continuing.")
                     }
                     .disabled(fvm.isMix == true)
+                }
+                
+                if fvm.isImmersive {
+                    Button{
+                        fvm.maleModel?.position = defaultPosition
+                        fvm.femaleModel?.position = defaultPosition
+                    }label:{
+                        Image(systemName: "person.fill.viewfinder")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                    }.toggleStyle(.button)
+                        .padding(12)
+                        .buttonStyle(.borderless)
+                        .buttonBorderShape(.circle)
+                        .labelStyle(.iconOnly)
+                        .padding(12)
+                        .glassBackgroundEffect(in: .rect(cornerRadius: 60))
+                        .help("Recenter")
                 }
             }
 

@@ -27,7 +27,6 @@ struct ImmersiveView: View {
     @State private var currentRotation = simd_quatf(angle: 0, axis: [0, 1, 0])
     @State private var currentScale: Float = 1.0
     @State private var currentPosition = SIMD3<Float>(0, 0, -1)
-    @State private var dragBoxEntity: ModelEntity?
     
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     
