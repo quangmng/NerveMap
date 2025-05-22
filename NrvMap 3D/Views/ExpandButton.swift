@@ -44,27 +44,28 @@ struct ExpandButton: View {
                 Image(systemName: systemImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 40, height: 40)
                     .padding()
-                    .background {
-                        Circle().fill(Color.gray.opacity(0.6))
-                    }
+//                    .background {
+//                        Circle().fill(Color.gray.opacity(0.6))
+//                    }
             }
-            
+            .frame(width: 80, height: 80)
+
 
             if expendButton == id {
+                
                 ForEach(0..<extraButtons.count, id: \.self) { index in
                     Button(action: extraButtons[index].1) {
                         Image(systemName: extraButtons[index].0)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 40, height: 40)
                             .padding()
-                            .background {
-                                Circle().fill(Color.gray.opacity(0.6))
-                            }
+//                            .background {
+//                                Circle().fill(Color.gray.opacity(0.6))
+//                            }
                     }
                     .transition(.opacity)
+                    .frame(width: 60, height: 60)
                 }
             }
         }

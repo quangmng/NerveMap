@@ -16,20 +16,6 @@ struct ButtonBoard: View {
     var body: some View {
         HStack(spacing: 30) {
             
-//            Button {
-//                
-//            } label: {
-//                Image(systemName: "book.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 100, height: 100)
-//                    .padding()
-//                    .background(Circle().fill(Color.mint))
-//                    .foregroundStyle(.white)
-//            }
-            
-
-            
             ExpandButton(id: 0, systemImage: fvm.genderSelect ? "figure.stand" : "figure.stand.dress", action: {fvm.genderSelect.toggle(); fvm.isMale.toggle()}, extraButtons: [], expendButton: $fvm.expendButton)
                 .background {
                     Circle()
@@ -48,11 +34,13 @@ struct ButtonBoard: View {
             
             ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("pencil.and.scribble", {fvm.isAnnotationMode.toggle()}), ("books.vertical.fill", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
                 .help("Notes")
-            
-            ExpandButton(id: 4, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
-                .help("Info")
 
-            ExpandButton(id: 5, systemImage: "graduationcap.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expendButton: $fvm.expendButton)
+            RoundedRectangle(cornerRadius: 20).frame(width: 3, height: 50)
+
+            ExpandButton(id: 4, systemImage: "graduationcap.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expendButton: $fvm.expendButton)
+
+            ExpandButton(id: 5, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
+                .help("Info")
 
 
         }.toggleStyle(.button)

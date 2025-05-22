@@ -25,7 +25,6 @@ struct KnowledgeList: View {
                     Text(derm.area)
                         .font(.system(size: 35, weight: .semibold))
                         .foregroundColor(.primary)
-//                                .padding(.bottom, 10)
                     Text(derm.clinicalNote)
                         .font(.system(size: 30, weight: .regular))
                         .foregroundColor(.primary)

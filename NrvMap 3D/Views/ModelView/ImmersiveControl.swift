@@ -9,36 +9,38 @@ import RealityKit
 import SwiftUI
 
 struct ImmersiveControl: View {
-    
+
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @EnvironmentObject var fvm: FunctionViewModel
-    
+
     @State private var showAlert: Bool = false
-    
+
     var body: some View {
-        VStack(spacing: 30){
-            Text("Environment")
-                .font(.system(size:40))
-                .fontWeight(.heavy)
-                .padding()
-                .leading()
+        VStack(spacing: 30) {
+            if fvm.isMix == false && fvm.isImmersive == false {
+                Text("Choose the Environment")
+                    .font(.system(size:40))
+                    .fontWeight(.heavy)
+                    .animation(.spring(), value: fvm.isMix)
+            }
+
             HStack(spacing: 30){
-                
+
                 // Mix Immersive
                 // Real Life
                 if fvm.isImmersive == false || fvm.isMix  == true{
-                    
-                    
+
+
                     Button{
                         Task {
                             if fvm.isImmersive == false {
                                 fvm.style = .mixed
                                 fvm.isMix = true
                                 await openImmersiveSpace(id: "Immersive")
-                                
+
                                 fvm.isImmersive = true
                                 dismissWindow(id: "WelcomeView")
                             } else {
@@ -55,24 +57,30 @@ struct ImmersiveControl: View {
                                 .font(.largeTitle)
                                 .frame(width: 200, height: 100)
                         } else {
-                            Text("Exit")
-                                .font(.largeTitle)
+                            Text("Exit Mode")
+                                .font(
+                                    .system(
+                                        size: 40,
+                                        weight: .bold,
+                                        design: .rounded
+                                    )
+                                )
                                 .frame(width: 200, height: 100)
                                 .foregroundStyle(Color.red.secondary)
                         }
                     }
                     .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.roundedRectangle(radius: 20))
+                    .buttonBorderShape(.capsule)
                     .disabled(fvm.isFull == true)
                 }
-                
+
                 // MARK: - Enter Full Immersive
-                if fvm.isImmersive == false || fvm.isFull  == true{
+                if fvm.isImmersive == false || fvm.isFull  == true {
                     Button{
                         Task {
                             if fvm.isImmersive == false {
                                 showAlert = true
-                                
+
                             } else {
                                 await dismissImmersiveSpace()
                                 fvm.isImmersive = false
@@ -87,14 +95,21 @@ struct ImmersiveControl: View {
                                 .font(.largeTitle)
                                 .frame(width: 200, height: 100)
                         } else {
-                            Text("Exit")
-                                .font(.largeTitle)
+                            Text("Exit Mode")
+                                .font(
+                                    .system(
+                                        size: 40,
+                                        weight: .bold,
+                                        design: .rounded
+                                    )
+                                )
+
                                 .frame(width: 200, height: 100)
                                 .foregroundStyle(Color.red.secondary)
                         }
                     }
                     .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.roundedRectangle(radius: 20))
+                    .buttonBorderShape(.capsule)
                     .alert("⚠️ Entering Immersive Mode" ,isPresented: $showAlert){
                         Button("Cancel", role:.cancel, action:{showAlert = false})
                         Button("Continue", action:{
@@ -113,19 +128,19 @@ struct ImmersiveControl: View {
                     .disabled(fvm.isMix == true)
                 }
             }
-            
+
             // MARK: - Test this visiable and functionality
             if fvm.isImmersive {
                 ButtonBoard()
             }
-            
+
             /*
              Text("Condition")
              .font(.system(size:40))
              .fontWeight(.heavy)
              .leading()
              .padding()
-             
+
              TabView{
              VStack{
              Text("Normal")
@@ -134,7 +149,7 @@ struct ImmersiveControl: View {
              .padding(.bottom, 20)
              }
              .tag(0)
-             
+
              VStack{
              Text("Herinated Disc")
              .font(.system(size:32))

@@ -24,7 +24,11 @@ struct AddAnnotationVIew: View {
             Text("Add Note").font(.headline)
             Text("Currenly in \(fvm.position) ")
             TextField("Title", text: $title)
+                .padding()
+                .border(Color.gray, width: 1)
             TextField("Description", text: $content)
+                .padding()
+                .border(Color.gray, width: 1)
             Button("Save") {
                 saveNote()
             }
@@ -58,3 +62,4 @@ struct AddAnnotationVIew: View {
         dismissWindow(id: "AnnotationWindow")
     }
 }
+
