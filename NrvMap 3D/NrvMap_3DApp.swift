@@ -39,7 +39,7 @@ struct NrvMap_3DApp: App {
             }
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 3000, height: 1600)
+        .defaultSize(width: 1500, height: 1500)
         
         WindowGroup(id: "HelpWindow"){
             HelpView()
@@ -58,21 +58,12 @@ struct NrvMap_3DApp: App {
         }
 
         // Volumetric view for female model
-        WindowGroup(id: "ModelDF") {
-            FemaleModelView()
-                .environmentObject(noteVM)
-                .environmentObject(fvm)
-                .volumeBaseplateVisibility(.visible)
-        }
-        .windowStyle(.volumetric)
-        .defaultSize(width: 600, height: 1600)
-
 
         WindowGroup(id: "Control") {
             ImmersiveControl()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
-        }.defaultSize(width: 550, height: 500)
+        }.defaultSize(width: 800, height: 500)
 
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()
@@ -105,13 +96,6 @@ struct NrvMap_3DApp: App {
         }
         .defaultSize(width: 2000, height: 1000)
 
-        WindowGroup(id: "MotionWindow") {
-            MotionTextView()
-                .environmentObject(noteVM)
-                .environmentObject(fvm)
-        }
-        .defaultSize(width: 100, height: 50)
-
         WindowGroup(id: "BtnBoard") {
             ButtonBoard()
                 .environmentObject(fvm)
@@ -121,10 +105,6 @@ struct NrvMap_3DApp: App {
         WindowGroup (id: "InfoWindow"){
             InfoView(name: fvm.selectedEntity?.name ?? "")
                 .environmentObject(fvm)
-        }.defaultSize(width: 800, height: 500)
-            .defaultWindowPlacement { _, _ in
-                WindowPlacement(.utilityPanel)
-            }
-
+        }.defaultSize(width: 600, height: 700)
     }
 }

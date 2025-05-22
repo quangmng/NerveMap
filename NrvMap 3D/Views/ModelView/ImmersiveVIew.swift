@@ -43,9 +43,9 @@ struct ImmersiveView: View {
             let femaleEntity = await fvm.createModel(modelName: "FemaleDermaModel")
             let maleEntity = await fvm.createModel(modelName: "MaleDermaModel")
             
-            femaleEntity.position = SIMD3<Float>(x: -0.7, y: 0.7, z: -1)
+            femaleEntity.position = SIMD3<Float>(x: -0.7, y: 0.9, z: -1)
             femaleEntity.scale = [1,1,1]
-            maleEntity.position = SIMD3<Float>(x: -0.7, y: 0.7, z: -1)
+            maleEntity.position = SIMD3<Float>(x: -0.7, y: 0.9, z: -1)
             maleEntity.scale = [1,1,1]
             
             fvm.femaleModel = femaleEntity
@@ -141,8 +141,8 @@ struct ImmersiveView: View {
                 .onChanged { value in
                     if fvm.showBox == false{} else{
                         let delta = value.translation
-                        let dx = Float(delta.width) * 0.0003
-                        let dy = Float(delta.height) * -0.0003
+                        let dx = Float(delta.width) * 0.0005
+                        let dy = Float(delta.height) * -0.0005
                         
                         // Free movement in 3D space
                         if let modelF = fvm.femaleModel {
