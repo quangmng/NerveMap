@@ -18,19 +18,79 @@ struct NoteRowView: View {
         return formatter
     }()
 
+    func colorForFirstCharacter(of text: String) -> Color {
+        guard let firstChar = text.first else {
+            return .gray // Default color for empty input
+        }
+
+        switch firstChar.uppercased() {
+        case "C":
+            return .orange
+        case "T":
+            return .green
+        case "L":
+            return .blue
+        case "S":
+            return .purple
+        default:
+            return .gray
+        }
+    }
+
     var body: some View {
 
         HStack(spacing: 0) {
-            noteComponent
 
+                HStack(spacing: 20) {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(colorForFirstCharacter(of: note.position))
+                        .frame(width: 180, height: 180)
+                        .overlay {
+                            Text(note.position)
+                                .font(
+                                    .system(
+                                        size: 80,
+                                        weight: .bold,
+                                        design: .rounded
+                                    )
+                                )
+                        }
+
+                    VStack(alignment: .leading, spacing: 25) {
+                        Text(note.title)
+                            .font(
+                                .system(
+                                    size: 70,
+                                    weight: .semibold,
+                                    design: .rounded
+                                )
+                            )
+                            .underline()
+
+                        Text(note.details)
+                            .font(
+                                .system(
+                                    size: 60,
+                                    weight: .regular,
+                                    design: .rounded
+                                )
+                            )
+                    }
+                }
+
+            Spacer()
+
+            // MARK: -Date component
             RoundedRectangle(cornerRadius: 16)
-                .foregroundStyle(Color.orange )
+                .foregroundStyle(Color.gray.opacity(0.8))
                 .frame(width: 260, height: 100)
                 .overlay {
                     Text(Self.dateFormatter.string(from: note.dateCreated))
-                        .font(.system(size: 40, weight: .bold))
+                        .font(
+                            .system(size: 40, weight: .bold, design: .rounded)
+                        )
                 }
-                .traling()
+
         }
     }
 }
@@ -41,7 +101,7 @@ struct NoteRowView: View {
         title: "Sample Note",
         details: "This is a preview of a note with position info.",
         dateCreated: Date(),
-        position: "T1"
+        position: "S1"
     ))
 }
 

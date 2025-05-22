@@ -12,6 +12,7 @@ struct LearnMoreView: View {
     @State private var selectedNerveLevel: String? = nil
     @State private var selectedArea: String? = nil
     @EnvironmentObject var fvm: FunctionViewModel
+    @Environment(\.dismiss) private var dismiss
 
     // Compute unique first-letter categories (e.g., V, C, T, L, S)
     private var nerveLevelPrefixes: [String] {
@@ -25,8 +26,8 @@ struct LearnMoreView: View {
     }
 
     var body: some View {
+        NavigationStack {
         VStack {
-
             // Nerve Level Selection
             VStack {
                 Text("Choose the dermatome area👇🏻")
@@ -116,7 +117,9 @@ struct LearnMoreView: View {
                 if let dermatome = allDermatomes.first(where: { $0.nerveLevel == area }) {
                     HStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.green.opacity(0.8))
+                            .fill(
+                                colorForFirstCharacter(of: dermatome.nerveLevel)
+                            )
                             .frame(width: 200, height: 200)
                             .overlay {
                                 Text(dermatome.nerveLevel)
@@ -158,7 +161,43 @@ struct LearnMoreView: View {
         }.onDisappear{if fvm.selectedEntity != nil {
             fvm.stopBlinkingHighlight(for: fvm.selectedEntity!)
         }}
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 40))
+                        .frame(width: 60, height: 60)
+                }
+                .padding(.top, 10)
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.circle)
+
+            }
+        })
+
         .padding()
+    }
+    }
+
+    func colorForFirstCharacter(of text: String) -> Color {
+        guard let firstChar = text.first else {
+            return .gray // Default color for empty input
+        }
+
+        switch firstChar.uppercased() {
+        case "C":
+            return .orange
+        case "T":
+            return .green
+        case "L":
+            return .blue
+        case "S":
+            return .purple
+        default:
+            return .gray
+        }
     }
 }
 

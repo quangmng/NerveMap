@@ -24,11 +24,11 @@ struct AddAnnotationVIew: View {
             Text("Add Note").font(.headline)
             Text("Currenly in \(fvm.position) ")
             TextField("Title", text: $title)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .border(Color.gray, width: 1)
             TextField("Description", text: $content)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .border(Color.gray, width: 1)
             Button("Save") {
                 saveNote()
             }
