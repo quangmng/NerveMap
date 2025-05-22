@@ -20,19 +20,6 @@ struct ExpandButton: View {
 
     var body: some View {
         HStack(spacing: 8) {
-//            Button {
-//                if expendButton == id {
-//                    expendButton = nil
-//                } else {
-//                    expendButton = id
-//                }
-//                action()
-//            } label: {
-//                Image(systemName: systemImage)
-//                    .font(.largeTitle)
-//                    .frame(width: 50, height: 50)
-//            }
-
             Button(action: {
                 if expendButton == id {
                     expendButton = nil
@@ -45,9 +32,6 @@ struct ExpandButton: View {
                     .resizable()
                     .scaledToFit()
                     .padding()
-//                    .background {
-//                        Circle().fill(Color.gray.opacity(0.6))
-//                    }
             }
             .frame(width: 80, height: 80)
 
