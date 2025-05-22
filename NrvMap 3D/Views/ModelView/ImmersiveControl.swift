@@ -133,35 +133,6 @@ struct ImmersiveControl: View {
             if fvm.isImmersive {
                 ButtonBoard()
             }
-
-            /*
-             Text("Condition")
-             .font(.system(size:40))
-             .fontWeight(.heavy)
-             .leading()
-             .padding()
-
-             TabView{
-             VStack{
-             Text("Normal")
-             .font(.system(size:32))
-             .fontWeight(.semibold)
-             .padding(.bottom, 20)
-             }
-             .tag(0)
-
-             VStack{
-             Text("Herinated Disc")
-             .font(.system(size:32))
-             .fontWeight(.semibold)
-             .padding(.bottom, 20)
-             }.tag(1)
-             }.padding()
-             .background(Color.white.opacity(0.09))
-             .cornerRadius(30)
-             .frame(width: 500, height: 130)
-             .tabViewStyle(.page)
-             */
         }
         .padding(25)
     }

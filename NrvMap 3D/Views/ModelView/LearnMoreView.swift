@@ -116,11 +116,12 @@ struct LearnMoreView: View {
             if let area = selectedArea {
                 if let dermatome = allDermatomes.first(where: { $0.nerveLevel == area }) {
                     HStack {
-                        RoundedRectangle(cornerRadius: 20)
+//                        RoundedRectangle(cornerRadius: 20)
+                        Circle()
                             .fill(
                                 colorForFirstCharacter(of: dermatome.nerveLevel)
                             )
-                            .frame(width: 200, height: 200)
+                            .frame(width: 150)
                             .overlay {
                                 Text(dermatome.nerveLevel)
                                     .font(

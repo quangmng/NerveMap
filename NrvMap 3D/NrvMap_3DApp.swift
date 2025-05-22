@@ -78,7 +78,8 @@ struct NrvMap_3DApp: App {
             ImmersiveView()
                 .environmentObject(noteVM)
                 .environmentObject(fvm)
-        }.immersionStyle(selection: $fvm.style, in: .mixed, .full, .progressive)
+        }
+        .immersionStyle(selection: $fvm.style, in: .mixed, .full, .progressive)
 
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {

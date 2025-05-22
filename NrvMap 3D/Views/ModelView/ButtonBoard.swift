@@ -32,7 +32,7 @@ struct ButtonBoard: View {
             ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
                 .help("Immersive")
             
-            ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("pencil.and.scribble", {fvm.isAnnotationMode.toggle()}), ("books.vertical.fill", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
+            ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("character.cursor.ibeam", {fvm.isAnnotationMode.toggle()}), ("books.vertical", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
                 .help("Notes")
 
             RoundedRectangle(cornerRadius: 20).frame(width: 3, height: 50)
