@@ -23,15 +23,24 @@ struct ButtonBoard: View {
                 }
                 .help("Gender")
             
-            ExpandButton(id: 1, systemImage: "figure.walk.motion", action: {fvm.showBox.toggle()}, extraButtons: [
-                // action, label
-            ], expendButton: $fvm.expendButton)
-            .help("Animation")
+            if fvm.isImmersive == true{
+                ExpandButton(id: 1, systemImage: fvm.showBox ? "hand.pinch.fill" : "hand.pinch.fill", action: {fvm.showBox.toggle()}, extraButtons: [
+                    // action, label
+                ], expendButton: $fvm.expendButton)
+                .foregroundStyle(fvm.showBox ? Color.black : Color.white)
+                .background {
+                    Circle()
+                        .fill(fvm.showBox ? Color.white : Color.clear)
+                }
+                .help("Move")
+            }
             
             // TODO: merge this button with poses (enum)
-            ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
-                .help("Immersive")
-                .disabled(fvm.isImmersive)
+            if fvm.isImmersive == false{
+                ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {openWindow(id: "Control")}, extraButtons: [], expendButton: $fvm.expendButton)
+                    .help("Immersive")
+                    .disabled(fvm.isImmersive)
+            }
 
             ExpandButton(id: 3, systemImage: "note.text", action: {}, extraButtons: [("character.cursor.ibeam", {fvm.isAnnotationMode.toggle()}), ("books.vertical", {openWindow(id: "NotesWindow")})], expendButton: $fvm.expendButton)
                 .help("Notes")

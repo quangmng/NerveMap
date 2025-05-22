@@ -16,14 +16,7 @@ struct InitialLauncherView: View {
     
     var body: some View {
         VStack{
-            Button{
-                open(id: "WelcomeView")
-            }label:{
-                Text("Start")
-                    .font(.extraLargeTitle)
-                    .bold()
-                    .opacity(isVisable ? 1 : 0)
-            }
+           
         }
         
             .task {

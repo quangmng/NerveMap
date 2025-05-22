@@ -123,23 +123,11 @@ struct MaleModelView: View {
                         print("Double Tap \(fvm.selectedEntity?.name ?? "No Entity")")
                     }
             )
-            
-            .background{
-                if fvm.isAnnotationMode == true {
-                    Color.black.opacity(0.5)
-                }
-            }
             .ornament(attachmentAnchor: .scene(.bottomFront)) {
                 ButtonBoard()
             }
         }.onAppear{
             dismissWindow(id: "launch")
-        }
-        
-        .onDisappear{
-            if fvm.isImmersive == false{
-                openWindow(id: "ModelDM")
-            }
         }
     }
     
