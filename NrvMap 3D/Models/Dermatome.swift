@@ -17,13 +17,13 @@ struct Dermatome: Identifiable {
 
 /// A comprehensive list of dermatomes from C2 through S5.
 let allDermatomes: [Dermatome] = [
-    Dermatome(
-        id: 0,
-        nerveLevel: "V",
-        area: "Face areas",
-        // TODO: - Waiting for Toby's professional fill-in
-        clinicalNote: ""
-    ),
+//    Dermatome(
+//        id: 0,
+//        nerveLevel: "V",
+//        area: "Face areas",
+//        // TODO: - Waiting for Toby's professional fill-in
+//        clinicalNote: ""
+//    ),
     Dermatome(
         id: 1,
         nerveLevel: "C2",

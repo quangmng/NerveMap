@@ -102,6 +102,7 @@ struct NrvMap_3DApp: App {
             LearnMoreView()
                 .environmentObject(fvm)
         }
+        .defaultSize(width: 2000, height: 1000)
 
         WindowGroup(id: "MotionWindow") {
             MotionTextView()
