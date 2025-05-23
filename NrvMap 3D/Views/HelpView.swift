@@ -14,29 +14,79 @@ struct HelpView: View {
     @Environment(\.openWindow) public var open
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @State private var isVisible = false
+    @State private var isTapped: Bool = true
+    @State private var isShow: Bool = false
+
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
-                
+
                 // Page 1
                 HStack {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("NrvMap 3D")
-                            .font(.system(size: 60, weight: .bold))
+                    VStack(alignment: .leading, spacing: 40) {
+                        Text("Nerve Map")
+                            .font(
+                                .system(
+                                    size: 80,
+                                    weight: .bold,
+                                    design: .rounded
+                                )
+                            )
                             .opacity(isVisible ? 1 : 0)
-                        
-                        Text("Digital Anatomy - Dermatomes Map")
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [
+                                        .blue,
+                                        .purple
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 420, height: 100)
+                                    .padding()
+                            }
+
+
+
+                        Text("Learn with realistic 3D models")
                             .opacity(isVisible ? 1 : 0)
-                            .font(.system(size:40, weight:.bold))
-                        
-                        Text("Learn with realistic 3D\nmodels")
+                            .font(
+                                .system(
+                                    size: 40,
+                                    weight: .semibold,
+                                    design: .rounded
+                                )
+                            )
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 560, height: 60)
+                                    .foregroundStyle(Color.gray.opacity(0.7))
+                                    .padding()
+                            }
+
+                        Text("Digital Anatomy Dermatomes Map Solution")
                             .opacity(isVisible ? 1 : 0)
-                            .font(.system(size:30))
+                            .font(
+                                .system(
+                                    size: 30,
+                                    weight: .regular,
+                                    design: .rounded
+                                )
+                            )
                             .multilineTextAlignment(.leading)
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 570, height: 60)
+                                    .foregroundStyle(Color.gray.opacity(0.7))
+                                    .padding()
+                            }
                     }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     Image("onboard1")
                         .resizable()
                         .scaledToFit()
@@ -44,10 +94,10 @@ struct HelpView: View {
                         .frame(width: 300, height: 500)
                         .padding()
                 }
-                .frame(width: 800)
+                .frame(width: 1000)
                 .tag(0)
-                
-                
+
+
                 // Page 2
                 HStack(alignment: .center, spacing: 40) {
                     ZStack {
@@ -55,35 +105,35 @@ struct HelpView: View {
                             ZStack {
                                 let spacingY: CGFloat = 80
                                 let centerX = geometry.size.width * 0.4
-                                
+
                                 // Rotate
                                 Image("rotateIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX - 150, y: spacingY)
                                     .opacity(isVisible ? 1 : 0)
-                                
+
                                 // Zoom In
                                 Image("zoomInIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX-25, y: spacingY * 1.8)
                                     .opacity(isVisible ? 1 : 0)
-                                
+
                                 // Zoom Out
                                 Image("zoomOutIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 80 , y: spacingY * 3)
                                     .opacity(isVisible ? 1 : 0)
-                                
+
                                 // Move Icon
                                 Image("moveIcon")
                                     .resizable()
                                     .frame(width: 70, height: 70)
                                     .position(x: centerX + 170, y: spacingY * 4.4)
                                     .opacity(isVisible ? 1 : 0)
-                                
+
                                 // Hand Gesture
                                 Image("handGesture")
                                     .resizable()
@@ -95,40 +145,216 @@ struct HelpView: View {
                         }
                         .frame(width: 400, height: 450)
                     }
-                    
-                    VStack{
-                        Text("Manipulate 3D\ndermatome maps\nmodel like never before!!")
+
+                    VStack(spacing: 40) {
+                        Text("Interactive Dermatome Map")
                             .opacity(isVisible ? 1 : 0)
-                            .font(.system(size:40, weight: .bold))
+                            .font(
+                                .system(
+                                    size: 80,
+                                    weight: .semibold,
+                                    design: .rounded
+                                )
+                            )
+
+
+                        HStack(spacing: 20) {
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 160, height: 90)
+                                .foregroundStyle(Color.gray.opacity(0.6))
+                                .overlay {
+                                    Text("Rotate")
+                                        .font(
+                                            .system(
+                                                size: 30,
+                                                weight: .semibold,
+                                                design: .rounded
+                                            )
+                                        )
+                                }
+                                .hoverEffect { effect, isActive, geometry in
+                                    effect.animation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                                        $0
+                                            .rotationEffect(.degrees(isActive ? 15 : 0))
+                                            .scaleEffect(isActive ? 1.2 : 1.0)
+                                    }
+                                }
+
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 160, height: 90)
+                                .foregroundStyle(Color.gray.opacity(0.6))
+                                .overlay {
+                                    Text("Zoom-In")
+                                        .font(
+                                            .system(
+                                                size: 30,
+                                                weight: .semibold,
+                                                design: .rounded
+                                            )
+                                        )
+                                }
+                                .hoverEffect { effect, isActive, geometry in
+                                    effect.animation(.spring(duration: 1)) {
+                                        $0.scaleEffect(isActive ? 1.2 : 1.0)
+                                    }
+                                }
+
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 160, height: 90)
+                                .foregroundStyle(Color.gray.opacity(0.6))
+                                .overlay {
+                                    Text("Zoom-Out")
+                                        .font(
+                                            .system(
+                                                size: 30,
+                                                weight: .semibold,
+                                                design: .rounded
+                                            )
+                                        )
+                                }
+                                .hoverEffect { effect, isActive, geometry in
+                                    effect.animation(.spring(duration: 0.5)) {
+                                        $0.scaleEffect(isActive ? 0.8 : 1.0)
+                                    }
+                                }
+
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 160, height: 90)
+                                .foregroundStyle(Color.gray.opacity(0.6))
+                                .overlay {
+                                    Text("Moving")
+                                        .font(
+                                            .system(
+                                                size: 30,
+                                                weight: .semibold,
+                                                design: .rounded
+                                            )
+                                        )
+                                }
+                                .hoverEffect { effect, isActive, geometry in
+                                    effect.animation(.spring(duration: 1)) {
+                                        $0.offset(y: isActive ? -50 : 0)
+                                    }
+                                }
+                        }
                     }
                     .multilineTextAlignment(.center)
                 }
-                
                 .tag(1)
-                
+
                 // Page 3
-                HStack {
-                    Image("onboard3")
-                        
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 450, height: 450)
-                        .padding(-30)
+
+                //                    Image("onboard3")
+                //                        .resizable()
+                //                        .scaledToFit()
+                //                        .frame(width: 450, height: 450)
+                //                        .padding(-30)
+                //                        .opacity(isVisible ? 1 : 0)
+
+                VStack(spacing: 30) {
+                    Text("Immersive & Learning")
                         .opacity(isVisible ? 1 : 0)
-                    
-                    Text("Immersive & Learn in One\nPowerful App")
-                        .opacity(isVisible ? 1 : 0)
-                        .font(.system(size: 50, weight: .bold))
+                        .font(
+                            .system(
+                                size: 60,
+                                weight: .semibold,
+                                design: .rounded
+                            )
+                        )
                         .multilineTextAlignment(.center)
-                    
+
+                    Text("With One Powerful App")
+                        .font(
+                            .system(
+                                size: 100,
+                                weight: .heavy,
+                                design: .rounded
+                            )
+                        )
+                        .foregroundColor(
+                            Color.mint.mix(with: .red, by: 0.8)
+                        )
+
+                    Spacer().frame(height: 25)
+
+                    HStack(spacing: 55) {
+
+                        Button {
+                            isTapped.toggle()
+                        } label: {
+                            ZStack {
+                                    Circle()
+                                    .fill(isTapped ? Color.maleBule : Color.femalePink)
+                                    .frame(width: 100, height: 100)
+                                Image(systemName: isTapped ? "figure.stand" : "figure.stand.dress")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                        .foregroundColor(.white)
+                                }
+                        }
+                        .buttonBorderShape(.circle)
+                        .help("Gender")
+
+
+                        Button {
+
+                        } label: {
+                            ZStack {
+                                Circle()
+                                .fill(Color.clear)
+                                .frame(width: 100, height: 100)
+                                Image(systemName: "square.stack.3d.up.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                            }
+                        }
+                        .buttonBorderShape(.circle)
+                        .help("Immersive")
+
+                        Button {
+
+                        } label: {
+                            ZStack {
+                                Circle()
+                                .fill(Color.clear)
+                                .frame(width: 100, height: 100)
+                                Image(systemName: "note.text")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                            }
+                        }
+                        .buttonBorderShape(.circle)
+                        .help("Notes")
+
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(width: 5, height: 100)
+
+                        Button {
+
+                        } label: {
+                            ZStack {
+                                Circle()
+                                .fill(Color.clear)
+                                .frame(width: 100, height: 100)
+                                Image(systemName: "graduationcap.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                            }
+                        }
+                        .buttonBorderShape(.circle)
+                        .help("Learn")
+                    }
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.leading, -250)
                 .tag(2)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(.page(backgroundDisplayMode: .always))
-            
+
             // Navigation Arrows
             HStack {
                 Button {
@@ -136,24 +362,22 @@ struct HelpView: View {
                 } label: {
                     if currentPage > 0{
                         Image(systemName: "arrow.left.circle.fill")
-                            
+
                             .resizable()
                             .frame(width: 40, height: 40)
                             .opacity(isVisible ? 1 : 0)
                     } else {
                         Image(systemName: "arrow.left.circle")
-                           
                             .resizable()
                             .frame(width: 40, height: 40)
                             .opacity(isVisible ? 1 : 0)
                     }
-                    //
                 }
                 .buttonBorderShape(.circle)
                 .disabled(currentPage == 0)
-                
+
                 Spacer()
-                
+
                 if currentPage < 2 {
                     Button {
                         currentPage += 1
@@ -182,7 +406,6 @@ struct HelpView: View {
                     }
                 }
             }
-            
             .padding(.horizontal, 50)
             .padding(.bottom, 50)
         }
