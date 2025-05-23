@@ -24,7 +24,7 @@ struct ButtonBoard: View {
                 .help("Gender")
             
             if fvm.isImmersive == true{
-                ExpandButton(id: 1, systemImage: fvm.showBox ? "hand.pinch.fill" : "hand.pinch.fill", action: {fvm.showBox.toggle()}, extraButtons: [
+                ExpandButton(id: 1, systemImage: "hand.pinch.fill", action: {fvm.showBox.toggle()}, extraButtons: [
                     // action, label
                 ], expendButton: $fvm.expendButton)
                 .foregroundStyle(fvm.showBox ? Color.black : Color.white)
@@ -52,8 +52,8 @@ struct ButtonBoard: View {
 
             RoundedRectangle(cornerRadius: 20).frame(width: 3, height: 50)
 
-            ExpandButton(id: 4, systemImage: "graduationcap.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expendButton: $fvm.expendButton)
-                .help("learn")
+            ExpandButton(id: 4, systemImage: "book.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expendButton: $fvm.expendButton)
+                .help("Learn")
 
             ExpandButton(id: 5, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expendButton: $fvm.expendButton)
                 .help("Info")

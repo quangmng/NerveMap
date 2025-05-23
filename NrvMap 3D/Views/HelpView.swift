@@ -271,7 +271,7 @@ struct HelpView: View {
                                 }
                             }
                             .buttonBorderShape(.circle)
-                            .help("Immersive")
+                            .help("Immersive Mode")
                             
                             Button {
                                 
@@ -299,7 +299,7 @@ struct HelpView: View {
                                     Circle()
                                         .fill(Color.clear)
                                         .frame(width: 100, height: 100)
-                                    Image(systemName: "graduationcap.fill")
+                                    Image(systemName: "book.fill")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 60, height: 60)
