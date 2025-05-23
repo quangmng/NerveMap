@@ -16,15 +16,15 @@ struct HelpView: View {
     @State private var isVisible = false
     @State private var isTapped: Bool = true
     @State private var isShow: Bool = false
-
+    
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
-
+                
                 // Page 1
                 HStack {
                     VStack(alignment: .leading, spacing: 40) {
-                        Text("Nerve Map")
+                        Text("NerveMap")
                             .font(
                                 .system(
                                     size: 80,
@@ -45,13 +45,13 @@ struct HelpView: View {
                             )
                             .background {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .frame(width: 420, height: 100)
+                                    .frame(width: 410, height: 100)
                                     .padding()
                             }
-
-
-
-                        Text("Learn with realistic 3D models")
+                        
+                        
+                        
+                        Text("A virtual tour of the human nervous system")
                             .opacity(isVisible ? 1 : 0)
                             .font(
                                 .system(
@@ -60,14 +60,9 @@ struct HelpView: View {
                                     design: .rounded
                                 )
                             )
-                            .background {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .frame(width: 560, height: 60)
-                                    .foregroundStyle(Color.gray.opacity(0.7))
-                                    .padding()
-                            }
-
-                        Text("Digital Anatomy Dermatomes Map Solution")
+                        
+                        
+                        Text("with (almost) realistic 3D models!")
                             .opacity(isVisible ? 1 : 0)
                             .font(
                                 .system(
@@ -77,16 +72,10 @@ struct HelpView: View {
                                 )
                             )
                             .multilineTextAlignment(.leading)
-                            .background {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .frame(width: 570, height: 60)
-                                    .foregroundStyle(Color.gray.opacity(0.7))
-                                    .padding()
-                            }
                     }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-
+                    
                     Image("onboard1")
                         .resizable()
                         .scaledToFit()
@@ -96,68 +85,35 @@ struct HelpView: View {
                 }
                 .frame(width: 1000)
                 .tag(0)
-
-
+                
+                
                 // Page 2
                 HStack(alignment: .center, spacing: 40) {
                     ZStack {
                         GeometryReader { geometry in
                             ZStack {
-                                let spacingY: CGFloat = 80
-                                let centerX = geometry.size.width * 0.4
-
-                                // Rotate
-                                Image("rotateIcon")
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                                    .position(x: centerX - 150, y: spacingY)
-                                    .opacity(isVisible ? 1 : 0)
-
-                                // Zoom In
-                                Image("zoomInIcon")
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                                    .position(x: centerX-25, y: spacingY * 1.8)
-                                    .opacity(isVisible ? 1 : 0)
-
-                                // Zoom Out
-                                Image("zoomOutIcon")
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                                    .position(x: centerX + 80 , y: spacingY * 3)
-                                    .opacity(isVisible ? 1 : 0)
-
-                                // Move Icon
-                                Image("moveIcon")
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                                    .position(x: centerX + 170, y: spacingY * 4.4)
-                                    .opacity(isVisible ? 1 : 0)
-
-                                // Hand Gesture
-                                Image("handGesture")
+                                Image("handInteract-white")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 250)
-                                    .position(x: geometry.size.width * 0.1, y: geometry.size.height * 0.90)
+                                    .position(x: geometry.size.width * 0.45, y: geometry.size.height * 0.6)
                                     .opacity(isVisible ? 1 : 0)
                             }
                         }
                         .frame(width: 400, height: 450)
                     }
-
-                    VStack(spacing: 40) {
-                        Text("Interactive Dermatome Map")
+                    
+                    VStack(spacing: 50) {
+                        Text("Interact with the Dermatomes Map")
                             .opacity(isVisible ? 1 : 0)
                             .font(
                                 .system(
-                                    size: 80,
+                                    size: 60,
                                     weight: .semibold,
                                     design: .rounded
                                 )
                             )
-
-
+                        
+                        
                         HStack(spacing: 20) {
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 160, height: 90)
@@ -179,7 +135,7 @@ struct HelpView: View {
                                             .scaleEffect(isActive ? 1.2 : 1.0)
                                     }
                                 }
-
+                            
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 160, height: 90)
                                 .foregroundStyle(Color.gray.opacity(0.6))
@@ -198,7 +154,7 @@ struct HelpView: View {
                                         $0.scaleEffect(isActive ? 1.2 : 1.0)
                                     }
                                 }
-
+                            
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 160, height: 90)
                                 .foregroundStyle(Color.gray.opacity(0.6))
@@ -217,7 +173,7 @@ struct HelpView: View {
                                         $0.scaleEffect(isActive ? 0.8 : 1.0)
                                     }
                                 }
-
+                            
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 160, height: 90)
                                 .foregroundStyle(Color.gray.opacity(0.6))
@@ -233,7 +189,7 @@ struct HelpView: View {
                                 }
                                 .hoverEffect { effect, isActive, geometry in
                                     effect.animation(.spring(duration: 1)) {
-                                        $0.offset(y: isActive ? -50 : 0)
+                                        $0.offset(y: isActive ? -30 : 0)
                                     }
                                 }
                         }
@@ -241,18 +197,10 @@ struct HelpView: View {
                     .multilineTextAlignment(.center)
                 }
                 .tag(1)
-
-                // Page 3
-
-                //                    Image("onboard3")
-                //                        .resizable()
-                //                        .scaledToFit()
-                //                        .frame(width: 450, height: 450)
-                //                        .padding(-30)
-                //                        .opacity(isVisible ? 1 : 0)
-
+                
+                
                 VStack(spacing: 30) {
-                    Text("Immersive & Learning")
+                    Text("Immerse & Learn")
                         .opacity(isVisible ? 1 : 0)
                         .font(
                             .system(
@@ -262,7 +210,7 @@ struct HelpView: View {
                             )
                         )
                         .multilineTextAlignment(.center)
-
+                    
                     Text("With One Powerful App")
                         .font(
                             .system(
@@ -277,19 +225,19 @@ struct HelpView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundStyle(Color.white)
-                                .frame(width: 950, height: 100)
+                                .frame(width: 900, height: 100)
                         }
-
+                    
                     VStack {
                         Text("Try glancing at these buttons and see what they do!")
                             .font(
                                 .system(
-                                    size: 40,
+                                    size: 30,
                                     weight: .bold,
                                     design: .rounded
                                 )
                             )
-
+                        
                         HStack(spacing: 55) {
                             Button {
                                 isTapped.toggle()
@@ -307,10 +255,10 @@ struct HelpView: View {
                             }
                             .buttonBorderShape(.circle)
                             .help("Gender")
-
-
+                            
+                            
                             Button {
-
+                                
                             } label: {
                                 ZStack {
                                     Circle()
@@ -324,9 +272,9 @@ struct HelpView: View {
                             }
                             .buttonBorderShape(.circle)
                             .help("Immersive")
-
+                            
                             Button {
-
+                                
                             } label: {
                                 ZStack {
                                     Circle()
@@ -340,12 +288,12 @@ struct HelpView: View {
                             }
                             .buttonBorderShape(.circle)
                             .help("Notes")
-
+                            
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 5, height: 100)
-
+                            
                             Button {
-
+                                
                             } label: {
                                 ZStack {
                                     Circle()
@@ -360,23 +308,23 @@ struct HelpView: View {
                             .buttonBorderShape(.circle)
                             .help("Learn")
                         }
-
-                                                Text("To access this help anytime, tap the 'i' button.")
-                                                    .font(
-                                                        .system(
-                                                            size: 30,
-                                                            weight: .semibold,
-                                                            design: .rounded
-                                                        )
-                                                    )
                     }
+                    .padding(.bottom, 30)
+                    Text("(To access this help anytime, tap the \(Image(systemName: "info.circle.fill")) button.)")
+                        .font(
+                            .system(
+                                size: 20,
+                                weight: .semibold,
+                                design: .rounded
+                            )
+                        )
                 }
                 .frame(maxWidth: .infinity)
                 .tag(2)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(.page(backgroundDisplayMode: .always))
-
+            
             // Navigation Arrows
             HStack {
                 Button {
@@ -384,7 +332,7 @@ struct HelpView: View {
                 } label: {
                     if currentPage > 0{
                         Image(systemName: "arrow.left.circle.fill")
-
+                        
                             .resizable()
                             .frame(width: 40, height: 40)
                             .opacity(isVisible ? 1 : 0)
@@ -397,9 +345,9 @@ struct HelpView: View {
                 }
                 .buttonBorderShape(.circle)
                 .disabled(currentPage == 0)
-
+                
                 Spacer()
-
+                
                 if currentPage < 2 {
                     Button {
                         currentPage += 1
@@ -408,10 +356,9 @@ struct HelpView: View {
                             .resizable()
                             .opacity(isVisible ? 1 : 0)
                             .frame(width: 40, height: 40)
-                        //                            .foregroundColor(.blue)
                     }
                     .buttonBorderShape(.circle)
-
+                    
                 } else {
                     Button {
                         dismiss(id: "HelpWindow")
