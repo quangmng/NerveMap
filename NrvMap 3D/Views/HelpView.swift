@@ -266,7 +266,7 @@ struct HelpView: View {
                     Text("With One Powerful App")
                         .font(
                             .system(
-                                size: 100,
+                                size: 80,
                                 weight: .heavy,
                                 design: .rounded
                             )
@@ -274,79 +274,101 @@ struct HelpView: View {
                         .foregroundColor(
                             Color.mint.mix(with: .red, by: 0.8)
                         )
+                        .background {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(Color.white)
+                                .frame(width: 950, height: 100)
+                        }
 
-                    Spacer().frame(height: 25)
+                    VStack {
+                        Text("Try glancing at these buttons and see what they do!")
+                            .font(
+                                .system(
+                                    size: 40,
+                                    weight: .bold,
+                                    design: .rounded
+                                )
+                            )
 
-                    HStack(spacing: 55) {
-
-                        Button {
-                            isTapped.toggle()
-                        } label: {
-                            ZStack {
+                        HStack(spacing: 55) {
+                            Button {
+                                isTapped.toggle()
+                            } label: {
+                                ZStack {
                                     Circle()
-                                    .fill(isTapped ? Color.maleBule : Color.femalePink)
-                                    .frame(width: 100, height: 100)
-                                Image(systemName: isTapped ? "figure.stand" : "figure.stand.dress")
+                                        .fill(isTapped ? Color.maleBule : Color.femalePink)
+                                        .frame(width: 100, height: 100)
+                                    Image(systemName: isTapped ? "figure.stand" : "figure.stand.dress")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 60, height: 60)
                                         .foregroundColor(.white)
                                 }
-                        }
-                        .buttonBorderShape(.circle)
-                        .help("Gender")
-
-
-                        Button {
-
-                        } label: {
-                            ZStack {
-                                Circle()
-                                .fill(Color.clear)
-                                .frame(width: 100, height: 100)
-                                Image(systemName: "square.stack.3d.up.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
                             }
-                        }
-                        .buttonBorderShape(.circle)
-                        .help("Immersive")
+                            .buttonBorderShape(.circle)
+                            .help("Gender")
 
-                        Button {
 
-                        } label: {
-                            ZStack {
-                                Circle()
-                                .fill(Color.clear)
-                                .frame(width: 100, height: 100)
-                                Image(systemName: "note.text")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
+                            Button {
+
+                            } label: {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.clear)
+                                        .frame(width: 100, height: 100)
+                                    Image(systemName: "square.stack.3d.up.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                }
                             }
-                        }
-                        .buttonBorderShape(.circle)
-                        .help("Notes")
+                            .buttonBorderShape(.circle)
+                            .help("Immersive")
 
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 5, height: 100)
+                            Button {
 
-                        Button {
-
-                        } label: {
-                            ZStack {
-                                Circle()
-                                .fill(Color.clear)
-                                .frame(width: 100, height: 100)
-                                Image(systemName: "graduationcap.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
+                            } label: {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.clear)
+                                        .frame(width: 100, height: 100)
+                                    Image(systemName: "note.text")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                }
                             }
+                            .buttonBorderShape(.circle)
+                            .help("Notes")
+
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 5, height: 100)
+
+                            Button {
+
+                            } label: {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.clear)
+                                        .frame(width: 100, height: 100)
+                                    Image(systemName: "graduationcap.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                }
+                            }
+                            .buttonBorderShape(.circle)
+                            .help("Learn")
                         }
-                        .buttonBorderShape(.circle)
-                        .help("Learn")
+
+                                                Text("To access this help anytime, tap the 'i' button.")
+                                                    .font(
+                                                        .system(
+                                                            size: 30,
+                                                            weight: .semibold,
+                                                            design: .rounded
+                                                        )
+                                                    )
                     }
                 }
                 .frame(maxWidth: .infinity)
