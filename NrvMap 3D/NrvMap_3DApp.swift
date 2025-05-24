@@ -29,14 +29,10 @@ struct NrvMap_3DApp: App {
         .windowStyle(.plain)
 
         WindowGroup(id: "WelcomeView"){
-            if hasSeenWelcomeScreen == false {
-                HelpView()
-            }else{
                 MaleModelView()
                     .environmentObject(noteVM)
                     .environmentObject(fvm)
                     .volumeBaseplateVisibility(.visible)
-            }
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 1500, height: 1500)
