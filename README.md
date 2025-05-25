@@ -8,9 +8,9 @@ Technology Stack: <br><br>
 ![visionOS](https://img.shields.io/badge/visionOS-000000?style=for-the-badge&logo=apple&logoColor=white)<br><br>
 
 Group members:
-- Quang Minh Nguyen - 14415297
-- Wende Zhou - 14359273
-- Cheuk Hei So - 14463323
-- Soha Lee - 24882843
-- Owen Herianto - 14457776
+- Quang Minh Nguyen - 14415297 - Team Leader
+- Wende Zhou - 14359273 - Co-Leader, Development
+- Cheuk Hei So - 14463323 - Lead Development
+- Soha Lee - 24882843 - UX/UI Design
+- Owen Herianto - 14457776 - Timekeeper, 3D Asset Manager
 
