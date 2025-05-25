@@ -38,10 +38,10 @@ struct MaleModelView: View {
                     let maleEntity = await fvm.createModel(modelName: "MaleDermaModel")
                     
                     femaleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                    femaleEntity.position = SIMD3<Float>(0, 0, 0)
+                    femaleEntity.position = SIMD3<Float>(0, -0.3, 0)
                     
                     maleEntity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
-                    maleEntity.position = SIMD3<Float>(0, 0, 0)
+                    maleEntity.position = SIMD3<Float>(0, -0.3, 0)
                     
                     fvm.femaleModel = femaleEntity
                     fvm.maleModel = maleEntity
@@ -128,6 +128,7 @@ struct MaleModelView: View {
             }
         }.onAppear{
             dismissWindow(id: "launch")
+            dismissWindow(id: "HelpWindow")
         }
     }
     

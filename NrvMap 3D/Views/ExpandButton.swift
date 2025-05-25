@@ -16,15 +16,15 @@ struct ExpandButton: View {
     let action: () -> Void
     let extraButtons: [(String, () -> Void)]
 
-    @Binding var expendButton: Int?
+    @Binding var expandButton: Int?
 
     var body: some View {
         HStack(spacing: 8) {
             Button(action: {
-                if expendButton == id {
-                    expendButton = nil
+                if expandButton == id {
+                    expandButton = nil
                 } else {
-                    expendButton = id
+                    expandButton = id
                 }
                 action()
             }) {
@@ -36,7 +36,7 @@ struct ExpandButton: View {
             .frame(width: 80, height: 80)
 
 
-            if expendButton == id {
+            if expandButton == id {
                 
                 ForEach(0..<extraButtons.count, id: \.self) { index in
                     Button(action: extraButtons[index].1) {
@@ -53,6 +53,6 @@ struct ExpandButton: View {
                 }
             }
         }
-        .animation(.spring(), value: expendButton)
+        .animation(.spring(), value: expandButton)
     }
 }

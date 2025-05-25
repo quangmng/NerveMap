@@ -15,7 +15,12 @@ struct HelpView: View {
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @State private var isVisible = false
     @State private var isTapped: Bool = true
+    @State private var isPinched: Bool = false
+    @State private var isNoted: Bool = false
     @State private var isShow: Bool = false
+    @State private var expandButton: Int? = nil
+    
+    
     
     var body: some View {
         VStack {
@@ -239,75 +244,46 @@ struct HelpView: View {
                             )
                         
                         HStack(spacing: 55) {
-                            Button {
-                                isTapped.toggle()
-                            } label: {
-                                ZStack {
+                            ExpandButton(id: 0, systemImage: isTapped ? "figure.stand" : "figure.stand.dress", action: {isTapped.toggle()}, extraButtons: [], expandButton: $expandButton)
+                                .background {
                                     Circle()
                                         .fill(isTapped ? Color.maleBule : Color.femalePink)
-                                        .frame(width: 100, height: 100)
-                                    Image(systemName: isTapped ? "figure.stand" : "figure.stand.dress")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 60, height: 60)
-                                        .foregroundColor(.white)
                                 }
-                            }
-                            .buttonBorderShape(.circle)
-                            .help("Gender")
+                                .help("Switch Gender")
                             
-                            
-                            Button {
-                                
-                            } label: {
-                                ZStack {
+                            ExpandButton(id: 1, systemImage: "hand.pinch.fill", action: {isPinched.toggle()}, extraButtons: [], expandButton: $expandButton)
+                                .foregroundStyle(isPinched ? Color.black : Color.white)
+                                .background {
                                     Circle()
-                                        .fill(Color.clear)
-                                        .frame(width: 100, height: 100)
-                                    Image(systemName: "square.stack.3d.up.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 60, height: 60)
+                                        .fill(isPinched ? Color.white : Color.clear)
                                 }
-                            }
-                            .buttonBorderShape(.circle)
-                            .help("Immersive Mode")
+                                .help("Move model (Immersive Mode only)")
                             
-                            Button {
-                                
-                            } label: {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.clear)
-                                        .frame(width: 100, height: 100)
-                                    Image(systemName: "note.text")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 60, height: 60)
-                                }
+                            ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {}, extraButtons: [], expandButton: $expandButton)
+                                .help("Immersive Mode")
+                            
+                            ExpandButton(id: 3, systemImage: isNoted ? "character.cursor.ibeam" : "note.text", action:
+                                            {if isNoted == true {isNoted.toggle(); expandButton = nil}}, extraButtons: [("note.text.badge.plus", {isNoted.toggle(); expandButton = nil}), ("books.vertical", {})], expandButton: $expandButton)
+                            .foregroundStyle(isNoted ? Color.black : Color.white)
+                            .background {
+                                Circle()
+                                    .fill(isNoted ? Color.white : Color.clear)
                             }
-                            .buttonBorderShape(.circle)
                             .help("Notes")
                             
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 5, height: 100)
                             
-                            Button {
-                                
-                            } label: {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.clear)
-                                        .frame(width: 100, height: 100)
-                                    Image(systemName: "book.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 60, height: 60)
-                                }
-                            }
-                            .buttonBorderShape(.circle)
-                            .help("Learn")
+                            ExpandButton(id: 4, systemImage: "book.fill", action: {}, extraButtons: [], expandButton: $expandButton)
+                                .help("Learn")
                         }
+                        .toggleStyle(.button)
+                        .padding(12)
+                        .buttonStyle(.borderless)
+                        .buttonBorderShape(.circle)
+                        .labelStyle(.iconOnly)
+                        .padding(12)
+                        .glassBackgroundEffect(in: .rect(cornerRadius: 80))
                     }
                     .padding(.bottom, 30)
                     Text("(To access this help anytime, tap the \(Image(systemName: "info.circle.fill")) button.)")
@@ -363,8 +339,8 @@ struct HelpView: View {
                     Button {
                         dismiss(id: "HelpWindow")
                         if hasSeenWelcomeScreen == false{
-                            open(id: "ModelDM")
-                            dismiss(id: "WelcomeView")
+                            open(id: "WelcomeView")
+                            dismiss(id: "HelpWindow")
                             hasSeenWelcomeScreen = true
                         }
                     } label: {
@@ -377,10 +353,12 @@ struct HelpView: View {
             }
             .padding(.horizontal, 50)
             .padding(.bottom, 50)
+            
         }
         .background(Color.clear)
         .onAppear {
             self.isVisible = true
+            dismiss(id: "launch")
         }
     }
 }

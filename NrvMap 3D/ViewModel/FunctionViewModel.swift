@@ -16,7 +16,7 @@ class FunctionViewModel: ObservableObject {
     @Published var isMix: Bool = false
     @Published var isFull: Bool = false
     
-    @Published var expendButton: Int? = nil
+    @Published var expandButton: Int? = nil
     
     @Published var isImmersive: Bool = false
     @Published var isMoving: Bool = false

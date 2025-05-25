@@ -35,7 +35,7 @@ struct NrvMap_3DApp: App {
                     .volumeBaseplateVisibility(.visible)
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 1500, height: 1500)
+        .defaultSize(width: 2100, height: 2100)
         
         WindowGroup(id: "HelpWindow"){
             HelpView()
