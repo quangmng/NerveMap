@@ -25,7 +25,7 @@ struct ButtonBoard: View {
             
             if fvm.isImmersive == true{
                 ExpandButton(id: 1, systemImage: "hand.pinch.fill", action: {fvm.showBox.toggle()}, extraButtons: [
-                    // action, label
+                    // action, label, helpText
                 ], expandButton: $fvm.expandButton)
                 .foregroundStyle(fvm.showBox ? Color.black : Color.white)
                 .background {
@@ -42,7 +42,14 @@ struct ButtonBoard: View {
                     .disabled(fvm.isImmersive)
             }
             
-            ExpandButton(id: 3, systemImage: fvm.isAnnotationMode ? "character.cursor.ibeam" : "note.text", action: {if fvm.isAnnotationMode == true {fvm.isAnnotationMode.toggle() ; fvm.expandButton = nil}}, extraButtons: [("note.text.badge.plus", {fvm.isAnnotationMode.toggle(); fvm.expandButton = nil}), ("books.vertical", {openWindow(id: "NotesWindow")})], expandButton: $fvm.expandButton)
+            ExpandButton(id: 3, systemImage: fvm.isAnnotationMode ? "character.cursor.ibeam" : "note.text", action: {if fvm.isAnnotationMode == true {fvm.isAnnotationMode.toggle() ; fvm.expandButton = nil}}, extraButtons: [
+                (systemImage: "note.text.badge.plus",
+                 action: { fvm.isAnnotationMode.toggle(); fvm.expandButton = nil },
+                 helpText: "Add Note"),
+                (systemImage: "books.vertical",
+                 action: { openWindow(id: "NotesWindow") },
+                 helpText: "View Notes")
+            ], expandButton: $fvm.expandButton)
                 .foregroundStyle(fvm.isAnnotationMode ? Color.black : Color.white)
                 .background {
                     Circle()

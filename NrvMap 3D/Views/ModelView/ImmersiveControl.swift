@@ -148,7 +148,7 @@ struct ImmersiveControl: View {
                         .labelStyle(.iconOnly)
                         .padding(12)
                         .glassBackgroundEffect(in: .rect(cornerRadius: 60))
-                        .help("Recenter")
+                        .help("Recentre")
                 }
             }
             

@@ -14,7 +14,7 @@ struct ExpandButton: View {
     let id: Int
     let systemImage: String
     let action: () -> Void
-    let extraButtons: [(String, () -> Void)]
+    let extraButtons: [(systemImage: String, action: () -> Void, helpText: String)]
 
     @Binding var expandButton: Int?
 
@@ -38,13 +38,14 @@ struct ExpandButton: View {
 
             if expandButton == id {
                 
-                ForEach(0..<extraButtons.count, id: \.self) { index in
-                    Button(action: extraButtons[index].1) {
-                        Image(systemName: extraButtons[index].0)
+                ForEach(extraButtons, id: \.systemImage) { systemImage, action, helpText in
+                    Button(action: action) {
+                        Image(systemName: systemImage)
                             .resizable()
                             .scaledToFit()
                             .padding()
                     }
+                    .help(helpText)
                     .transition(.opacity)
                     .frame(width: 60, height: 60)
                 }

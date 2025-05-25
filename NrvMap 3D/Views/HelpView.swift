@@ -262,14 +262,32 @@ struct HelpView: View {
                             ExpandButton(id: 2, systemImage: "square.stack.3d.up.fill", action: {}, extraButtons: [], expandButton: $expandButton)
                                 .help("Immersive Mode")
                             
-                            ExpandButton(id: 3, systemImage: isNoted ? "character.cursor.ibeam" : "note.text", action:
-                                            {if isNoted == true {isNoted.toggle(); expandButton = nil}}, extraButtons: [("note.text.badge.plus", {isNoted.toggle(); expandButton = nil}), ("books.vertical", {})], expandButton: $expandButton)
+                            ExpandButton(
+                                id: 3,
+                                systemImage: isNoted ? "character.cursor.ibeam" : "note.text",
+                                action: { if isNoted == true { isNoted.toggle(); expandButton = nil } },
+                                extraButtons: [
+                                    (
+                                        systemImage: "note.text.badge.plus",
+                                        action: { isNoted.toggle(); expandButton = nil },
+                                        helpText: "Add Note"
+                                    ),
+                                    (
+                                        systemImage: "books.vertical",
+                                        action: {},
+                                        helpText: "View Notes"
+                                    )
+                                ],
+                                expandButton: $expandButton
+                            )
                             .foregroundStyle(isNoted ? Color.black : Color.white)
                             .background {
                                 Circle()
                                     .fill(isNoted ? Color.white : Color.clear)
                             }
-                            .help("Notes")
+                            .help("Notes (tap me!)")
+                            
+                            
                             
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 5, height: 100)
