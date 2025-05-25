@@ -44,9 +44,6 @@ struct ExpandButton: View {
                             .resizable()
                             .scaledToFit()
                             .padding()
-//                            .background {
-//                                Circle().fill(Color.gray.opacity(0.6))
-//                            }
                     }
                     .transition(.opacity)
                     .frame(width: 60, height: 60)
