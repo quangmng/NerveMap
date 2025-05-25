@@ -9,20 +9,20 @@ import SwiftUI
 import SwiftData
 
 struct NoteRowView: View {
-
+    
     let note: NoteData
-
+    
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter
     }()
-
+    
     func colorForFirstCharacter(of text: String) -> Color {
         guard let firstChar = text.first else {
             return .gray // Default color for empty input
         }
-
+        
         switch firstChar.uppercased() {
         case "C":
             return .orange
@@ -36,51 +36,51 @@ struct NoteRowView: View {
             return .gray
         }
     }
-
+    
     var body: some View {
-
+        
         HStack(spacing: 0) {
-
-                HStack(spacing: 20) {
-                    RoundedRectangle(cornerRadius: 20)
-                    
-                        .fill(colorForFirstCharacter(of: note.position))
-                        .frame(width: 180, height: 180)
-                        .overlay {
-                            Text(note.position)
-                                .font(
-                                    .system(
-                                        size: 80,
-                                        weight: .bold,
-                                        design: .rounded
-                                    )
-                                )
-                        }
-
-                    VStack(alignment: .leading, spacing: 25) {
-                        Text(note.title)
+            
+            HStack(spacing: 20) {
+                RoundedRectangle(cornerRadius: 20)
+                
+                    .fill(colorForFirstCharacter(of: note.position))
+                    .frame(width: 180, height: 180)
+                    .overlay {
+                        Text(note.position)
                             .font(
                                 .system(
-                                    size: 70,
-                                    weight: .semibold,
-                                    design: .rounded
-                                )
-                            )
-                            .underline()
-
-                        Text(note.details)
-                            .font(
-                                .system(
-                                    size: 60,
-                                    weight: .regular,
+                                    size: 80,
+                                    weight: .bold,
                                     design: .rounded
                                 )
                             )
                     }
+                
+                VStack(alignment: .leading, spacing: 25) {
+                    Text(note.title)
+                        .font(
+                            .system(
+                                size: 70,
+                                weight: .semibold,
+                                design: .rounded
+                            )
+                        )
+                        .underline()
+                    
+                    Text(note.details)
+                        .font(
+                            .system(
+                                size: 60,
+                                weight: .regular,
+                                design: .rounded
+                            )
+                        )
                 }
-
+            }
+            
             Spacer()
-
+            
             // MARK: -Date component
             RoundedRectangle(cornerRadius: 16)
                 .foregroundStyle(Color.gray.opacity(0.8))
@@ -91,7 +91,7 @@ struct NoteRowView: View {
                             .system(size: 40, weight: .bold, design: .rounded)
                         )
                 }
-
+            
         }
     }
 }
@@ -117,14 +117,13 @@ extension NoteRowView {
                         Text(note.position)
                             .font(.system(size: 60, weight: .heavy))
                     }
-
-
+                
+                
                 Text(note.title)
                     .font(.system(size: 50))
                     .underline()
-//                    .lineLimit(5)
             }
-
+            
             Text(note.details)
                 .font(.system(size: 40))
         }

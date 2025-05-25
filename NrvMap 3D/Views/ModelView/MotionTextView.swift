@@ -11,7 +11,7 @@ import RealityFoundation
 struct MotionTextView: View {
     
     @EnvironmentObject var fvm: FunctionViewModel
-
+    
     var body: some View {
         TabView {
             tabContent(title: "🚶🏼Walking", setModel: {
@@ -21,7 +21,7 @@ struct MotionTextView: View {
                 fvm.modelEntity = fvm.walkModel
             })
             .tag(0)
-
+            
             tabContent(title: "🧍🏻Stand Up", setModel: {
                 fvm.showWalk = false
                 fvm.showSit = true
@@ -29,7 +29,7 @@ struct MotionTextView: View {
                 fvm.modelEntity = fvm.sitModel
             })
             .tag(1)
-
+            
             tabContent(title: "🪑Sitting", setModel: {
                 fvm.showWalk = false
                 fvm.showSit = false
@@ -39,14 +39,14 @@ struct MotionTextView: View {
             .tag(2)
         }
     }
-
+    
     @ViewBuilder
     private func tabContent(title: String, setModel: @escaping () -> Void) -> some View {
         VStack {
             Text(title)
                 .font(.system(size: 30))
                 .fontWeight(.semibold)
-
+            
             Button(action: {
                 if fvm.isMoving {
                     fvm.stopAnimation()

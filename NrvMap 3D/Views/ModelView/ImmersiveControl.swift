@@ -9,16 +9,16 @@ import RealityKit
 import SwiftUI
 
 struct ImmersiveControl: View {
-
+    
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     @EnvironmentObject var fvm: FunctionViewModel
-
+    
     @State private var showAlert: Bool = false
     let defaultPosition = SIMD3<Float>(x: -0.7, y: 0.9, z: -1)
-
+    
     var body: some View {
         VStack(spacing: 30) {
             if fvm.isMix == false && fvm.isImmersive == false {
@@ -27,14 +27,14 @@ struct ImmersiveControl: View {
                     .fontWeight(.heavy)
                     .animation(.spring(), value: fvm.isMix)
             }
-
+            
             HStack(spacing: 30){
-
+                
                 // Mix Immersive
                 // Real Life
                 if fvm.isImmersive == false || fvm.isMix  == true{
-
-
+                    
+                    
                     Button{
                         Task {
                             if fvm.isImmersive == false {
@@ -43,7 +43,7 @@ struct ImmersiveControl: View {
                                 await openImmersiveSpace(id: "Immersive")
                                 fvm.isImmersive = true
                                 dismissWindow(id: "WelcomeView")
-                               
+                                
                             } else {
                                 await dismissImmersiveSpace()
                                 fvm.isImmersive = false
@@ -76,14 +76,14 @@ struct ImmersiveControl: View {
                     .buttonBorderShape(.capsule)
                     .disabled(fvm.isFull == true)
                 }
-
+                
                 // MARK: - Enter Full Immersive
                 if fvm.isImmersive == false || fvm.isFull  == true {
                     Button{
                         Task {
                             if fvm.isImmersive == false {
                                 showAlert = true
-
+                                
                             } else {
                                 await dismissImmersiveSpace()
                                 fvm.isImmersive = false
@@ -108,7 +108,7 @@ struct ImmersiveControl: View {
                                         design: .rounded
                                     )
                                 )
-
+                            
                                 .frame(width: 200, height: 100)
                                 .foregroundStyle(Color.red.secondary)
                         }
@@ -151,7 +151,7 @@ struct ImmersiveControl: View {
                         .help("Recenter")
                 }
             }
-
+            
             // MARK: - Test this visiable and functionality
             if fvm.isImmersive {
                 ButtonBoard()

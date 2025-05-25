@@ -7,23 +7,23 @@
 
 import SwiftUI
 
-extension View{
-    
+extension View {
+
     func leading() -> some View {
-        
+
         self.frame(maxWidth: .infinity, alignment: .leading)
-        
+
     }
-    
+
     func traling() -> some View{
         self
             .frame(maxWidth: .infinity, alignment: .trailing)
     }
-    
+
     func center() -> some View{
         self
             .frame(maxWidth: .infinity, alignment: .center)
     }
-    
+
 }
 

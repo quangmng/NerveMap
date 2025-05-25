@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct NoteListView: View {
-
+    
     @Query(sort: \NoteData.dateCreated, order: .reverse) private var notes: [NoteData]
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         NavigationStack {
             List {
@@ -33,9 +33,9 @@ struct NoteListView: View {
                         Image(systemName: "xmark")
                     }
                     .buttonBorderShape(.circle)
-
-
-
+                    
+                    
+                    
                 }
             })
         }
@@ -45,7 +45,7 @@ struct NoteListView: View {
 #Preview {
     let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: NoteData.self, configurations: modelConfiguration)
-
+    
     // Add mock notes for preview
     let context = container.mainContext
     let sampleNotes = [
@@ -53,7 +53,7 @@ struct NoteListView: View {
         NoteData(id: UUID().uuidString, title: "Covers the back of the head and upper neck", details: "Common in occipital neuralgia, where pain radiates from the base of the skull.", dateCreated: Date().addingTimeInterval(-3600), position: "C2")
     ]
     sampleNotes.forEach { context.insert($0) }
-
+    
     return NoteListView()
         .modelContainer(container)
 }

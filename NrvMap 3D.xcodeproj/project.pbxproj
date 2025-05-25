@@ -22,11 +22,9 @@
 		FD9035B62DBA013900ECC559 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358C2DBA013900ECC559 /* AppModel.swift */; };
 		FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358D2DBA013900ECC559 /* Dermatome.swift */; };
 		FD9035B82DBA013900ECC559 /* ModelMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90358E2DBA013900ECC559 /* ModelMesh.swift */; };
-		FD9035BA2DBA013900ECC559 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035902DBA013900ECC559 /* NoteModel.swift */; };
 		FD9035BB2DBA013900ECC559 /* SIMD3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035912DBA013900ECC559 /* SIMD3.swift */; };
 		FD9035BC2DBA013900ECC559 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035922DBA013900ECC559 /* UIExtension.swift */; };
 		FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */; };
-		FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9035982DBA013900ECC559 /* NoteViewModel.swift */; };
 		FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359A2DBA013900ECC559 /* ChooseModelView.swift */; };
 		FD9035C02DBA013900ECC559 /* FemaleModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359B2DBA013900ECC559 /* FemaleModelView.swift */; };
 		FD9035C12DBA013900ECC559 /* FunctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */; };
@@ -66,13 +64,11 @@
 		FD90358C2DBA013900ECC559 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		FD90358D2DBA013900ECC559 /* Dermatome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dermatome.swift; sourceTree = "<group>"; };
 		FD90358E2DBA013900ECC559 /* ModelMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMesh.swift; sourceTree = "<group>"; };
-		FD9035902DBA013900ECC559 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		FD9035912DBA013900ECC559 /* SIMD3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIMD3.swift; sourceTree = "<group>"; };
 		FD9035922DBA013900ECC559 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		FD9035942DBA013900ECC559 /* FemaleDModel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = FemaleDModel.usdz; sourceTree = "<group>"; };
 		FD9035952DBA013900ECC559 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewModel.swift; sourceTree = "<group>"; };
-		FD9035982DBA013900ECC559 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		FD90359A2DBA013900ECC559 /* ChooseModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseModelView.swift; sourceTree = "<group>"; };
 		FD90359B2DBA013900ECC559 /* FemaleModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FemaleModelView.swift; sourceTree = "<group>"; };
 		FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionViewModel.swift; sourceTree = "<group>"; };
@@ -157,7 +153,6 @@
 				FD90358B2DBA013900ECC559 /* AnnotationModel.swift */,
 				FD90358D2DBA013900ECC559 /* Dermatome.swift */,
 				FD90358E2DBA013900ECC559 /* ModelMesh.swift */,
-				FD9035902DBA013900ECC559 /* NoteModel.swift */,
 				FD9035912DBA013900ECC559 /* SIMD3.swift */,
 				FD9035922DBA013900ECC559 /* UIExtension.swift */,
 				FD09D7D22DC9D62E0047B141 /* ModelGestureFactory.swift */,
@@ -179,7 +174,6 @@
 			children = (
 				FD9035972DBA013900ECC559 /* AnnotationViewModel.swift */,
 				FD90359C2DBA013900ECC559 /* FunctionViewModel.swift */,
-				FD9035982DBA013900ECC559 /* NoteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -329,12 +323,10 @@
 				FD9035B72DBA013900ECC559 /* Dermatome.swift in Sources */,
 				FD9035B82DBA013900ECC559 /* ModelMesh.swift in Sources */,
 				FD9035D92DBA655600ECC559 /* MotionTextView.swift in Sources */,
-				FD9035BA2DBA013900ECC559 /* NoteModel.swift in Sources */,
 				FD9035BB2DBA013900ECC559 /* SIMD3.swift in Sources */,
 				FD9035BC2DBA013900ECC559 /* UIExtension.swift in Sources */,
 				FD09D7CF2DC86A8A0047B141 /* ButtonBoard.swift in Sources */,
 				FD9035BD2DBA013900ECC559 /* AnnotationViewModel.swift in Sources */,
-				FD9035BE2DBA013900ECC559 /* NoteViewModel.swift in Sources */,
 				FD9035BF2DBA013900ECC559 /* ChooseModelView.swift in Sources */,
 				D566D6692DDC48F100531A46 /* InfoView.swift in Sources */,
 				FD9035C02DBA013900ECC559 /* FemaleModelView.swift in Sources */,

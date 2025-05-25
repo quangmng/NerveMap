@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 
 struct FemaleModelView: View {
-    
+
     @Environment(\.openWindow) public var openWindow
     @State private var modelEntity: Entity?
     @State private var selectedEntity: Entity?
@@ -18,7 +18,7 @@ struct FemaleModelView: View {
     @StateObject var fvm = FunctionViewModel()
     @Environment(AnnotationViewModel.self) private var avm
     @State var isAnnotationMode: Bool = false
-    
+
     var body: some View {
         HStack {
             ZStack {
@@ -29,7 +29,7 @@ struct FemaleModelView: View {
                         entity.scale = SIMD3<Float>(0.5, 0.5, 0.5)
                         entity.generateCollisionShapes(recursive: true) // Enable tap & drag
                         entity.position = SIMD3<Float>(x: -0.1, y: -0.5, z: -0.05)
-                        
+
                         fvm.enableInteraction(for: entity)
                         content.add(entity)
                         
@@ -42,7 +42,7 @@ struct FemaleModelView: View {
                     for list in avm.annotationList {
                         if let listEntity = attachments.entity(for: list.id){
                             content.add(listEntity)
-                       }
+                        }
                     }
                 }
                 attachments: {
@@ -54,7 +54,7 @@ struct FemaleModelView: View {
                         }
                     }
                 }
-                
+
                 .gesture(SpatialTapGesture()
                     .targetedToAnyEntity()
                     .onEnded{value in
@@ -125,7 +125,7 @@ struct FemaleModelView: View {
                             }
                         }
                 )
-                
+
                 // Right-aligned Button Bar
                 HStack {
                     Spacer().frame(width: 600)
@@ -136,28 +136,28 @@ struct FemaleModelView: View {
                             Image(systemName: "arrow.left.arrow.right")
                                 .font(.title)
                         }
-                        
+
                         Button {
                             openWindow(id: "KnowledgeList")
                         } label: {
                             Image(systemName: "note.text")
                                 .font(.title)
                         }
-                        
+
                         Button{
                             isAnnotationMode.toggle()
                         }label:{
                             Image(systemName: "list.bullet.clipboard")
                                 .font(.title)
                         }
-                        
+
                         Button{
                             openWindow(id: "HelpWindow")
                         }label: {
                             Image(systemName: "questionmark.circle")
                                 .font(.title)
                         }
-                        
+
                     }
                 }
             }
@@ -170,5 +170,5 @@ struct FemaleModelView: View {
 #Preview(windowStyle: .volumetric) {
     FemaleModelView()
         .volumeBaseplateVisibility( .visible)
-    
+
 }

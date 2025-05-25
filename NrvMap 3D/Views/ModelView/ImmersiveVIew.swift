@@ -21,7 +21,7 @@ struct ImmersiveView: View {
     @State var initialScale: SIMD3<Float>? = nil
     @State private var currentGenderIsMale: Bool? = nil
     
-    @StateObject var noteVM = NoteViewModel()
+    
     @EnvironmentObject var fvm: FunctionViewModel
     
     @State private var currentRotation = simd_quatf(angle: 0, axis: [0, 1, 0])

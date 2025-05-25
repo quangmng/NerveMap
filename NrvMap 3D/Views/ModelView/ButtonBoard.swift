@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 
 struct ButtonBoard: View {
-
+    
     @Environment(\.openWindow) public var openWindow
     @EnvironmentObject var fvm: FunctionViewModel
     
@@ -41,7 +41,7 @@ struct ButtonBoard: View {
                     .help("Immersive Mode")
                     .disabled(fvm.isImmersive)
             }
-
+            
             ExpandButton(id: 3, systemImage: fvm.isAnnotationMode ? "character.cursor.ibeam" : "note.text", action: {if fvm.isAnnotationMode == true {fvm.isAnnotationMode.toggle() ; fvm.expandButton = nil}}, extraButtons: [("note.text.badge.plus", {fvm.isAnnotationMode.toggle(); fvm.expandButton = nil}), ("books.vertical", {openWindow(id: "NotesWindow")})], expandButton: $fvm.expandButton)
                 .foregroundStyle(fvm.isAnnotationMode ? Color.black : Color.white)
                 .background {
@@ -49,16 +49,16 @@ struct ButtonBoard: View {
                         .fill(fvm.isAnnotationMode ? Color.white : Color.clear)
                 }
                 .help("Notes")
-
+            
             RoundedRectangle(cornerRadius: 20).frame(width: 3, height: 50)
-
+            
             ExpandButton(id: 4, systemImage: "book.fill", action: {openWindow(id: "LearnMore")}, extraButtons: [], expandButton: $fvm.expandButton)
                 .help("Learn")
-
+            
             ExpandButton(id: 5, systemImage: "info.circle.fill", action: {openWindow(id: "HelpWindow")}, extraButtons: [], expandButton: $fvm.expandButton)
                 .help("Info/Help")
-
-
+            
+            
         }.toggleStyle(.button)
             .padding(12)
             .buttonStyle(.borderless)

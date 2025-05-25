@@ -12,10 +12,9 @@ import RealityKitContent
 
 struct ChooseModelView: View {
     
-//    let notee: Note
     @Environment(\.openWindow) public var openWindow
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject var noteVM = NoteViewModel()
+
     @State private var noteText: String = ""
     @State private var lastUpdate: Date = Date()
     

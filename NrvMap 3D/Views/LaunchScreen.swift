@@ -17,26 +17,26 @@ struct InitialLauncherView: View {
     
     var body: some View {
         VStack{
-           
+            
         }
         
-            .task {
-                Task {
-                    if hasSeenWelcomeScreen == true{
-                        
-                        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
-                        //                    await open(id: "WelcomeView")
-                        open(id: "WelcomeView")
-                        dismiss(id: "launch")
-                        isVisable = false
-                    }else{
-                        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
-                        //                    await open(id: "WelcomeView")
-                        open(id: "HelpWindow")
-                        dismiss(id: "launch")
-                        isVisable = false
-                    }
+        .task {
+            Task {
+                if hasSeenWelcomeScreen == true{
+                    
+                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+                    //                    await open(id: "WelcomeView")
+                    open(id: "WelcomeView")
+                    dismiss(id: "launch")
+                    isVisable = false
+                }else{
+                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+                    //                    await open(id: "WelcomeView")
+                    open(id: "HelpWindow")
+                    dismiss(id: "launch")
+                    isVisable = false
                 }
             }
+        }
     }
 }

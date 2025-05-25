@@ -13,7 +13,6 @@ struct NrvMap_3DApp: App {
 
     @AppStorage("hasSeenWelcomeScreen") var hasSeenWelcomeScreen = false
     @State private var appModel = AppModel()
-    @StateObject private var noteVM = NoteViewModel()
     @StateObject var fvm = FunctionViewModel()
     @State private var name: String = ""
 
@@ -30,7 +29,6 @@ struct NrvMap_3DApp: App {
 
         WindowGroup(id: "WelcomeView"){
                 MaleModelView()
-                    .environmentObject(noteVM)
                     .environmentObject(fvm)
                     .volumeBaseplateVisibility(.visible)
         }
@@ -44,7 +42,6 @@ struct NrvMap_3DApp: App {
         // Notes window
         WindowGroup(id: "NotesWindow") {
             NoteListView()
-                .environmentObject(noteVM)
                 .environmentObject(fvm)
         }
         .modelContainer(for: NoteData.self)
@@ -57,13 +54,11 @@ struct NrvMap_3DApp: App {
 
         WindowGroup(id: "Control") {
             ImmersiveControl()
-                .environmentObject(noteVM)
                 .environmentObject(fvm)
         }.defaultSize(width: 800, height: 500)
 
         ImmersiveSpace(id: "Immersive") {
             ImmersiveView()
-                .environmentObject(noteVM)
                 .environmentObject(fvm)
         }
         .immersionStyle(selection: $fvm.style, in: .mixed, .full, .progressive)
@@ -71,7 +66,6 @@ struct NrvMap_3DApp: App {
         // Volumetric view for male model
         WindowGroup(id: "ModelDM") {
             MaleModelView()
-                .environmentObject(noteVM)
                 .environmentObject(fvm)
                 .volumeBaseplateVisibility(.visible)
         }
@@ -84,7 +78,6 @@ struct NrvMap_3DApp: App {
         }
         .modelContainer(for: [NoteData.self])
         .defaultSize(width: 400, height: 600)
-//        let container = ModelContainer(for: [NoteData.self])
 
         WindowGroup(id: "LearnMore") {
             LearnMoreView()

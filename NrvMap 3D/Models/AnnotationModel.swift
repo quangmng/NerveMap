@@ -14,5 +14,3 @@ struct AnnotationModel: Identifiable {
     var description: String
     var position: SIMD3<Float>
 }
-//
-//

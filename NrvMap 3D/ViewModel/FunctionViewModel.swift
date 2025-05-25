@@ -11,17 +11,17 @@ import SwiftUI
 import RealityKitContent
 
 class FunctionViewModel: ObservableObject {
-    
+
     @Published var style: ImmersionStyle = .mixed
     @Published var isMix: Bool = false
     @Published var isFull: Bool = false
-    
+
     @Published var expandButton: Int? = nil
-    
+
     @Published var isImmersive: Bool = false
     @Published var isMoving: Bool = false
     @Published var showBox: Bool = false
-    
+
     @Published var showSit: Bool = false
     @Published var showWalk: Bool = true
     @Published var genderSelect: Bool = false
@@ -37,14 +37,14 @@ class FunctionViewModel: ObservableObject {
     @Published var standModel: Entity?
     @Published var walkModel: Entity?
     @Published var worldAnchor = AnchorEntity(world: SIMD3(x: 0, y:0, z: -1))
-    
+
     @Published var position: String = ""
     @Published var simdPosition: SIMD3<Float> = [0,0,0]
-    
+
     var blinkingTimers: [Entity: Timer] = [:]
     var originalMaterials: [Entity: [RealityKit.Material]] = [:]
     var cachedOriginalMaterials: [ObjectIdentifier: [RealityKit.Material]] = [:]
-    
+
     func enableInteraction(for entity: Entity) {
         entity.components
             .set(
@@ -55,7 +55,7 @@ class FunctionViewModel: ObservableObject {
             enableInteraction(for: child)
         }
     }
-    
+
     func highlightEntity(_ entity: Entity, duration: TimeInterval = 1.0) {
         guard var modelComponent = entity.components[ModelComponent.self] else { return }
         let id = ObjectIdentifier(entity)
@@ -80,7 +80,7 @@ class FunctionViewModel: ObservableObject {
             cachedOriginalMaterials.removeValue(forKey: id)
         }
     }
-    
+
     func createModel(modelName: String) async -> Entity {
         guard let loadedEntity = try? await Entity(named: modelName, in: realityKitContentBundle) else {
             fatalError("Failed to load entity")
@@ -103,33 +103,33 @@ class FunctionViewModel: ObservableObject {
         parentEntity.position = center
         let modelHeight = bounds.extents.y
         parentEntity.position.y += modelHeight / 2
-        
+
         enableInteraction(for: parentEntity)
         return parentEntity
     }
-    
+
     func createSkybox() -> Entity?{
-            
-            let largeSphere = MeshResource.generateSphere(radius: 1000.0)
-            
-            var skyboxMaterial = UnlitMaterial()
-            
-            do{
-                let texture = try TextureResource.load(named: "Hospital")
-                skyboxMaterial.color = .init(texture: .init(texture))
-            }catch{
-                print("Error: \(error)")
-            }
-            
-            let skyBoxEntity = Entity()
-            skyBoxEntity.components.set(ModelComponent(mesh: largeSphere, materials: [skyboxMaterial]))
-            
-            skyBoxEntity.scale *= .init(x: -1, y: 1, z: 1)
-            
-            return skyBoxEntity
-            
+
+        let largeSphere = MeshResource.generateSphere(radius: 1000.0)
+
+        var skyboxMaterial = UnlitMaterial()
+
+        do{
+            let texture = try TextureResource.load(named: "Hospital")
+            skyboxMaterial.color = .init(texture: .init(texture))
+        }catch{
+            print("Error: \(error)")
         }
-    
+
+        let skyBoxEntity = Entity()
+        skyBoxEntity.components.set(ModelComponent(mesh: largeSphere, materials: [skyboxMaterial]))
+
+        skyBoxEntity.scale *= .init(x: -1, y: 1, z: 1)
+
+        return skyBoxEntity
+
+    }
+
     func startBlinkingHighlight(for entity: Entity, interval: TimeInterval = 0.5) {
         guard blinkingTimers[entity] == nil,
               var modelComponent = entity.components[ModelComponent.self] else { return }
@@ -175,12 +175,12 @@ class FunctionViewModel: ObservableObject {
             isMoving = true
         }
     }
-
+    
     func stopAnimation() {
         if let entity = modelEntity {
             entity.stopAllAnimations()
             isMoving = false
         }
     }
-    
+
 }
